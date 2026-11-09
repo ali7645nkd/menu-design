@@ -1295,10 +1295,8 @@
       /* CATEGORY HEADING AND SECOND MENU CARD */
       .category-heading {
         position: relative;
-        top: auto;
-        left: auto;
-        right: auto;
         z-index: 17;
+        width: 100%;
         margin: 0 0 16px;
         text-align: center;
       }
@@ -1313,7 +1311,7 @@
       }
       .category-section {
         position: relative;
-        margin: 0 -8px 30px;
+        margin: 0 -4px 30px 142px;
         padding: 24px 0 30px;
         border: 1px solid rgba(190, 151, 82, 0.34);
         border-radius: 27px;
@@ -1345,6 +1343,9 @@
       }
       .category-track {
         position: relative;
+        background: transparent;
+        border: 0;
+        box-shadow: none;
         display: flex;
         align-items: flex-start;
         gap: 17px;
@@ -1695,10 +1696,10 @@
             class="scroll-demo"
             aria-label="محتوى تجريبي لاختبار التمرير"
           >
-            <div class="category-heading">
-              <h2 class="category-section-title" id="categoriesTitle">الأقسام</h2>
-            </div>
             <section class="category-section" aria-label="أقسام القائمة">
+              <div class="category-heading">
+                <h2 class="category-section-title" id="categoriesTitle">الأقسام</h2>
+              </div>
               <nav class="category-track" id="categoryTrack" aria-label="أقسام القائمة">
                 <button class="category-button active" type="button" data-category-index="0" aria-pressed="true">
                   <span class="category-image-frame"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=240&q=82" alt="" loading="lazy" /></span>
