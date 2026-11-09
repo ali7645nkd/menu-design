@@ -397,7 +397,8 @@
         justify-content: center;
         background: linear-gradient(
           145deg,
-          rgba(255, 255, 255, 0.98),          rgba(232, 250, 242, 0.94)
+          rgba(255, 255, 255, 0.98),
+          rgba(232, 250, 242, 0.94)
         );
         border: 2px solid rgba(255, 255, 255, 0.95);
         box-shadow:
@@ -447,11 +448,17 @@
       .phone.logo-compact .logo-letter {
         transform: scale(0.92);
       }
-      /* Keep the top-bar MENU title visible while the logo is compact. */
       .phone.logo-compact .menu-title {
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
+      }
+      /* Keep MENU visible during scroll, shifted away from the compact logo. */
+      .phone[dir="rtl"].logo-compact .menu-title {
+        transform: translateX(calc(-50% - 38px));
+      }
+      .phone[dir="ltr"].logo-compact .menu-title {
+        transform: translateX(calc(-50% + 38px));
       }
       .phone.logo-compact .logo-circle {
         background: #f2fff7;
@@ -797,7 +804,8 @@
         box-shadow:
           0 8px 24px rgba(25, 55, 40, 0.12),
           inset 0 1px 0 rgba(255, 255, 255, 0.95);
-        transition:          background 0.3s ease,
+        transition:
+          background 0.3s ease,
           border-color 0.3s ease,
           box-shadow 0.3s ease;
       }
@@ -1034,7 +1042,7 @@
           opacity 0.3s ease;
       }
 
-      /* Hide MENU completely when the navigation is open so it cannot show beneath the logo. */
+      /* Hide the title while the navigation is open; never slide it beneath the logo. */
       .phone[dir="rtl"] .bar-wrap.is-open .menu-title,
       .phone[dir="ltr"] .bar-wrap.is-open .menu-title {
         opacity: 0;
@@ -1193,7 +1201,8 @@
 
       /* Same light search appearance in dark mode */
       .phone.dark .menu-search {
-        background: rgba(255, 255, 255, 0.88);        border-color: rgba(255, 255, 255, 0.98);
+        background: rgba(255, 255, 255, 0.88);
+        border-color: rgba(255, 255, 255, 0.98);
         color: #245443;
 
         box-shadow:
@@ -1294,7 +1303,7 @@
       }
       .category-section-title {
         color: var(--text-color);
-        font-family: Arial, sans-serif;
+        font-family: inherit;
         font-size: 24px;
         line-height: 1.3;
         font-weight: 800;
@@ -1595,7 +1604,8 @@
               ></div>
               <div
                 class="hero-slide"
-                style="                  background-image: url(&quot;https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=85&quot;);
+                style="
+                  background-image: url(&quot;https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=85&quot;);
                 "
               ></div>
               <div
@@ -1995,3 +2005,203 @@
         // Restaurant status and location (sample preview data)
         document.getElementById("statusLabel").textContent = t.statusLabel;
         const statusElement = document.getElementById("restaurantStatus");
+        statusElement.textContent = restaurantInfo.isOpen
+          ? t.statusOpen
+          : t.statusClosed;
+        statusElement.classList.toggle("is-open", restaurantInfo.isOpen);
+        statusElement.classList.toggle("is-closed", !restaurantInfo.isOpen);
+        document.getElementById("locationLabel").textContent = t.locationLabel;
+        document.getElementById("restaurantLocation").textContent =
+          t.locationValue;
+        // Search
+        const menuSearchInput = document.getElementById("menuSearchInput");
+        menuSearchInput.placeholder = t.searchPlaceholder;
+        menuSearchInput.setAttribute("aria-label", t.searchPlaceholder);
+        // Category strip
+        document.getElementById("categoriesTitle").textContent = t.categoriesTitle;
+        categoryButtons.forEach((button, index) => {
+          button.querySelector(".category-name").textContent = t.demoCats[index];
+        });
+        // Category heading and labels are updated above.
+        for (let i = 0; i < 6; i++) {
+          document.getElementById(`demoCat${i + 1}`).textContent =
+            t.demoCats[i];
+          document.getElementById(`demoDesc${i + 1}`).textContent =
+            t.demoDescs[i];
+        }
+        // Modal
+        document.getElementById("modalTitle").textContent = t.modalTitle;
+        document.getElementById("modalDescription").textContent =
+          t.modalDescription;
+        modalClose.textContent = t.close;
+        // Language selector
+        document.querySelectorAll(".language-option").forEach((button) => {
+          button.classList.toggle("active", button.dataset.lang === lang);
+        });
+        languageMenu.classList.remove("visible");
+        window.setTimeout(() => {
+          screen.classList.remove("direction-changing");
+        }, 350);
+      }
+      languageButton.addEventListener("click", (event) => {
+        event.stopPropagation();
+        languageMenu.classList.toggle("visible");
+      });
+      languageMenu.addEventListener("click", (event) => {
+        const option = event.target.closest("[data-lang]");
+        if (!option) return;
+        changeLanguage(option.dataset.lang);
+      });
+      /* DARK / LIGHT MODE */
+      themeButton.addEventListener("click", () => {
+        const isDark = phone.classList.toggle("dark");
+        const t = translations[currentLanguage];
+        themeButton.title = isDark ? t.lightMode : t.darkMode;
+        themeButton.setAttribute("aria-label", themeButton.title);
+      });
+      /* FULLSCREEN */
+      async function toggleFullscreen() {
+        try {
+          if (!document.fullscreenElement) {
+            await phone.requestFullscreen();
+          } else {
+            await document.exitFullscreen();
+          }
+        } catch (error) {
+          alert("قد لا يسمح المتصفح بملء الشاشة في هذه الحالة.");
+        }
+      }
+
+      
+      fullscreenButton.addEventListener("click", toggleFullscreen);
+      document.addEventListener("fullscreenchange", () => {
+        const t = translations[currentLanguage];
+        const active = Boolean(document.fullscreenElement);
+        fullscreenButton.title = active ? t.exitFullscreen : t.fullscreen;
+        fullscreenButton.setAttribute("aria-label", fullscreenButton.title);
+      });
+      /* CONTROL PANEL PREVIEW */
+      adminButton.addEventListener("click", () => {
+        adminModal.classList.add("visible");
+      });
+      modalClose.addEventListener("click", () => {
+        adminModal.classList.remove("visible");
+      });
+      adminModal.addEventListener("click", (event) => {
+        if (event.target === adminModal) {
+          adminModal.classList.remove("visible");
+        }
+      });
+      /* CLOSE WHEN CLICKING OUTSIDE THE BAR */
+      document.addEventListener("click", (event) => {
+        if (!barWrap.contains(event.target)) {
+          setMenu(false);
+        }
+      });
+      /* CLOSE WITH ESCAPE */
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          setMenu(false);
+          adminModal.classList.remove("visible");
+          languageMenu.classList.remove("visible");
+        }
+      });
+      /* LOGO SCROLL BEHAVIOR */
+      screen.addEventListener(
+        "scroll",
+        () => {
+          const currentScroll = screen.scrollTop;
+          if (currentScroll <= 5) {
+            phone.classList.remove("logo-compact");
+          } else if (currentScroll > lastScrollTop + 1) {
+            phone.classList.add("logo-compact");
+          } else if (currentScroll < lastScrollTop - 1) {
+            phone.classList.remove("logo-compact");
+          }
+          lastScrollTop = currentScroll;
+          if (menuOpen) {
+            setMenu(false);
+          }
+        },
+        { passive: true },
+      );
+      /* CATEGORY SELECTION */
+      categoryButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          categoryButtons.forEach((item) => {
+            const selected = item === button;
+            item.classList.toggle("active", selected);
+            item.setAttribute("aria-pressed", String(selected));
+          });
+        });
+      });
+
+      /* HERO SLIDER */
+      function showSlide(index) {
+        if (heroSlides.length <= 1) return;
+        currentSlide = (index + heroSlides.length) % heroSlides.length;
+        heroSlides.forEach((slide, i) => {
+          slide.classList.toggle("active", i === currentSlide);
+        });
+        heroDots.forEach((dot, i) => {
+          dot.classList.toggle("active", i === currentSlide);
+        });
+      }
+      function stopAutoplay() {
+        if (autoplayTimer) {
+          clearInterval(autoplayTimer);
+          autoplayTimer = null;
+        }
+      }
+      function startAutoplay() {
+        stopAutoplay();
+        if (reduceMotion || heroSlides.length <= 1) return;
+        autoplayTimer = setInterval(() => {
+          showSlide(currentSlide + 1);
+        }, 5000);
+      }
+      heroDots.forEach((dot) => {
+        dot.addEventListener("click", () => {
+          showSlide(Number(dot.dataset.slide));
+          startAutoplay();
+        });
+      });
+      /* TOUCH SWIPE */
+      hero.addEventListener(
+        "touchstart",
+        (event) => {
+          touchStartX = event.touches[0].clientX;
+        },
+        { passive: true },
+      );
+      hero.addEventListener(
+        "touchend",
+        (event) => {
+          const endX = event.changedTouches[0].clientX;
+          const difference = endX - touchStartX;
+          if (Math.abs(difference) < 45) return;
+          const isRTL = phone.dir === "rtl";
+          if (difference < 0) {
+            showSlide(currentSlide + (isRTL ? 1 : -1));
+          } else {
+            showSlide(currentSlide + (isRTL ? -1 : 1));
+          }
+          startAutoplay();
+        },
+        { passive: true },
+      );
+      /* PAUSE SLIDER WHEN TAB IS HIDDEN */
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          stopAutoplay();
+        } else {
+          startAutoplay();
+        }
+      });
+      /* INITIALIZATION */
+      changeLanguage("ar");
+      showSlide(0);
+      startAutoplay();
+    </script>
+  </body>
+</html>
