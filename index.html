@@ -449,9 +449,10 @@
         transform: scale(0.92);
       }
       .phone.logo-compact .menu-title {
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateX(-50%);
       }
       .phone.logo-compact .logo-circle {
         background: #f2fff7;
@@ -1035,11 +1036,15 @@
           opacity 0.3s ease;
       }
 
-      /* Fade MENU out smoothly when the navigation opens. */
-      .phone[dir="rtl"] .bar-wrap.is-open .menu-title,
+      /* Move MENU to the right while the navbar opens, then fade it out. */
+      .phone[dir="rtl"] .bar-wrap.is-open .menu-title {
+        opacity: 0;
+        transform: translateX(calc(-50% + 145px)) scale(0.92);
+      }
+      /* Keep the mirrored motion for left-to-right languages. */
       .phone[dir="ltr"] .bar-wrap.is-open .menu-title {
         opacity: 0;
-        transform: translateX(-50%) scale(0.92);
+        transform: translateX(calc(-50% - 145px)) scale(0.92);
       }
 
       /* The logo must stay visually above the title */
