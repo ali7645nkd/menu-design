@@ -453,12 +453,9 @@
         visibility: visible;
         pointer-events: auto;
       }
-      /* Keep MENU visible during scroll, shifted away from the compact logo. */
-      .phone[dir="rtl"].logo-compact .menu-title {
-        transform: translateX(calc(-50% - 38px));
-      }
-      .phone[dir="ltr"].logo-compact .menu-title {
-        transform: translateX(calc(-50% + 38px));
+      /* Keep MENU visible and horizontally centered while scrolling. */
+      .phone.logo-compact .menu-title {
+        transform: translateX(-50%);
       }
       .phone.logo-compact .logo-circle {
         background: #f2fff7;
@@ -1042,13 +1039,16 @@
           opacity 0.3s ease;
       }
 
-      /* Hide the title while the navigation is open; never slide it beneath the logo. */
-      .phone[dir="rtl"] .bar-wrap.is-open .menu-title,
+      /* Slide MENU toward the logo when the navigation opens, preserving the original motion. */
+      .phone[dir="rtl"] .bar-wrap.is-open .menu-title {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(calc(-50% + 145px)) scale(0.88);
+      }
       .phone[dir="ltr"] .bar-wrap.is-open .menu-title {
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-        transform: translateX(-50%) scale(0.92);
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(calc(-50% - 145px)) scale(0.88);
       }
 
       /* The logo must stay visually above the title */
