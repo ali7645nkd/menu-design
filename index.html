@@ -1279,6 +1279,124 @@
           inset 0 1px 0 rgba(255, 255, 255, 0.2),
           inset -1px 0 0 rgba(190, 255, 215, 0.18);
       }
+
+      /* CATEGORY STRIP */
+      .category-section {
+        margin: 0 -16px 30px;
+        padding: 4px 0 12px;
+      }
+      .category-section-title {
+        margin: 0 16px 17px;
+        color: var(--text-color);
+        font-size: 15px;
+        font-weight: 800;
+      }
+      .category-track {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 7px 18px 13px;
+        scroll-snap-type: x proximity;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .category-track::-webkit-scrollbar {
+        display: none;
+      }
+      .category-button {
+        position: relative;
+        flex: 0 0 76px;
+        width: 76px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 9px;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        color: var(--text-color);
+        cursor: pointer;
+        scroll-snap-align: center;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .category-image-frame {
+        position: relative;
+        width: 68px;
+        height: 68px;
+        display: block;
+        padding: 3px;
+        border: 1.5px solid rgba(8, 127, 91, 0.58);
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        -webkit-backdrop-filter: blur(12px) saturate(145%);
+        backdrop-filter: blur(12px) saturate(145%);
+        box-shadow:
+          0 4px 13px rgba(20, 90, 67, 0.08),
+          inset 0 1px 2px rgba(255, 255, 255, 0.72);
+        transition:
+          transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+          border-color 0.3s ease,
+          box-shadow 0.3s ease,
+          background 0.3s ease;
+      }
+      .category-image-frame img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+      .category-name {
+        max-width: 88px;
+        min-height: 28px;
+        font-size: 10px;
+        line-height: 1.45;
+        font-weight: 700;
+        text-align: center;
+        white-space: normal;
+        opacity: 0.78;
+        transition:
+          color 0.3s ease,
+          opacity 0.3s ease,
+          transform 0.3s ease;
+      }
+      .category-button:hover .category-image-frame {
+        transform: translateY(-2px);
+      }
+      .category-button.active .category-image-frame {
+        transform: translateY(-5px);
+        border-color: #10b981;
+        background: rgba(16, 185, 129, 0.13);
+        box-shadow:
+          0 8px 19px rgba(16, 185, 129, 0.2),
+          0 0 0 2px rgba(16, 185, 129, 0.1),
+          inset 0 1px 3px rgba(255, 255, 255, 0.72);
+      }
+      .category-button.active .category-name {
+        color: var(--green);
+        opacity: 1;
+        transform: translateY(-2px);
+      }
+      .phone.dark .category-image-frame {
+        border-color: rgba(114, 221, 176, 0.52);
+        background: rgba(35, 65, 52, 0.5);
+        box-shadow:
+          0 4px 14px rgba(0, 0, 0, 0.22),
+          inset 0 1px 2px rgba(255, 255, 255, 0.1);
+      }
+      .phone.dark .category-button.active .category-image-frame {
+        border-color: #72ddb0;
+        background: rgba(16, 185, 129, 0.16);
+        box-shadow:
+          0 8px 20px rgba(0, 0, 0, 0.24),
+          0 0 13px rgba(114, 221, 176, 0.16);
+      }
+      .phone.dark .category-button.active .category-name {
+        color: #72ddb0;
+      }
     </style>
   </head>
   <body>
@@ -1504,6 +1622,35 @@
                 انزل للأسفل ثم اصعد للأعلى لمشاهدة حركة اللوغو.
               </p>
             </div>
+            <section class="category-section" aria-label="أقسام القائمة">
+              <h3 class="category-section-title" id="categoriesTitle">تصفح الأقسام</h3>
+              <nav class="category-track" id="categoryTrack" aria-label="أقسام القائمة">
+                <button class="category-button active" type="button" data-category-index="0" aria-pressed="true">
+                  <span class="category-image-frame"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=240&q=82" alt="" loading="lazy" /></span>
+                  <span class="category-name">الأطباق الرئيسية</span>
+                </button>
+                <button class="category-button" type="button" data-category-index="1" aria-pressed="false">
+                  <span class="category-image-frame"><img src="https://images.unsplash.com/photo-1512621778302-9b8f2f7f6f4b?auto=format&fit=crop&w=240&q=82" alt="" loading="lazy" /></span>
+                  <span class="category-name">المقبلات والسلطات</span>
+                </button>
+                <button class="category-button" type="button" data-category-index="2" aria-pressed="false">
+                  <span class="category-image-frame"><img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=240&q=82" alt="" loading="lazy" /></span>
+                  <span class="category-name">المشروبات</span>
+                </button>
+                <button class="category-button" type="button" data-category-index="3" aria-pressed="false">
+                  <span class="category-image-frame"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=240&q=82" alt="" loading="lazy" /></span>
+                  <span class="category-name">الحلويات</span>
+                </button>
+                <button class="category-button" type="button" data-category-index="4" aria-pressed="false">
+                  <span class="category-image-frame"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=240&q=82" alt="" loading="lazy" /></span>
+                  <span class="category-name">القهوة</span>
+                </button>
+                <button class="category-button" type="button" data-category-index="5" aria-pressed="false">
+                  <span class="category-image-frame"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=240&q=82" alt="" loading="lazy" /></span>
+                  <span class="category-name">الوجبات الخاصة</span>
+                </button>
+              </nav>
+            </section>
             <div class="scroll-demo-card">
               <div class="scroll-demo-icon">🍽️</div>
               <div>
@@ -1592,6 +1739,7 @@
       const heroDescription = document.getElementById("heroDescription");
       const heroSlides = [...document.querySelectorAll(".hero-slide")];
       const heroDots = [...document.querySelectorAll(".hero-dot")];
+      const categoryButtons = [...document.querySelectorAll(".category-button")];
       let menuOpen = false;
       let currentLanguage = "ar";
       let currentSlide = 0;
@@ -1632,6 +1780,7 @@
           locationValue: "القامشلي، سوريا",
           searchPlaceholder: "ابحث عن صنف في القائمة...",
           scrollHeading: "اختبار حركة اللوغو",
+          categoriesTitle: "تصفح الأقسام",
           scrollIntro: "انزل للأسفل ثم اصعد للأعلى لمشاهدة حركة اللوغو.",
           scrollFooter: "حرّك الصفحة للأعلى والأسفل لاختبار التجربة",
           demoCats: [
@@ -1676,6 +1825,7 @@
           locationValue: "Qamishli, Syria",
           searchPlaceholder: "Search for a menu item...",
           scrollHeading: "Logo scroll test",
+          categoriesTitle: "Browse categories",
           scrollIntro: "Scroll down and then up to see the logo animation.",
           scrollFooter: "Scroll up and down to test the experience",
           demoCats: [
@@ -1719,6 +1869,7 @@
           locationValue: "Qamişlo, Sûriye",
           searchPlaceholder: "Di lîsteyê de li xwarinekê bigere...",
           scrollHeading: "Ceribandina tevgera logoyê",
+          categoriesTitle: "Li kategoriyan bigere",
           scrollIntro:
             "Ber bi jêr ve here, paşê vegere jorê da ku tevgera logo bibînî.",
           scrollFooter: "Ji bo ceribandinê jor û jêr here",
@@ -1802,6 +1953,11 @@
         const menuSearchInput = document.getElementById("menuSearchInput");
         menuSearchInput.placeholder = t.searchPlaceholder;
         menuSearchInput.setAttribute("aria-label", t.searchPlaceholder);
+        // Category strip
+        document.getElementById("categoriesTitle").textContent = t.categoriesTitle;
+        categoryButtons.forEach((button, index) => {
+          button.querySelector(".category-name").textContent = t.demoCats[index];
+        });
         // Scroll test content
         document.getElementById("scrollHeading").textContent = t.scrollHeading;
         document.getElementById("scrollIntro").textContent = t.scrollIntro;
@@ -1908,6 +2064,17 @@
         },
         { passive: true },
       );
+      /* CATEGORY SELECTION */
+      categoryButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          categoryButtons.forEach((item) => {
+            const selected = item === button;
+            item.classList.toggle("active", selected);
+            item.setAttribute("aria-pressed", String(selected));
+          });
+        });
+      });
+
       /* HERO SLIDER */
       function showSlide(index) {
         if (heroSlides.length <= 1) return;
