@@ -1492,13 +1492,13 @@
       /* 3D menu item carousel */
       .items-carousel{position:relative;margin-top:8px;padding:0 0 2px;touch-action:pan-y}
       .items-carousel-stage{position:relative;height:350px;margin:0 auto}
-      .menu-item-card{position:absolute;top:35px;left:50%;width:218px;height:286px;padding:0;border-radius:23px;overflow:visible;background:var(--page-bg);border:1px solid rgba(16,185,129,.17);box-shadow:0 13px 30px rgba(12,48,34,.14);transform:translateX(-50%) scale(.72);opacity:0;z-index:1;pointer-events:none;transform-origin:center;transition:transform .34s ease-out,opacity .25s ease,filter .25s ease,box-shadow .25s ease;cursor:pointer;outline:none}
-      .menu-item-card.is-active{transform:translateX(-50%) scale(1);opacity:1;z-index:5;pointer-events:auto;box-shadow:0 18px 38px rgba(12,48,34,.2)}
+      .menu-item-card{position:absolute;top:35px;left:50%;width:218px;height:286px;padding:0;border-radius:23px;overflow:visible;background:var(--page-bg);border:1px solid rgba(16,185,129,.17);box-shadow:0 13px 30px rgba(12,48,34,.14);transform:translate3d(-50%,0,0) scale(.72);opacity:0;z-index:1;pointer-events:none;transform-origin:center;transition:transform .24s cubic-bezier(.2,.75,.25,1),opacity .18s ease;will-change:transform,opacity;backface-visibility:hidden;cursor:pointer;outline:none}
+      .menu-item-card.is-active{transform:translate3d(calc(-50% + var(--drag-x,0px)),0,0) scale(1);opacity:1;z-index:5;pointer-events:auto;box-shadow:0 18px 38px rgba(12,48,34,.2)}
       .menu-item-card.is-prev,.menu-item-card.is-next{opacity:.76;z-index:3;pointer-events:auto;filter:saturate(.78)}
-      .phone[dir="rtl"] .menu-item-card.is-prev{transform:translateX(calc(-50% + 126px)) translateY(19px) scale(.78)}
-      .phone[dir="rtl"] .menu-item-card.is-next{transform:translateX(calc(-50% - 126px)) translateY(19px) scale(.78)}
-      .phone[dir="ltr"] .menu-item-card.is-prev{transform:translateX(calc(-50% - 126px)) translateY(19px) scale(.78)}
-      .phone[dir="ltr"] .menu-item-card.is-next{transform:translateX(calc(-50% + 126px)) translateY(19px) scale(.78)}
+      .phone[dir="rtl"] .menu-item-card.is-prev{transform:translate3d(calc(-50% + 126px),19px,0) scale(.78)}
+      .phone[dir="rtl"] .menu-item-card.is-next{transform:translate3d(calc(-50% - 126px),19px,0) scale(.78)}
+      .phone[dir="ltr"] .menu-item-card.is-prev{transform:translate3d(calc(-50% - 126px),19px,0) scale(.78)}
+      .phone[dir="ltr"] .menu-item-card.is-next{transform:translate3d(calc(-50% + 126px),19px,0) scale(.78)}
       .menu-item-image{position:absolute;top:-48px;left:50%;width:142px;height:142px;padding:5px;transform:translateX(-50%);border-radius:50%;background:var(--page-bg);border:1px solid rgba(16,185,129,.3);box-shadow:0 8px 20px rgba(8,55,36,.2);z-index:2}
       .menu-item-image img{display:block;width:100%;height:100%;object-fit:cover;border-radius:50%}
       .menu-item-content{height:100%;padding:118px 17px 16px;display:flex;flex-direction:column;text-align:center;align-items:center}
@@ -1518,7 +1518,7 @@
       .carousel-dot{width:5px;height:5px;border:0;border-radius:9px;background:rgba(16,185,129,.28);padding:0;cursor:pointer;transition:width .3s ease,background .3s ease}
       .carousel-dot.active{width:17px;background:var(--green)}
       .carousel-hint{margin-top:2px;text-align:center;font-size:9px;color:var(--text-color);opacity:.48}
-      @media(max-width:370px){.menu-item-card{width:204px}.phone[dir="rtl"] .menu-item-card.is-prev{transform:translateX(calc(-50% + 112px)) translateY(21px) scale(.74)}.phone[dir="rtl"] .menu-item-card.is-next{transform:translateX(calc(-50% - 112px)) translateY(21px) scale(.74)}.phone[dir="ltr"] .menu-item-card.is-prev{transform:translateX(calc(-50% - 112px)) translateY(21px) scale(.74)}.phone[dir="ltr"] .menu-item-card.is-next{transform:translateX(calc(-50% + 112px)) translateY(21px) scale(.74)}}
+      @media(max-width:370px){.menu-item-card{width:204px}.phone[dir="rtl"] .menu-item-card.is-prev{transform:translate3d(calc(-50% + 112px),21px,0) scale(.74)}.phone[dir="rtl"] .menu-item-card.is-next{transform:translate3d(calc(-50% - 112px),21px,0) scale(.74)}.phone[dir="ltr"] .menu-item-card.is-prev{transform:translate3d(calc(-50% - 112px),21px,0) scale(.74)}.phone[dir="ltr"] .menu-item-card.is-next{transform:translate3d(calc(-50% + 112px),21px,0) scale(.74)}}
       @media(prefers-reduced-motion:reduce){.menu-item-card,.carousel-dot,.category-image-frame{transition:none!important}}
     </style>
   </head>
@@ -2188,9 +2188,22 @@
       const itemDots = [...document.querySelectorAll(".carousel-dot")];
       const itemStage = document.getElementById("itemsCarouselStage");
       let activeItemIndex = 0;
-      let itemTouchStartX = 0;
+      let itemPointerStartX = 0;
+      let itemPointerStartY = 0;
+      let itemDragX = 0;
+      let itemDragging = false;
+      let itemPointerId = null;
+      let itemSuppressClick = false;
+      function clearItemDrag() {
+        itemCards.forEach(card => card.style.removeProperty("--drag-x"));
+        itemDragX = 0;
+        itemDragging = false;
+        itemPointerId = null;
+        itemStage.classList.remove("is-dragging");
+      }
       function showMenuItem(index) {
         if (!itemCards.length) return;
+        clearItemDrag();
         activeItemIndex = (index + itemCards.length) % itemCards.length;
         itemCards.forEach((card, i) => {
           card.classList.remove("is-active", "is-prev", "is-next");
@@ -2205,7 +2218,10 @@
       document.getElementById("itemNext").addEventListener("click", () => showMenuItem(activeItemIndex + 1));
       itemDots.forEach(dot => dot.addEventListener("click", () => showMenuItem(Number(dot.dataset.itemTarget))));
       itemCards.forEach(card => {
-        card.addEventListener("click", () => showMenuItem(Number(card.dataset.itemIndex)));
+        card.addEventListener("click", () => {
+          if (itemSuppressClick) return;
+          showMenuItem(Number(card.dataset.itemIndex));
+        });
         card.addEventListener("keydown", event => {
           if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
@@ -2213,15 +2229,44 @@
           }
         });
       });
-      itemStage.addEventListener("touchstart", event => {
-        itemTouchStartX = event.touches[0].clientX;
-      }, {passive:true});
-      itemStage.addEventListener("touchend", event => {
-        const delta = event.changedTouches[0].clientX - itemTouchStartX;
-        if (Math.abs(delta) < 35) return;
-        const rtl = phone.dir === "rtl";
-        showMenuItem(activeItemIndex + ((delta < 0) === rtl ? -1 : 1));
-      }, {passive:true});
+      itemStage.addEventListener("pointerdown", event => {
+        if (!event.isPrimary || (event.pointerType === "mouse" && event.button !== 0)) return;
+        itemPointerStartX = event.clientX;
+        itemPointerStartY = event.clientY;
+        itemDragX = 0;
+        itemDragging = false;
+        itemPointerId = event.pointerId;
+        itemStage.setPointerCapture(event.pointerId);
+      });
+      itemStage.addEventListener("pointermove", event => {
+        if (itemPointerId !== event.pointerId) return;
+        const deltaX = event.clientX - itemPointerStartX;
+        const deltaY = event.clientY - itemPointerStartY;
+        if (!itemDragging && Math.abs(deltaX) > 7 && Math.abs(deltaX) > Math.abs(deltaY) * 1.15) {
+          itemDragging = true;
+          itemStage.classList.add("is-dragging");
+        }
+        if (!itemDragging) return;
+        itemDragX = Math.max(-145, Math.min(145, deltaX));
+        itemCards[activeItemIndex].style.setProperty("--drag-x", itemDragX + "px");
+      });
+      function finishItemPointer(event, cancelled = false) {
+        if (itemPointerId !== event.pointerId) return;
+        const delta = itemDragX;
+        const wasDragging = itemDragging;
+        clearItemDrag();
+        if (wasDragging) {
+          itemSuppressClick = true;
+          if (!cancelled && Math.abs(delta) >= 42) {
+            const rtl = phone.dir === "rtl";
+            showMenuItem(activeItemIndex + ((delta < 0) === rtl ? -1 : 1));
+          }
+          requestAnimationFrame(() => { itemSuppressClick = false; });
+        }
+      }
+      itemStage.addEventListener("pointerup", event => finishItemPointer(event));
+      itemStage.addEventListener("pointercancel", event => finishItemPointer(event, true));
+      itemStage.addEventListener("lostpointercapture", event => finishItemPointer(event, true));
       showMenuItem(0);
 
 
