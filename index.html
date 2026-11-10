@@ -1549,17 +1549,20 @@
         pointer-events: none;
       }
 
-      /* Search glides around the semicircle's edge, rises, and expands. */
+      /* Search expands and lifts using compositor-friendly transforms. */
       .menu-search {
         position: absolute;
         top: 443px;
-        left: calc(12px + (146px * (1 - var(--scene-progress))));
+        left: 12px;
         right: 12px;
         width: auto;
         margin: 0;
         z-index: 30;
+        transform-origin: right center;
+        transform: translate3d(0, calc(-30px * var(--scene-progress)), 0)
+          scaleX(calc(0.61 + (0.39 * var(--scene-progress))));
         transition: none;
-        will-change: top, left, right;
+        will-change: transform;
         background: rgba(255, 255, 255, 0.94);
         -webkit-backdrop-filter: blur(22px) saturate(150%);
         backdrop-filter: blur(22px) saturate(150%);
@@ -1576,33 +1579,42 @@
           inset 0 1px 0 rgba(255, 255, 255, 0.98);
       }
 
-      /* Make room below the settled search and center the section title. */
+      /* Lift the whole menu content slightly to reserve room for the footer. */
       .category-section {
-        padding-top: calc(24px + (36px * var(--scene-progress)));
+        padding-top: 24px;
+        transform: translate3d(0, calc(-34px * var(--scene-progress)), 0);
+        transition: none;
+        will-change: transform;
       }
       .category-heading {
-        width: calc(100% - (146px * (1 - var(--scene-progress))));
-        margin-left: calc(146px * (1 - var(--scene-progress)));
+        width: 100%;
+        margin: 0 0 16px;
+        transform-origin: right center;
+        transform: scaleX(calc(0.61 + (0.39 * var(--scene-progress))));
         transition: none;
+        will-change: transform;
       }
 
-      /* Circles briefly tighten while passing the semicircle, then recover. */
+      /* Keep circle geometry stable; only apply a tiny visual squeeze. */
       .category-track {
-        gap: calc(17px - (5px * var(--collision-progress)));
+        gap: 17px;
+        transform: scaleX(calc(1 - (0.025 * var(--collision-progress))));
+        transform-origin: center center;
         transition: none;
+        will-change: transform;
       }
       .category-button {
-        flex-basis: calc(88px - (9px * var(--collision-progress)));
-        width: calc(88px - (9px * var(--collision-progress)));
+        flex-basis: 88px;
+        width: 88px;
       }
       .category-image-frame {
-        width: calc(78px - (8px * var(--collision-progress)));
-        height: calc(78px - (8px * var(--collision-progress)));
+        width: 78px;
+        height: 78px;
       }
 
-      /* The active item card rises into the newly available space. */
+      /* Raise the item cards a little more to open the footer area. */
       .items-carousel {
-        transform: translate3d(0, calc(-24px * var(--scene-progress)), 0);
+        transform: translate3d(0, calc(-18px * var(--scene-progress)), 0);
         transition: none;
         will-change: transform;
       }
@@ -1613,7 +1625,9 @@
         pointer-events: none;
       }
       .phone.scene-locked .scroll-demo-footer {
-        display: none;
+        display: block;
+        margin-top: 22px;
+        transform: translate3d(0, -10px, 0);
       }
       .category-track {
         overflow-x: auto;
@@ -2278,6 +2292,7 @@
       let sceneTouchX = 0;
       let sceneTouchAxis = null;
       let sceneGestureDirection = 0;
+      let lastRenderedScenePosition = -1;
 
       function syncSceneCard(progress) {
         if (progress >= 0.999 && sceneCardState !== 1) {
@@ -2289,10 +2304,11 @@
         }
       }
 
-      function updateScrollScene() {
-        sceneFrame = 0;
+      function renderScrollScene() {
         const currentScroll = Math.max(0, Math.min(SCENE_DISTANCE, screen.scrollTop));
         if (screen.scrollTop !== currentScroll) screen.scrollTop = currentScroll;
+        if (Math.abs(currentScroll - lastRenderedScenePosition) < 0.25) return;
+        lastRenderedScenePosition = currentScroll;
 
         const progress = currentScroll / SCENE_DISTANCE;
         phone.classList.toggle("logo-compact", progress > 0.015);
@@ -2305,9 +2321,14 @@
         if (menuOpen) setMenu(false);
       }
 
+      function updateScrollScene() {
+        sceneFrame = 0;
+        renderScrollScene();
+      }
+
       function setSceneScroll(nextValue) {
         screen.scrollTop = Math.max(0, Math.min(SCENE_DISTANCE, nextValue));
-        if (!sceneFrame) sceneFrame = requestAnimationFrame(updateScrollScene);
+        renderScrollScene();
       }
 
       function stopSceneSnap() {
@@ -2332,10 +2353,12 @@
         }
 
         const startedAt = performance.now();
-        const duration = 260;
+        const duration = 300;
         const animate = (now) => {
           const raw = Math.min(1, (now - startedAt) / duration);
-          const eased = 1 - Math.pow(1 - raw, 3);
+          const eased = raw < 0.5
+            ? 4 * raw * raw * raw
+            : 1 - Math.pow(-2 * raw + 2, 3) / 2;
           setSceneScroll(from + distance * eased);
           if (raw < 1) {
             sceneAnimationFrame = requestAnimationFrame(animate);
@@ -2358,8 +2381,7 @@
         }
       }
 
-      /* A short wheel gesture now completes the scene instead of leaving it
-         suspended halfway around the semicircle. */
+      /* Coalesce wheel updates and keep the transition on a single render path. */
       screen.addEventListener("wheel", (event) => {
         if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
         event.preventDefault();
@@ -2375,8 +2397,7 @@
         }, 95);
       }, { passive: false });
 
-      /* Touch vertical drags scrub the transition with extra travel.
-         On release, the scene smoothly pops to its nearest intended state. */
+      /* Touch vertical drags update only compositor-friendly scene transforms. */
       screen.addEventListener("touchstart", (event) => {
         if (!event.touches.length) return;
         stopSceneSnap();
