@@ -1851,7 +1851,6 @@
       let currentSlide = 0;
       let autoplayTimer = null;
       let touchStartX = 0;
-      let lastScrollTop = 0;
       const reduceMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
       ).matches;
@@ -2158,14 +2157,7 @@
         "scroll",
         () => {
           const currentScroll = screen.scrollTop;
-          if (currentScroll <= 5) {
-            phone.classList.remove("logo-compact");
-          } else if (currentScroll > lastScrollTop + 1) {
-            phone.classList.add("logo-compact");
-          } else if (currentScroll < lastScrollTop - 1) {
-            phone.classList.remove("logo-compact");
-          }
-          lastScrollTop = currentScroll;
+          phone.classList.toggle("logo-compact", currentScroll > 5);
           if (menuOpen) {
             setMenu(false);
           }
