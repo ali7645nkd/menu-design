@@ -2251,7 +2251,8 @@
         phone.classList.toggle("logo-compact", currentScroll > 5);
 
         // One shared progress value keeps all elements moving as a single scene.
-        const rawProgress = (currentScroll - 190) / 190;
+        // Complete the transition as the search reaches its sticky position.
+        const rawProgress = (currentScroll - 190) / 139;
         const progress = Math.max(0, Math.min(1, rawProgress));
         phone.style.setProperty("--scene-progress", progress.toFixed(4));
         const collisionProgress = 4 * progress * (1 - progress);
