@@ -1528,6 +1528,7 @@
          ========================================== */
       .phone {
         --scene-progress: 0;
+        --collision-progress: 0;
       }
 
       /* Keep the search in normal flow at first, then let it
@@ -1582,16 +1583,16 @@
       /* Temporarily tighten category spacing and circles while passing
          the semicircle, then restore their original dimensions. */
       .category-track {
-        gap: calc(17px - (5px * var(--scene-progress)));
+        gap: calc(17px - (5px * var(--collision-progress)));
         transition: none;
       }
       .category-button {
-        flex-basis: calc(88px - (9px * var(--scene-progress)));
-        width: calc(88px - (9px * var(--scene-progress)));
+        flex-basis: calc(88px - (9px * var(--collision-progress)));
+        width: calc(88px - (9px * var(--collision-progress)));
       }
       .category-image-frame {
-        width: calc(78px - (8px * var(--scene-progress)));
-        height: calc(78px - (8px * var(--scene-progress)));
+        width: calc(78px - (8px * var(--collision-progress)));
+        height: calc(78px - (8px * var(--collision-progress)));
       }
 
       /* Lift the menu-card scene slightly as the search settles. */
@@ -2253,6 +2254,8 @@
         const rawProgress = (currentScroll - 190) / 190;
         const progress = Math.max(0, Math.min(1, rawProgress));
         phone.style.setProperty("--scene-progress", progress.toFixed(4));
+        const collisionProgress = 4 * progress * (1 - progress);
+        phone.style.setProperty("--collision-progress", collisionProgress.toFixed(4));
 
         if (menuOpen) {
           setMenu(false);
