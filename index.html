@@ -1549,20 +1549,18 @@
         pointer-events: none;
       }
 
-      /* Search expands and lifts using compositor-friendly transforms. */
+      /* Search keeps its text at natural width while its available space expands. */
       .menu-search {
         position: absolute;
         top: 443px;
-        left: 12px;
+        left: calc(12px + (146px * (1 - var(--scene-progress))));
         right: 12px;
         width: auto;
         margin: 0;
         z-index: 30;
-        transform-origin: right center;
-        transform: translate3d(0, calc(-30px * var(--scene-progress)), 0)
-          scaleX(calc(0.61 + (0.39 * var(--scene-progress))));
+        transform: translate3d(0, calc(-30px * var(--scene-progress)), 0);
         transition: none;
-        will-change: transform;
+        will-change: left, transform;
         background: rgba(255, 255, 255, 0.94);
         -webkit-backdrop-filter: blur(8px) saturate(115%);
         backdrop-filter: blur(8px) saturate(115%);
@@ -1588,12 +1586,12 @@
         will-change: transform;
       }
       .category-heading {
-        width: 100%;
-        margin: 0 0 16px;
-        transform-origin: right center;
-        transform: scaleX(calc(0.61 + (0.39 * var(--scene-progress))));
+        width: calc(100% - (146px * (1 - var(--scene-progress))));
+        margin: 0 0 16px calc(146px * (1 - var(--scene-progress)));
+        text-align: center;
+        transform: none;
         transition: none;
-        will-change: transform;
+        will-change: width, margin-left;
       }
 
       /* Keep circle geometry stable; only apply a tiny visual squeeze. */
