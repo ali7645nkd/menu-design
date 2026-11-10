@@ -2282,7 +2282,7 @@
       });
       /* LOGO + ACCELERATED, SNAPPING SCENE GESTURE */
       const SCENE_DISTANCE = 330;
-      const SCENE_GESTURE_GAIN = 2.2;
+      const SCENE_GESTURE_GAIN = 1.7;
       const SCENE_SNAP_THRESHOLD = 0.08;
       let sceneFrame = 0;
       let sceneAnimationFrame = 0;
@@ -2353,12 +2353,12 @@
         }
 
         const startedAt = performance.now();
-        const duration = 300;
+        const duration = 430;
         const animate = (now) => {
           const raw = Math.min(1, (now - startedAt) / duration);
           const eased = raw < 0.5
-            ? 4 * raw * raw * raw
-            : 1 - Math.pow(-2 * raw + 2, 3) / 2;
+            ? 16 * Math.pow(raw, 5)
+            : 1 - Math.pow(-2 * raw + 2, 5) / 2;
           setSceneScroll(from + distance * eased);
           if (raw < 1) {
             sceneAnimationFrame = requestAnimationFrame(animate);
@@ -2394,7 +2394,7 @@
         sceneSnapTimer = setTimeout(() => {
           sceneSnapTimer = null;
           settleSceneGesture(sceneGestureDirection);
-        }, 95);
+        }, 125);
       }, { passive: false });
 
       /* Touch vertical drags update only compositor-friendly scene transforms. */
