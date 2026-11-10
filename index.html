@@ -1531,12 +1531,12 @@
 
       /* The cover card collapses completely as the menu scene rises. */
       .hero {
-        height: calc(365px * (1 - var(--scene-progress)));
-        min-height: 0;
+        height: 365px;
         opacity: calc(1 - var(--scene-progress));
-        transform: translate3d(0, calc(-22px * var(--scene-progress)), 0);
+        transform: translate3d(0, calc(-330px * var(--scene-progress)), 0);
         transition: none;
-        will-change: height, opacity, transform;
+        will-change: opacity, transform;
+        pointer-events: none;
       }
 
       /* The restaurant status semicircle exits to the right and disappears. */
@@ -1554,7 +1554,7 @@
       /* Search glides around the semicircle's edge, rises, and expands. */
       .menu-search {
         position: absolute;
-        top: calc(443px - (330px * var(--scene-progress)));
+        top: 443px;
         left: calc(12px + (146px * (1 - var(--scene-progress))));
         right: 12px;
         width: auto;
