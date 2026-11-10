@@ -1397,6 +1397,47 @@
       .phone.dark .category-button.active .category-name {
         color: #72ddb0;
       }
+
+      /* Unified categories + 3D cover-flow menu card */
+      .menu-showcase{position:relative;margin:0 -4px;padding:18px 0 15px;border-radius:27px;background:var(--surface);border:1px solid rgba(16,185,129,.13);box-shadow:0 12px 32px rgba(20,90,67,.08),inset 0 1px 0 rgba(255,255,255,.58);overflow:hidden;isolation:isolate}
+      .phone.dark .menu-showcase{border-color:rgba(114,221,176,.16);box-shadow:0 12px 32px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.06)}
+      .menu-showcase-heading{display:flex;align-items:center;justify-content:space-between;margin:0 18px 12px;color:var(--text-color)}
+      .menu-showcase-heading h2{font-size:19px;line-height:1.3;font-weight:850}
+      .menu-showcase-mark{width:34px;height:4px;border-radius:9px;background:var(--green);opacity:.75}
+      .category-track{gap:11px;padding:5px 15px 10px}
+      .category-button{flex-basis:70px;width:70px;gap:7px}
+      .category-image-frame{width:60px;height:60px}
+      .category-name{font-size:9px;min-height:26px}
+      .items-carousel{position:relative;margin-top:8px;padding:0 0 2px;touch-action:pan-y}
+      .items-carousel-stage{position:relative;height:315px;margin:0 auto;perspective:1000px;transform-style:preserve-3d}
+      .menu-item-card{position:absolute;top:25px;left:50%;width:218px;height:270px;padding:0;border-radius:23px;overflow:visible;background:var(--page-bg);border:1px solid rgba(16,185,129,.17);box-shadow:0 13px 30px rgba(12,48,34,.14);transform:translateX(-50%) scale(.72);opacity:0;z-index:1;pointer-events:none;transform-origin:center;transition:transform .58s cubic-bezier(.22,1,.36,1),opacity .4s ease,filter .4s ease,box-shadow .4s ease;cursor:pointer;outline:none}
+      .menu-item-card.is-active{transform:translateX(-50%) scale(1);opacity:1;z-index:5;pointer-events:auto;box-shadow:0 18px 38px rgba(12,48,34,.2)}
+      .menu-item-card.is-prev,.menu-item-card.is-next{opacity:.76;z-index:3;pointer-events:auto;filter:saturate(.78)}
+      .phone[dir="rtl"] .menu-item-card.is-prev{transform:translateX(calc(-50% + 126px)) translateY(19px) scale(.78) rotateY(-17deg)}
+      .phone[dir="rtl"] .menu-item-card.is-next{transform:translateX(calc(-50% - 126px)) translateY(19px) scale(.78) rotateY(17deg)}
+      .phone[dir="ltr"] .menu-item-card.is-prev{transform:translateX(calc(-50% - 126px)) translateY(19px) scale(.78) rotateY(17deg)}
+      .phone[dir="ltr"] .menu-item-card.is-next{transform:translateX(calc(-50% + 126px)) translateY(19px) scale(.78) rotateY(-17deg)}
+      .menu-item-image{position:absolute;top:-24px;left:50%;width:112px;height:112px;padding:5px;transform:translateX(-50%);border-radius:50%;background:var(--page-bg);border:1px solid rgba(16,185,129,.3);box-shadow:0 8px 20px rgba(8,55,36,.2);z-index:2}
+      .menu-item-image img{display:block;width:100%;height:100%;object-fit:cover;border-radius:50%}
+      .menu-item-content{height:100%;padding:99px 17px 16px;display:flex;flex-direction:column;text-align:center;align-items:center}
+      .menu-item-category{font-size:9px;font-weight:800;color:var(--green);opacity:.88;margin-bottom:7px}
+      .menu-item-content h3{font-size:17px;font-weight:850;color:var(--text-color);margin-bottom:7px;line-height:1.3}
+      .menu-item-content p{font-size:10px;line-height:1.7;color:var(--text-color);opacity:.68;max-width:175px}
+      .menu-item-bottom{margin-top:auto;width:100%;display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid rgba(16,185,129,.14)}
+      .menu-item-bottom strong{font-size:16px;color:var(--green);font-weight:900;direction:ltr}
+      .menu-item-bottom span{font-size:15px;color:#d5a85f}
+      .phone.dark .menu-item-card{background:#20382e;border-color:rgba(114,221,176,.2);box-shadow:0 14px 30px rgba(0,0,0,.3)}
+      .phone.dark .menu-item-item.is-active,.phone.dark .menu-item-card.is-active{box-shadow:0 18px 38px rgba(0,0,0,.42)}
+      .phone.dark .menu-item-image{background:#20382e;border-color:rgba(114,221,176,.35)}
+      .phone.dark .menu-item-category,.phone.dark .menu-item-bottom strong{color:#72ddb0}
+      .items-carousel-controls{height:35px;display:flex;align-items:center;justify-content:center;gap:15px;margin-top:0;position:relative;z-index:8}
+      .carousel-arrow{width:29px;height:29px;border:1px solid rgba(16,185,129,.2);border-radius:50%;background:var(--surface);color:var(--text-color);font-size:22px;line-height:1;cursor:pointer;display:grid;place-items:center}
+      .carousel-pagination{display:flex;align-items:center;gap:6px}
+      .carousel-dot{width:5px;height:5px;border:0;border-radius:9px;background:rgba(16,185,129,.28);padding:0;cursor:pointer;transition:width .3s ease,background .3s ease}
+      .carousel-dot.active{width:17px;background:var(--green)}
+      .carousel-hint{margin-top:2px;text-align:center;font-size:9px;color:var(--text-color);opacity:.48}
+      @media(max-width:370px){.menu-item-card{width:204px}.phone[dir="rtl"] .menu-item-card.is-prev{transform:translateX(calc(-50% + 112px)) translateY(21px) scale(.74) rotateY(-17deg)}.phone[dir="rtl"] .menu-item-card.is-next{transform:translateX(calc(-50% - 112px)) translateY(21px) scale(.74) rotateY(17deg)}.phone[dir="ltr"] .menu-item-card.is-prev{transform:translateX(calc(-50% - 112px)) translateY(21px) scale(.74) rotateY(17deg)}.phone[dir="ltr"] .menu-item-card.is-next{transform:translateX(calc(-50% + 112px)) translateY(21px) scale(.74) rotateY(-17deg)}}
+      @media(prefers-reduced-motion:reduce){.menu-item-card,.carousel-dot,.category-image-frame{transition:none!important}}
     </style>
   </head>
   <body>
@@ -1617,88 +1658,59 @@
           >
             <div class="scroll-demo-heading">
               <span class="scroll-demo-label">MENUVA PREVIEW</span>
-              <h2 id="scrollHeading">اختبار حركة اللوغو</h2>
+              <h2 id="scrollHeading">قائمة الطعام</h2>
               <p id="scrollIntro">
-                انزل للأسفل ثم اصعد للأعلى لمشاهدة حركة اللوغو.
+                اختر قسماً واستكشف الأصناف المميزة.
               </p>
             </div>
-            <section class="category-section" aria-label="أقسام القائمة">
-              <h3 class="category-section-title" id="categoriesTitle">تصفح الأقسام</h3>
+
+            <section class="menu-showcase" aria-label="قائمة الطعام">
+              <div class="menu-showcase-heading"><h2 id="categoriesTitle">الأقسام</h2><span class="menu-showcase-mark" aria-hidden="true"></span></div>
               <nav class="category-track" id="categoryTrack" aria-label="أقسام القائمة">
-                <button class="category-button active" type="button" data-category-index="0" aria-pressed="true">
-                  <span class="category-image-frame"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=240&q=82" alt="" loading="lazy" /></span>
-                  <span class="category-name">الأطباق الرئيسية</span>
-                </button>
-                <button class="category-button" type="button" data-category-index="1" aria-pressed="false">
-                  <span class="category-image-frame"><img src="https://images.unsplash.com/photo-1512621778302-9b8f2f7f6f4b?auto=format&fit=crop&w=240&q=82" alt="" loading="lazy" /></span>
-                  <span class="category-name">المقبلات والسلطات</span>
-                </button>
-                <button class="category-button" type="button" data-category-index="2" aria-pressed="false">
-                  <span class="category-image-frame"><img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=240&q=82" alt="" loading="lazy" /></span>
-                  <span class="category-name">المشروبات</span>
-                </button>
-                <button class="category-button" type="button" data-category-index="3" aria-pressed="false">
-                  <span class="category-image-frame"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=240&q=82" alt="" loading="lazy" /></span>
-                  <span class="category-name">الحلويات</span>
-                </button>
-                <button class="category-button" type="button" data-category-index="4" aria-pressed="false">
-                  <span class="category-image-frame"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=240&q=82" alt="" loading="lazy" /></span>
-                  <span class="category-name">القهوة</span>
-                </button>
-                <button class="category-button" type="button" data-category-index="5" aria-pressed="false">
-                  <span class="category-image-frame"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=240&q=82" alt="" loading="lazy" /></span>
-                  <span class="category-name">الوجبات الخاصة</span>
-                </button>
+                <button class="category-button active" type="button" data-category-index="0" aria-pressed="true"><span class="category-image-frame"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=240&q=82" alt="" loading="lazy"></span><span class="category-name">الأطباق الرئيسية</span></button>
+                <button class="category-button" type="button" data-category-index="1" aria-pressed="false"><span class="category-image-frame"><img src="https://images.unsplash.com/photo-1512621778302-9b8f2f7f6f4b?auto=format&fit=crop&w=240&q=82" alt="" loading="lazy"></span><span class="category-name">المقبلات والسلطات</span></button>
+                <button class="category-button" type="button" data-category-index="2" aria-pressed="false"><span class="category-image-frame"><img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=240&q=82" alt="" loading="lazy"></span><span class="category-name">المشروبات</span></button>
+                <button class="category-button" type="button" data-category-index="3" aria-pressed="false"><span class="category-image-frame"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=240&q=82" alt="" loading="lazy"></span><span class="category-name">الحلويات</span></button>
+                <button class="category-button" type="button" data-category-index="4" aria-pressed="false"><span class="category-image-frame"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=240&q=82" alt="" loading="lazy"></span><span class="category-name">القهوة</span></button>
+                <button class="category-button" type="button" data-category-index="5" aria-pressed="false"><span class="category-image-frame"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=240&q=82" alt="" loading="lazy"></span><span class="category-name">الوجبات الخاصة</span></button>
               </nav>
+              <section class="items-carousel" aria-label="أصناف القائمة">
+                <div class="items-carousel-stage" id="itemsCarouselStage">
+                  <article class="menu-item-card is-active" data-item-index="0" tabindex="0" role="button" aria-label="كبسة دجاج">
+                    <div class="menu-item-image"><img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=640&q=85" alt="كبسة دجاج" loading="lazy"></div>
+                    <div class="menu-item-content"><span class="menu-item-category">الأطباق الرئيسية</span><h3 id="itemTitle1">كبسة دجاج</h3><p id="itemDesc1">أرز متبل مع دجاج طري ومزيج من البهارات الشرقية.</p><div class="menu-item-bottom"><strong>$12.50</strong><span aria-hidden="true">✦</span></div></div>
+                  </article>
+                  <article class="menu-item-card" data-item-index="1" tabindex="0" role="button" aria-label="سلطة طازجة">
+                    <div class="menu-item-image"><img src="https://images.unsplash.com/photo-1512621778302-9b8f2f7f6f4b?auto=format&fit=crop&w=640&q=85" alt="سلطة طازجة" loading="lazy"></div>
+                    <div class="menu-item-content"><span class="menu-item-category">المقبلات والسلطات</span><h3 id="itemTitle2">سلطة طازجة</h3><p id="itemDesc2">خضروات موسمية طازجة مع صلصة خفيفة ومنعشة.</p><div class="menu-item-bottom"><strong>$6.00</strong><span aria-hidden="true">✦</span></div></div>
+                  </article>
+                  <article class="menu-item-card" data-item-index="2" tabindex="0" role="button" aria-label="عصير طبيعي">
+                    <div class="menu-item-image"><img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=640&q=85" alt="عصير طبيعي" loading="lazy"></div>
+                    <div class="menu-item-content"><span class="menu-item-category">المشروبات</span><h3 id="itemTitle3">عصير طبيعي</h3><p id="itemDesc3">مزيج فواكه طازجة يقدم بارداً.</p><div class="menu-item-bottom"><strong>$4.00</strong><span aria-hidden="true">✦</span></div></div>
+                  </article>
+                  <article class="menu-item-card" data-item-index="3" tabindex="0" role="button" aria-label="حلوى الكريمة">
+                    <div class="menu-item-image"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=640&q=85" alt="حلوى الكريمة" loading="lazy"></div>
+                    <div class="menu-item-content"><span class="menu-item-category">الحلويات</span><h3 id="itemTitle4">حلوى الكريمة</h3><p id="itemDesc4">حلوى ناعمة بطبقات غنية وكريمة خفيفة.</p><div class="menu-item-bottom"><strong>$5.50</strong><span aria-hidden="true">✦</span></div></div>
+                  </article>
+                  <article class="menu-item-card" data-item-index="4" tabindex="0" role="button" aria-label="قهوة مختصة">
+                    <div class="menu-item-image"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=640&q=85" alt="قهوة مختصة" loading="lazy"></div>
+                    <div class="menu-item-content"><span class="menu-item-category">القهوة</span><h3 id="itemTitle5">قهوة مختصة</h3><p id="itemDesc5">قهوة محضرة بعناية لعشاق النكهة الغنية.</p><div class="menu-item-bottom"><strong>$3.50</strong><span aria-hidden="true">✦</span></div></div>
+                  </article>
+                  <article class="menu-item-card" data-item-index="5" tabindex="0" role="button" aria-label="برغر كلاسيكي">
+                    <div class="menu-item-image"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=640&q=85" alt="برغر كلاسيكي" loading="lazy"></div>
+                    <div class="menu-item-content"><span class="menu-item-category">الوجبات الخاصة</span><h3 id="itemTitle6">برغر كلاسيكي</h3><p id="itemDesc6">لحم مشوي مع إضافات طازجة وخبز طري.</p><div class="menu-item-bottom"><strong>$9.00</strong><span aria-hidden="true">✦</span></div></div>
+                  </article>
+                </div>
+                <div class="items-carousel-controls">
+                  <button class="carousel-arrow" id="itemPrev" type="button" aria-label="الصنف السابق">‹</button>
+                  <div class="carousel-pagination" aria-label="التنقل بين الأصناف">
+                    <button class="carousel-dot active" type="button" data-item-target="0" aria-label="الصنف 1"></button><button class="carousel-dot" type="button" data-item-target="1" aria-label="الصنف 2"></button><button class="carousel-dot" type="button" data-item-target="2" aria-label="الصنف 3"></button><button class="carousel-dot" type="button" data-item-target="3" aria-label="الصنف 4"></button><button class="carousel-dot" type="button" data-item-target="4" aria-label="الصنف 5"></button><button class="carousel-dot" type="button" data-item-target="5" aria-label="الصنف 6"></button>
+                  </div>
+                  <button class="carousel-arrow" id="itemNext" type="button" aria-label="الصنف التالي">›</button>
+                </div>
+                <p class="carousel-hint">اسحب للتنقل بين الأصناف</p>
+              </section>
             </section>
-            <div class="scroll-demo-card">
-              <div class="scroll-demo-icon">🍽️</div>
-              <div>
-                <h3 id="demoCat1">الأطباق الرئيسية</h3>
-                <p id="demoDesc1">
-                  مجموعة من الأطباق المحضرة بعناية وبمكونات طازجة.
-                </p>
-              </div>
-            </div>
-            <div class="scroll-demo-card">
-              <div class="scroll-demo-icon">🥗</div>
-              <div>
-                <h3 id="demoCat2">المقبلات والسلطات</h3>
-                <p id="demoDesc2">
-                  تشكيلة متنوعة من المقبلات والسلطات الطازجة.
-                </p>
-              </div>
-            </div>
-            <div class="scroll-demo-card">
-              <div class="scroll-demo-icon">🍹</div>
-              <div>
-                <h3 id="demoCat3">المشروبات</h3>
-                <p id="demoDesc3">
-                  تشكيلة متنوعة من المشروبات الباردة والساخنة.
-                </p>
-              </div>
-            </div>
-            <div class="scroll-demo-card">
-              <div class="scroll-demo-icon">🍰</div>
-              <div>
-                <h3 id="demoCat4">الحلويات</h3>
-                <p id="demoDesc4">حلويات لذيذة لتكتمل تجربتك معنا.</p>
-              </div>
-            </div>
-            <div class="scroll-demo-card">
-              <div class="scroll-demo-icon">☕</div>
-              <div>
-                <h3 id="demoCat5">القهوة</h3>
-                <p id="demoDesc5">قهوة مختارة بعناية لمحبي القهوة.</p>
-              </div>
-            </div>
-            <div class="scroll-demo-card">
-              <div class="scroll-demo-icon">🍕</div>
-              <div>
-                <h3 id="demoCat6">الوجبات الخاصة</h3>
-                <p id="demoDesc6">اختيارات مميزة من مطبخنا.</p>
-              </div>
-            </div>
             <div class="scroll-demo-footer">
               <span>Menuva</span>
               <p id="scrollFooter">
@@ -1779,9 +1791,9 @@
           locationLabel: "موقع المطعم",
           locationValue: "القامشلي، سوريا",
           searchPlaceholder: "ابحث عن صنف في القائمة...",
-          scrollHeading: "اختبار حركة اللوغو",
+          scrollHeading: "قائمة الطعام",
           categoriesTitle: "تصفح الأقسام",
-          scrollIntro: "انزل للأسفل ثم اصعد للأعلى لمشاهدة حركة اللوغو.",
+          scrollIntro: "اختر قسماً واستكشف الأصناف المميزة.",
           scrollFooter: "حرّك الصفحة للأعلى والأسفل لاختبار التجربة",
           demoCats: [
             "الأطباق الرئيسية",
@@ -1799,6 +1811,8 @@
             "قهوة مختارة بعناية لمحبي القهوة.",
             "اختيارات مميزة من مطبخنا.",
           ],
+          itemNames: ["كبسة دجاج","سلطة طازجة","عصير طبيعي","حلوى الكريمة","قهوة مختصة","برغر كلاسيكي"],
+          itemDescs: ["أرز متبل مع دجاج طري ومزيج من البهارات الشرقية.","خضروات موسمية طازجة مع صلصة خفيفة ومنعشة.","مزيج فواكه طازجة يقدم بارداً.","حلوى ناعمة بطبقات غنية وكريمة خفيفة.","قهوة محضرة بعناية لعشاق النكهة الغنية.","لحم مشوي مع إضافات طازجة وخبز طري."],
         },
         en: {
           dir: "ltr",
@@ -1824,9 +1838,9 @@
           locationLabel: "Location",
           locationValue: "Qamishli, Syria",
           searchPlaceholder: "Search for a menu item...",
-          scrollHeading: "Logo scroll test",
+          scrollHeading: "Our menu",
           categoriesTitle: "Browse categories",
-          scrollIntro: "Scroll down and then up to see the logo animation.",
+          scrollIntro: "Choose a category and explore our featured items.",
           scrollFooter: "Scroll up and down to test the experience",
           demoCats: [
             "Main courses",
@@ -1844,6 +1858,8 @@
             "Carefully selected coffee for coffee lovers.",
             "Special choices from our kitchen.",
           ],
+          itemNames: ["Chicken Kabsa","Fresh Garden Salad","Fresh Juice","Cream Dessert","Specialty Coffee","Classic Burger"],
+          itemDescs: ["Seasoned rice with tender chicken and eastern spices.","Fresh seasonal vegetables with a light, refreshing dressing.","A chilled blend of freshly selected fruits.","A delicate dessert layered with rich cream.","Carefully brewed coffee with a rich aroma.","Grilled beef with fresh toppings in a soft bun."],
         },
         ku: {
           dir: "ltr",
@@ -1868,7 +1884,7 @@
           locationLabel: "Cih",
           locationValue: "Qamişlo, Sûriye",
           searchPlaceholder: "Di lîsteyê de li xwarinekê bigere...",
-          scrollHeading: "Ceribandina tevgera logoyê",
+          scrollHeading: "Menuya me",
           categoriesTitle: "Li kategoriyan bigere",
           scrollIntro:
             "Ber bi jêr ve here, paşê vegere jorê da ku tevgera logo bibînî.",
@@ -1889,6 +1905,8 @@
             "Qehweya bijartî ji bo hezkiriyên qehweyê.",
             "Hilbijartinên taybet ji metbexa me.",
           ],
+          itemNames: ["Kabsa bi mirîşk","Salata nû","Vexwarina fêkiyan","Şîrîniya kremê","Qehweya taybet","Burgera klasîk"],
+          itemDescs: ["Birincê bi biharat û mirîşkeke nerm.","Sebzeyên demsalê bi sosê sivik û xweş.","Tevliheviya fêkiyên nû û sar.","Şîrîniyeke nerm bi qatên kremê.","Qehwe bi baldarî hatiye amadekirin.","Goştê birêjkirî bi nanê nerm û zêdeyên nû."],
         },
       };
       /* MENU OPEN / CLOSE */
@@ -1967,6 +1985,10 @@
             t.demoCats[i];
           document.getElementById(`demoDesc${i + 1}`).textContent =
             t.demoDescs[i];
+        }
+        for (let i = 0; i < 6; i++) {
+          document.getElementById("itemTitle" + (i + 1)).textContent = t.itemNames[i];
+          document.getElementById("itemDesc" + (i + 1)).textContent = t.itemDescs[i];
         }
         // Modal
         document.getElementById("modalTitle").textContent = t.modalTitle;
@@ -2074,6 +2096,42 @@
           });
         });
       });
+
+      /* 3D MENU ITEM CAROUSEL */
+      const itemCards = [...document.querySelectorAll(".menu-item-card")];
+      const itemDots = [...document.querySelectorAll(".carousel-dot")];
+      const itemStage = document.getElementById("itemsCarouselStage");
+      let activeItemIndex = 0;
+      let itemTouchStartX = 0;
+      function showMenuItem(index) {
+        if (!itemCards.length) return;
+        activeItemIndex = (index + itemCards.length) % itemCards.length;
+        itemCards.forEach((card, i) => {
+          card.classList.remove("is-active", "is-prev", "is-next");
+          if (i === activeItemIndex) card.classList.add("is-active");
+          else if (i === (activeItemIndex - 1 + itemCards.length) % itemCards.length) card.classList.add("is-prev");
+          else if (i === (activeItemIndex + 1) % itemCards.length) card.classList.add("is-next");
+          card.setAttribute("aria-current", String(i === activeItemIndex));
+        });
+        itemDots.forEach((dot, i) => dot.classList.toggle("active", i === activeItemIndex));
+      }
+      document.getElementById("itemPrev").addEventListener("click", () => showMenuItem(activeItemIndex - 1));
+      document.getElementById("itemNext").addEventListener("click", () => showMenuItem(activeItemIndex + 1));
+      itemDots.forEach(dot => dot.addEventListener("click", () => showMenuItem(Number(dot.dataset.itemTarget))));
+      itemCards.forEach(card => {
+        card.addEventListener("click", () => showMenuItem(Number(card.dataset.itemIndex)));
+        card.addEventListener("keydown", event => {
+          if (event.key === "Enter" || event.key === " ") { event.preventDefault(); showMenuItem(Number(card.dataset.itemIndex)); }
+        });
+      });
+      itemStage.addEventListener("touchstart", event => { itemTouchStartX = event.touches[0].clientX; }, {passive:true});
+      itemStage.addEventListener("touchend", event => {
+        const delta = event.changedTouches[0].clientX - itemTouchStartX;
+        if (Math.abs(delta) < 35) return;
+        const rtl = phone.dir === "rtl";
+        showMenuItem(activeItemIndex + ((delta < 0) === rtl ? 1 : -1));
+      }, {passive:true});
+      showMenuItem(0);
 
       /* HERO SLIDER */
       function showSlide(index) {
