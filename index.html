@@ -857,7 +857,6 @@
       .scroll-demo {
         position: relative;
         padding: 10px 16px 45px;
-        min-height: 1100px;
         color: var(--text-color);
       }
       .scroll-demo-heading {
@@ -921,7 +920,7 @@
         opacity: 0.7;
       }
       .scroll-demo-footer {
-        margin-top: 65px;
+        margin-top: 22px;
         padding: 30px 10px;
         text-align: center;
         opacity: 0.65;
@@ -2364,7 +2363,7 @@
 
         /* Keep the native scroll position in sync, but never use it as the
            animation source. The finger-controlled value drives every frame. */
-        if (Math.abs(screen.scrollTop - position) > 0.5) {
+        if (screen.scrollTop <= SCENE_DISTANCE + 0.5 && Math.abs(screen.scrollTop - position) > 0.5) {
           sceneWritingScroll = true;
           screen.scrollTop = position;
           sceneWritingScroll = false;
@@ -2390,7 +2389,9 @@
       }
 
       function setSceneScroll(nextValue) {
-        scenePosition = Math.max(0, Math.min(SCENE_DISTANCE, nextValue));
+        const pagePosition = Math.max(0, nextValue);
+        screen.scrollTop = pagePosition;
+        scenePosition = Math.max(0, Math.min(SCENE_DISTANCE, pagePosition));
         scheduleSceneRender();
       }
 
@@ -2406,6 +2407,7 @@
       }
 
       function snapSceneTo(target) {
+        if (screen.scrollTop > SCENE_DISTANCE + 0.5) return;
         stopSceneSnap();
         const from = scenePosition;
         const to = target ? SCENE_DISTANCE : 0;
@@ -2432,6 +2434,7 @@
       }
 
       function settleSceneGesture(direction) {
+        if (screen.scrollTop > SCENE_DISTANCE + 0.5) return;
         const progress = scenePosition / SCENE_DISTANCE;
         if (direction > 0 && progress >= SCENE_SNAP_THRESHOLD) {
           snapSceneTo(1);
@@ -2450,7 +2453,7 @@
         const multiplier = event.deltaMode === 1 ? 24 : event.deltaMode === 2 ? 360 : 1;
         const delta = event.deltaY * multiplier * SCENE_GESTURE_GAIN;
         if (Math.abs(delta) > 0.1) sceneGestureDirection = Math.sign(delta);
-        setSceneScroll(scenePosition + delta);
+        setSceneScroll(screen.scrollTop + delta);
 
         if (sceneSnapTimer) clearTimeout(sceneSnapTimer);
         sceneSnapTimer = setTimeout(() => {
@@ -2486,7 +2489,7 @@
 
         event.preventDefault();
         if (Math.abs(deltaY) > 0.1) sceneGestureDirection = Math.sign(deltaY);
-        setSceneScroll(scenePosition + deltaY * SCENE_GESTURE_GAIN);
+        setSceneScroll(screen.scrollTop + deltaY * SCENE_GESTURE_GAIN);
         sceneTouchY = touch.clientY;
         sceneTouchX = touch.clientX;
       }, { passive: false });
