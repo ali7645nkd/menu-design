@@ -2922,9 +2922,9 @@
         if (Math.abs(difference) < 45) return;
         const isRTL = phone.dir === "rtl";
         if (difference < 0) {
-          showSlide(currentSlide + (isRTL ? 1 : -1));
-        } else {
           showSlide(currentSlide + (isRTL ? -1 : 1));
+        } else {
+          showSlide(currentSlide + (isRTL ? 1 : -1));
         }
         startAutoplay();
       });
