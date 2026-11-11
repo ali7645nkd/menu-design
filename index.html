@@ -2310,6 +2310,7 @@
       let sceneTouchX = 0;
       let sceneTouchAxis = null;
       let sceneGestureDirection = 0;
+      let sceneWritingScroll = false;
       let lastRenderedScenePosition = -1;
 
       function syncSceneCard(progress) {
@@ -2327,8 +2328,14 @@
         const position = Math.max(0, Math.min(SCENE_DISTANCE, scenePosition));
         const progress = position / SCENE_DISTANCE;
 
-        /* Render only compositor-friendly scene variables. Do not write
-           scrollTop here: that forces layout/scroll events during every drag. */
+        /* Keep the native scroll position in sync, but never use it as the
+           animation source. The finger-controlled value drives every frame. */
+        if (Math.abs(screen.scrollTop - position) > 0.5) {
+          sceneWritingScroll = true;
+          screen.scrollTop = position;
+          sceneWritingScroll = false;
+        }
+
         if (Math.abs(position - lastRenderedScenePosition) < 0.08) return;
         lastRenderedScenePosition = position;
 
@@ -2422,6 +2429,7 @@
       screen.addEventListener("touchstart", (event) => {
         if (!event.touches.length) return;
         stopSceneSnap();
+        scenePosition = Math.max(0, Math.min(SCENE_DISTANCE, screen.scrollTop));
         sceneTouchY = event.touches[0].clientY;
         sceneTouchX = event.touches[0].clientX;
         sceneTouchAxis = null;
@@ -2457,6 +2465,15 @@
       screen.addEventListener("touchcancel", () => {
         if (sceneTouchAxis === "vertical") settleSceneGesture(sceneGestureDirection);
         sceneTouchAxis = null;
+      }, { passive: true });
+
+      screen.addEventListener("scroll", () => {
+        if (sceneWritingScroll) return;
+        const nativePosition = Math.max(0, Math.min(SCENE_DISTANCE, screen.scrollTop));
+        if (Math.abs(nativePosition - scenePosition) > 1) {
+          scenePosition = nativePosition;
+          scheduleSceneRender();
+        }
       }, { passive: true });
 
       scheduleSceneRender();
