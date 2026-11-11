@@ -1678,7 +1678,17 @@
         transform: translate3d(0, calc(-330px * var(--scene-progress)), 0);
         transition: none;
         will-change: opacity, transform;
+        pointer-events: auto;
+        touch-action: pan-y;
+      }
+      /* Keep the visual layers from intercepting taps; the indicator buttons stay interactive. */
+      .hero-slides,
+      .hero-content {
         pointer-events: none;
+      }
+      .hero-indicators,
+      .hero-dot {
+        pointer-events: auto;
       }
 
       /* The restaurant status semicircle exits to the right and disappears. */
@@ -2898,30 +2908,29 @@
           startAutoplay();
         });
       });
-      /* TOUCH SWIPE */
-      hero.addEventListener(
-        "touchstart",
-        (event) => {
-          touchStartX = event.touches[0].clientX;
-        },
-        { passive: true },
-      );
-      hero.addEventListener(
-        "touchend",
-        (event) => {
-          const endX = event.changedTouches[0].clientX;
-          const difference = endX - touchStartX;
-          if (Math.abs(difference) < 45) return;
-          const isRTL = phone.dir === "rtl";
-          if (difference < 0) {
-            showSlide(currentSlide + (isRTL ? 1 : -1));
-          } else {
-            showSlide(currentSlide + (isRTL ? -1 : 1));
-          }
-          startAutoplay();
-        },
-        { passive: true },
-      );
+      /* SWIPE / DRAG BETWEEN COVER PHOTOS */
+      let heroPointerStartX = null;
+      hero.addEventListener("pointerdown", (event) => {
+        if (event.pointerType === "mouse" && event.button !== 0) return;
+        if (event.target.closest(".hero-dot")) return;
+        heroPointerStartX = event.clientX;
+      });
+      hero.addEventListener("pointerup", (event) => {
+        if (heroPointerStartX === null) return;
+        const difference = event.clientX - heroPointerStartX;
+        heroPointerStartX = null;
+        if (Math.abs(difference) < 45) return;
+        const isRTL = phone.dir === "rtl";
+        if (difference < 0) {
+          showSlide(currentSlide + (isRTL ? 1 : -1));
+        } else {
+          showSlide(currentSlide + (isRTL ? -1 : 1));
+        }
+        startAutoplay();
+      });
+      hero.addEventListener("pointercancel", () => {
+        heroPointerStartX = null;
+      });
       /* PAUSE SLIDER WHEN TAB IS HIDDEN */
       document.addEventListener("visibilitychange", () => {
         if (document.hidden) {
