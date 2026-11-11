@@ -919,20 +919,150 @@
         line-height: 1.7;
         opacity: 0.7;
       }
+      /* RESTAURANT FOOTER */
       .scroll-demo-footer {
-        margin-top: 22px;
-        padding: 30px 10px;
+        position: relative;
+        isolation: isolate;
+        width: calc(100% + 32px);
+        margin: 12px -16px -45px;
+        padding: 28px 18px 18px;
+        overflow: hidden;
         text-align: center;
-        opacity: 0.65;
+        color: #f8f1e5;
+        background:
+          radial-gradient(ellipse at 50% -25%, rgba(111, 210, 157, 0.2), transparent 65%),
+          #145a43;
+        border-radius: 28px 28px 0 0;
+        box-shadow: 0 -8px 28px rgba(20, 90, 67, 0.12);
       }
-      .scroll-demo-footer span {
-        font-family: Georgia, serif;
-        font-size: 25px;
-        font-weight: 900;
+      .scroll-demo-footer::before {
+        content: "";
+        position: absolute;
+        inset: 0 12% auto;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(248, 241, 229, 0.42), transparent);
+        pointer-events: none;
       }
-      .scroll-demo-footer p {
-        margin-top: 8px;
+      .phone.dark .scroll-demo-footer {
+        color: #edf7ef;
+        background:
+          radial-gradient(ellipse at 50% -25%, rgba(114, 221, 176, 0.13), transparent 65%),
+          #193d32;
+        box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.18);
+      }
+      .footer-restaurant-name {
+        position: relative;
+        margin: 0 auto 18px;
+        color: inherit;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 27px;
+        line-height: 1.35;
+        font-weight: 800;
+        letter-spacing: 0.15px;
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.16);
+      }
+      .footer-socials {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 11px;
+        margin: 0 auto 23px;
+      }
+      .footer-social-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 39px;
+        height: 39px;
+        padding: 9px;
+        color: #f8f1e5;
+        background: rgba(255, 255, 255, 0.105);
+        border: 1px solid rgba(248, 241, 229, 0.2);
+        border-radius: 50%;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 4px 12px rgba(0, 0, 0, 0.08);
+        cursor: pointer;
+        transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease;
+      }
+      .footer-social-button:hover {
+        transform: translateY(-3px);
+        background: rgba(255, 255, 255, 0.19);
+        border-color: rgba(248, 241, 229, 0.42);
+      }
+      .footer-social-button svg {
+        display: block;
+        width: 20px;
+        height: 20px;
+        fill: currentColor;
+      }
+      .footer-social-button .stroke-icon {
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .footer-payment-heading {
+        margin-bottom: 11px;
+        color: rgba(248, 241, 229, 0.78);
         font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+      }
+      .footer-payments {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 9px;
+        margin-bottom: 22px;
+      }
+      .footer-payment-mark {
+        min-width: 75px;
+        min-height: 35px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 11px;
+        color: #145a43;
+        background: #f8f1e5;
+        border: 1px solid rgba(255, 255, 255, 0.48);
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        font-size: 12px;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+      .footer-payment-mark.paypal {
+        color: #123b75;
+        font-family: Arial, sans-serif;
+        font-size: 15px;
+        font-style: italic;
+        letter-spacing: -0.8px;
+      }
+      .footer-payment-mark.shamcash {
+        font-size: 11px;
+        letter-spacing: -0.2px;
+      }
+      .footer-payment-mark.masari {
+        font-size: 12px;
+      }
+      .footer-copyright {
+        margin: 0;
+        color: rgba(248, 241, 229, 0.72);
+        font-size: 9px;
+        line-height: 1.8;
+      }
+      .footer-credit {
+        margin-top: 5px;
+        color: rgba(248, 241, 229, 0.9);
+        font-size: 10px;
+        line-height: 1.8;
+      }
+      .footer-credit strong {
+        color: #ffffff;
+        font-weight: 800;
+        letter-spacing: 0.2px;
       }
       /* CONTROL PANEL DEMO */
       .modal-backdrop {
@@ -1645,7 +1775,7 @@
       }
       .phone.scene-locked .scroll-demo-footer {
         display: block;
-        margin-top: 22px;
+        margin-top: 12px;
         transform: translate3d(0, -10px, 0);
       }
       .category-track {
@@ -1952,12 +2082,34 @@
                 <p class="carousel-hint">اسحب للتنقل بين الأصناف</p>
               </section>
             </section>
-            <div class="scroll-demo-footer">
-              <span>Menuva</span>
-              <p id="scrollFooter">
-                حرّك الصفحة للأعلى والأسفل لاختبار التجربة
-              </p>
-            </div>
+            <footer class="scroll-demo-footer" aria-label="تذييل المطعم">
+              <h2 class="footer-restaurant-name" id="footerRestaurantName">مطعم دار الياسمين</h2>
+              <div class="footer-socials" aria-label="حسابات التواصل الاجتماعي">
+                <button class="footer-social-button" type="button" data-social="facebook" aria-label="Facebook">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V3.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.3V13h2.8v8h3.4Z"/></svg>
+                </button>
+                <button class="footer-social-button" type="button" data-social="instagram" aria-label="Instagram">
+                  <svg class="stroke-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.7" cy="6.6" r=".8" fill="currentColor" stroke="none"/></svg>
+                </button>
+                <button class="footer-social-button" type="button" data-social="whatsapp" aria-label="WhatsApp">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2a9.7 9.7 0 0 0-8.3 14.7L2.4 22l5.2-1.3A9.8 9.8 0 1 0 12 2.2Zm0 17.6a7.8 7.8 0 0 1-4-1.1l-.3-.2-3.1.8.8-3-.2-.3A7.8 7.8 0 1 1 12 19.8Zm4.3-5.8c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8.9-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.5c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5l-.7-1.7c-.2-.4-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 3.9 3.4.5.2.9.3 1.2.4.5.2 1 .1 1.4.1.4-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.4-.3Z"/></svg>
+                </button>
+                <button class="footer-social-button" type="button" data-social="x" aria-label="X (Twitter)">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3L12 14.7 5.6 22H2.4l7.3-8.4L1.9 2h6.5l4.5 6.7L18.9 2Zm-1.1 18h1.7L7.4 3.9H5.6L17.8 20Z"/></svg>
+                </button>
+                <button class="footer-social-button" type="button" data-social="tiktok" aria-label="TikTok">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.6 7.1a6.7 6.7 0 0 1-4.1-1.4v8.1a6.2 6.2 0 1 1-5.4-6.1v3.3a2.9 2.9 0 1 0 2.1 2.8V2.2h3.3c.2 2 1.7 3.7 4.1 4.1v.8Z"/></svg>
+                </button>
+              </div>
+              <p class="footer-payment-heading" id="footerPaymentHeading">طرق الدفع المتاحة</p>
+              <div class="footer-payments" aria-label="طرق الدفع">
+                <span class="footer-payment-mark shamcash">شام كاش</span>
+                <span class="footer-payment-mark paypal">PayPal</span>
+                <span class="footer-payment-mark masari">مصاري</span>
+              </div>
+              <p class="footer-copyright" id="footerCopyright">© 2026 Menu Dos. جميع الحقوق محفوظة.</p>
+              <p class="footer-credit" id="footerCredit">تم إنشاؤه بواسطة <strong>Menu Dos</strong></p>
+            </footer>
           </section>
         </div>
         <!-- CONTROL PANEL MODAL -->
@@ -2066,6 +2218,9 @@
           itemDescs: ["أرز متبل مع دجاج طري ومزيج من البهارات الشرقية.","خضروات موسمية طازجة مع صلصة خفيفة ومنعشة.","مزيج فواكه طازجة يقدم بارداً.","حلوى ناعمة بطبقات غنية وكريمة خفيفة.","قهوة محضرة بعناية لعشاق النكهة الغنية.","لحم مشوي مع إضافات طازجة وخبز طري."],
           itemCategories: ["الأطباق الرئيسية","المقبلات والسلطات","المشروبات","الحلويات","القهوة","الوجبات الخاصة"],
           categoriesTitle: "الأقسام",
+          footerPaymentHeading: "طرق الدفع المتاحة",
+          footerCopyright: "© 2026 Menu Dos. جميع الحقوق محفوظة.",
+          footerCredit: "تم إنشاؤه بواسطة",
           demoCats: [
             "الأطباق الرئيسية",
             "المقبلات والسلطات",
@@ -2111,6 +2266,9 @@
           itemDescs: ["Seasoned rice with tender chicken and eastern spices.","Fresh seasonal vegetables with a light, refreshing dressing.","A blend of fresh fruits served chilled.","A soft dessert with rich layers and light cream.","Carefully prepared coffee for lovers of rich flavor.","Grilled beef with fresh toppings and a soft bun."],
           itemCategories: ["Main courses","Starters & salads","Drinks","Desserts","Coffee","Special meals"],
           categoriesTitle: "Categories",
+          footerPaymentHeading: "Available payment methods",
+          footerCopyright: "© 2026 Menu Dos. All rights reserved.",
+          footerCredit: "Created by",
           demoCats: [
             "Main courses",
             "Starters & salads",
@@ -2155,6 +2313,9 @@
           itemDescs: ["Birincê bi biharat û mirîşkeke nerm.","Sebzeyên demsalê bi sosê sivik û xweş.","Tevliheviya fêkiyên nû û sar.","Şîrîniyeke nerm bi qatên kremê.","Qehwe bi baldarî hatiye amadekirin.","Goştê birêjkirî bi nanê nerm û zêdeyên nû."],
           itemCategories: ["Xwarinên sereke","Pêşxwarin û salat","Vexwarin","Şîrînî","Qehwe","Xwarinên taybet"],
           categoriesTitle: "Kategorî",
+          footerPaymentHeading: "Rêbazên dayînê yên berdest",
+          footerCopyright: "© 2026 Menu Dos. Hemû maf parastî ne.",
+          footerCredit: "Hatiye çêkirin ji aliyê",
           demoCats: [
             "Xwarinên sereke",
             "Pêşxwarin û salat",
@@ -2220,6 +2381,10 @@
         // Hero
         heroTitle.textContent = t.restaurant;
         heroDescription.textContent = t.description;
+        document.getElementById("footerRestaurantName").textContent = t.restaurant;
+        document.getElementById("footerPaymentHeading").textContent = t.footerPaymentHeading;
+        document.getElementById("footerCopyright").textContent = t.footerCopyright;
+        document.getElementById("footerCredit").innerHTML = t.footerCredit + ' <strong>Menu Dos</strong>';
         // Restaurant status and location (sample preview data)
         document.getElementById("statusLabel").textContent = t.statusLabel;
         const statusElement = document.getElementById("restaurantStatus");
