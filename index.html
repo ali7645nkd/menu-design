@@ -1549,18 +1549,18 @@
         pointer-events: none;
       }
 
-      /* Search expands with transforms only; no width/left layout recalculation. */
+      /* Search keeps its text at natural width while its available space expands. */
       .menu-search {
         position: absolute;
         top: 443px;
-        left: 12px;
+        left: calc(12px + (146px * (1 - var(--scene-progress))));
         right: 12px;
         width: auto;
         margin: 0;
         z-index: 30;
-        transform: translate3d(calc(146px * (1 - var(--scene-progress))), calc(-30px * var(--scene-progress)), 0);
+        transform: translate3d(0, calc(-30px * var(--scene-progress)), 0);
         transition: none;
-        will-change: transform;
+        will-change: left, transform;
         background: rgba(255, 255, 255, 0.94);
         -webkit-backdrop-filter: blur(8px) saturate(115%);
         backdrop-filter: blur(8px) saturate(115%);
@@ -1585,21 +1585,24 @@
         transition: none;
         will-change: transform;
       }
-      /* Fade the heading and move it away without animating layout dimensions. */
+      /* Fade and collapse the section title as the second item card takes focus.
+         The category rail and item cards naturally move up into the freed space. */
       .category-heading {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 100%;
-        height: 32px;
-        min-height: 32px;
-        margin: 0 0 16px;
+        width: calc(100% - (146px * (1 - var(--scene-progress))));
+        height: calc(32px * (1 - var(--scene-progress)));
+        min-height: 0;
+        margin: 0 0 calc(16px * (1 - var(--scene-progress)))
+          calc(146px * (1 - var(--scene-progress)));
         padding: 0;
+        overflow: hidden;
         opacity: calc(1 - var(--scene-progress));
         text-align: center;
         transform: translate3d(0, calc(-8px * var(--scene-progress)), 0);
         transition: none;
-        will-change: opacity, transform;
+        will-change: width, height, margin, opacity, transform;
         pointer-events: none;
       }
       .category-heading .category-section-title {
@@ -1612,8 +1615,7 @@
       /* Keep circle geometry stable; only apply a tiny visual squeeze. */
       .category-track {
         gap: 17px;
-        transform: translate3d(0, calc(-48px * var(--scene-progress)), 0)
-          scaleX(calc(1 - (0.025 * var(--collision-progress))));
+        transform: scaleX(calc(1 - (0.025 * var(--collision-progress))));
         transform-origin: center center;
         transition: none;
         will-change: transform;
@@ -1629,15 +1631,9 @@
 
       /* Raise the item cards a little more to open the footer area. */
       .items-carousel {
-        transform: translate3d(0, calc(-48px * var(--scene-progress)), 0);
+        transform: translate3d(0, calc(-18px * var(--scene-progress)), 0);
         transition: none;
         will-change: transform;
-      }
-
-      .phone.scene-moving .restaurant-info-pill,
-      .phone.scene-moving .menu-search {
-        -webkit-backdrop-filter: none;
-        backdrop-filter: none;
       }
 
       /* Once the transition is complete, browsing is horizontal only. */
@@ -2301,7 +2297,7 @@
           languageMenu.classList.remove("visible");
         }
       });
-      /* DIRECT FINGER-TRACKED SCENE — optimized frame updates */
+      /* FINGER-TRACKED SCENE GESTURE */
       const SCENE_DISTANCE = 330;
       const SCENE_GESTURE_GAIN = 1;
       const SCENE_SNAP_THRESHOLD = 0.08;
@@ -2316,12 +2312,6 @@
       let sceneGestureDirection = 0;
       let sceneWritingScroll = false;
       let lastRenderedScenePosition = -1;
-      let sceneGestureActive = false;
-
-      function setSceneMoving(active) {
-        sceneGestureActive = active;
-        phone.classList.toggle("scene-moving", active);
-      }
 
       function syncSceneCard(progress) {
         if (progress >= 0.78 && sceneCardState !== 1) {
@@ -2338,22 +2328,24 @@
         const position = Math.max(0, Math.min(SCENE_DISTANCE, scenePosition));
         const progress = position / SCENE_DISTANCE;
 
-        /* Keep the real scroll offset aligned with the finger, but skip
-           sub-pixel writes that can trigger unnecessary scroll/layout work. */
-        if (Math.abs(screen.scrollTop - position) > 1.25) {
+        /* Keep the native scroll position in sync, but never use it as the
+           animation source. The finger-controlled value drives every frame. */
+        if (Math.abs(screen.scrollTop - position) > 0.5) {
           sceneWritingScroll = true;
           screen.scrollTop = position;
           sceneWritingScroll = false;
         }
 
-        if (Math.abs(position - lastRenderedScenePosition) < 0.12) return;
+        if (Math.abs(position - lastRenderedScenePosition) < 0.08) return;
         lastRenderedScenePosition = position;
 
         phone.classList.toggle("logo-compact", progress > 0.015);
         phone.classList.toggle("scene-locked", progress >= 0.999);
-        phone.style.setProperty("--scene-progress", progress.toFixed(3));
-        phone.style.setProperty("--collision-progress",
-          (4 * progress * (1 - progress)).toFixed(3));
+        phone.style.setProperty("--scene-progress", progress.toFixed(4));
+        phone.style.setProperty(
+          "--collision-progress",
+          (4 * progress * (1 - progress)).toFixed(4)
+        );
 
         syncSceneCard(progress);
         if (menuOpen) setMenu(false);
@@ -2384,65 +2376,56 @@
         const from = scenePosition;
         const to = target ? SCENE_DISTANCE : 0;
         const distance = to - from;
-
-        if (Math.abs(distance) < 0.75) {
+        if (Math.abs(distance) < 0.5) {
           setSceneScroll(to);
-          setSceneMoving(false);
           return;
         }
 
         const startedAt = performance.now();
-        const duration = 520;
-
+        const duration = 420;
         const animate = (now) => {
           const raw = Math.min(1, (now - startedAt) / duration);
-          /* Smoothstep cubic easing: gentle start and gentle finish. */
-          const eased = raw * raw * (3 - 2 * raw);
-          scenePosition = from + distance * eased;
-          scheduleSceneRender();
-
+          const eased = 1 - Math.pow(1 - raw, 4);
+          setSceneScroll(from + distance * eased);
           if (raw < 1) {
             sceneAnimationFrame = requestAnimationFrame(animate);
           } else {
             sceneAnimationFrame = 0;
-            scenePosition = to;
-            scheduleSceneRender();
-            setSceneMoving(false);
+            setSceneScroll(to);
           }
         };
-
         sceneAnimationFrame = requestAnimationFrame(animate);
       }
 
       function settleSceneGesture(direction) {
         const progress = scenePosition / SCENE_DISTANCE;
-        let target;
-        if (direction > 0 && progress >= SCENE_SNAP_THRESHOLD) target = 1;
-        else if (direction < 0 && progress <= 1 - SCENE_SNAP_THRESHOLD) target = 0;
-        else target = progress >= 0.5 ? 1 : 0;
-        snapSceneTo(target);
+        if (direction > 0 && progress >= SCENE_SNAP_THRESHOLD) {
+          snapSceneTo(1);
+        } else if (direction < 0 && progress <= 1 - SCENE_SNAP_THRESHOLD) {
+          snapSceneTo(0);
+        } else {
+          snapSceneTo(progress >= 0.5 ? 1 : 0);
+        }
       }
 
-      /* Wheel gestures use the same direct position model. */
+      /* Mouse wheel follows its input continuously; only release settles it. */
       screen.addEventListener("wheel", (event) => {
         if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
         event.preventDefault();
         stopSceneSnap();
-        setSceneMoving(true);
-
         const multiplier = event.deltaMode === 1 ? 24 : event.deltaMode === 2 ? 360 : 1;
-        const delta = event.deltaY * multiplier;
+        const delta = event.deltaY * multiplier * SCENE_GESTURE_GAIN;
         if (Math.abs(delta) > 0.1) sceneGestureDirection = Math.sign(delta);
-        setSceneScroll(scenePosition + delta * SCENE_GESTURE_GAIN);
+        setSceneScroll(scenePosition + delta);
 
         if (sceneSnapTimer) clearTimeout(sceneSnapTimer);
         sceneSnapTimer = setTimeout(() => {
           sceneSnapTimer = null;
           settleSceneGesture(sceneGestureDirection);
-        }, 150);
+        }, 140);
       }, { passive: false });
 
-      /* Touch follows the finger 1:1; rendering is coalesced to display frames. */
+      /* Touch position is mapped 1:1 to scene position for direct manipulation. */
       screen.addEventListener("touchstart", (event) => {
         if (!event.touches.length) return;
         stopSceneSnap();
@@ -2462,8 +2445,8 @@
         if (!sceneTouchAxis) {
           if (Math.abs(deltaX) < 5 && Math.abs(deltaY) < 5) return;
           sceneTouchAxis = Math.abs(deltaY) > Math.abs(deltaX) * 1.12
-            ? "vertical" : "horizontal";
-          if (sceneTouchAxis === "vertical") setSceneMoving(true);
+            ? "vertical"
+            : "horizontal";
         }
         if (sceneTouchAxis !== "vertical") return;
 
@@ -2474,19 +2457,20 @@
         sceneTouchX = touch.clientX;
       }, { passive: false });
 
-      function finishSceneTouch() {
+      screen.addEventListener("touchend", () => {
         if (sceneTouchAxis === "vertical") settleSceneGesture(sceneGestureDirection);
         sceneTouchAxis = null;
-      }
-      screen.addEventListener("touchend", finishSceneTouch, { passive: true });
-      screen.addEventListener("touchcancel", finishSceneTouch, { passive: true });
+      }, { passive: true });
 
-      /* Ignore the scroll event generated by our own synchronized write.
-         Genuine external scroll changes are still picked up. */
+      screen.addEventListener("touchcancel", () => {
+        if (sceneTouchAxis === "vertical") settleSceneGesture(sceneGestureDirection);
+        sceneTouchAxis = null;
+      }, { passive: true });
+
       screen.addEventListener("scroll", () => {
         if (sceneWritingScroll) return;
         const nativePosition = Math.max(0, Math.min(SCENE_DISTANCE, screen.scrollTop));
-        if (Math.abs(nativePosition - scenePosition) > 1.25) {
+        if (Math.abs(nativePosition - scenePosition) > 1) {
           scenePosition = nativePosition;
           scheduleSceneRender();
         }
