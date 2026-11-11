@@ -1353,31 +1353,61 @@
       }
       .category-track {
         position: relative;
-        background: transparent;
-        border: 0;
-        box-shadow: none;
+        isolation: isolate;
         display: flex;
         align-items: flex-start;
-        gap: 17px;
+        gap: 12px;
         overflow-x: auto;
         overflow-y: hidden;
-        padding: 20px 18px 16px;
+        padding: 25px 18px 13px;
         scroll-snap-type: x proximity;
         scroll-behavior: smooth;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
+      }
+      /* Curved translucent glass rail behind the category circles. */
+      .category-track::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 34px;
+        left: 0;
+        width: calc(100% + 240px);
+        height: 55px;
+        pointer-events: none;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.48),
+          rgba(255, 255, 255, 0.2) 58%,
+          rgba(255, 255, 255, 0.12)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.62);
+        box-shadow:
+          0 7px 18px rgba(20, 90, 67, 0.07),
+          inset 0 1px 1px rgba(255, 255, 255, 0.72);
+        -webkit-backdrop-filter: blur(14px) saturate(145%);
+        backdrop-filter: blur(14px) saturate(145%);
+        clip-path: polygon(
+          0 43%, 8% 27%, 20% 13%, 35% 4%, 50% 0,
+          65% 4%, 80% 13%, 92% 27%, 100% 43%,
+          100% 70%, 92% 83%, 80% 92%, 65% 98%,
+          50% 100%, 35% 98%, 20% 92%, 8% 83%, 0 70%
+        );
+      }
+      .category-track > .category-button {
+        z-index: 1;
       }
       .category-track::-webkit-scrollbar {
         display: none;
       }
       .category-button {
         position: relative;
-        flex: 0 0 88px;
-        width: 88px;
+        flex: 0 0 78px;
+        width: 78px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 10px;
+        gap: 8px;
         padding: 0;
         border: 0;
         background: transparent;
@@ -1388,8 +1418,8 @@
       }
       .category-image-frame {
         position: relative;
-        width: 78px;
-        height: 78px;
+        width: 68px;
+        height: 68px;
         display: block;
         padding: 3px;
         border: 1.5px solid rgba(8, 127, 91, 0.56);
@@ -1432,7 +1462,7 @@
         transform: translateY(-3px) scale(1.025);
       }
       .category-button.active .category-image-frame {
-        transform: translateY(-7px) scale(1.09);
+        transform: translateY(-7px) scale(1.06);
         border-color: #10b981;
         background: #d8ffeb;
         box-shadow:
@@ -1444,10 +1474,9 @@
       .category-button.active .category-image-frame::after {
         content: "";
         position: absolute;
-        inset: -6px;
-        border: 1.5px solid rgba(16, 185, 129, 0.75);
+        inset: -3px;
+        border: 1px solid rgba(16, 185, 129, 0.24);
         border-radius: 50%;
-        animation: categoryPulse 1.8s ease-out infinite;
         pointer-events: none;
       }
       .category-button.active .category-image-frame img {
@@ -1458,9 +1487,17 @@
         opacity: 1;
         transform: translateY(-2px);
       }
-      @keyframes categoryPulse {
-        0% { transform: scale(0.92); opacity: 0.75; }
-        75%, 100% { transform: scale(1.22); opacity: 0; }
+      .phone.dark .category-track::before {
+        background: linear-gradient(
+          180deg,
+          rgba(114, 221, 176, 0.16),
+          rgba(114, 221, 176, 0.07) 58%,
+          rgba(114, 221, 176, 0.04)
+        );
+        border-color: rgba(180, 255, 220, 0.16);
+        box-shadow:
+          0 7px 18px rgba(0, 0, 0, 0.14),
+          inset 0 1px 1px rgba(255, 255, 255, 0.1);
       }
       .phone.dark .category-image-frame {
         border-color: rgba(114, 221, 176, 0.52);
@@ -1478,14 +1515,16 @@
           0 0 0 8px rgba(114, 221, 176, 0.07);
       }
       .phone.dark .category-button.active .category-image-frame::after {
-        border-color: rgba(114, 221, 176, 0.72);
+        border-color: rgba(114, 221, 176, 0.24);
       }
       .phone.dark .category-button.active .category-name {
         color: #72ddb0;
       }
       @media (prefers-reduced-motion: reduce) {
-        .category-button.active .category-image-frame::after {
-          animation: none;
+        .category-button,
+        .category-image-frame,
+        .category-name {
+          transition: none !important;
         }
       }
     
@@ -1614,19 +1653,19 @@
 
       /* Keep circle geometry stable; only apply a tiny visual squeeze. */
       .category-track {
-        gap: 17px;
+        gap: 12px;
         transform: scaleX(calc(1 - (0.025 * var(--collision-progress))));
         transform-origin: center center;
         transition: none;
         will-change: transform;
       }
       .category-button {
-        flex-basis: 88px;
-        width: 88px;
+        flex-basis: 78px;
+        width: 78px;
       }
       .category-image-frame {
-        width: 78px;
-        height: 78px;
+        width: 68px;
+        height: 68px;
       }
 
       /* Raise the item cards a little more to open the footer area. */
