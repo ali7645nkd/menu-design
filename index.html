@@ -2341,6 +2341,7 @@
       let sceneCardState = scenePosition >= SCENE_DISTANCE * 0.78 ? 1 : 0;
       let sceneTouchY = 0;
       let sceneTouchX = 0;
+      let sceneTouchStartScroll = 0;
       let sceneTouchAxis = null;
       let sceneGestureDirection = 0;
       let sceneWritingScroll = false;
@@ -2445,9 +2446,57 @@
         }
       }
 
-      /* Mouse wheel follows its input continuously; only release settles it. */
+      /* The third stage snaps directly to the bottom of the menu. */
+      function snapPageTo(target) {
+        stopSceneSnap();
+        const from = screen.scrollTop;
+        const maxScroll = Math.max(SCENE_DISTANCE, screen.scrollHeight - screen.clientHeight);
+        const to = Math.max(SCENE_DISTANCE, Math.min(maxScroll, target));
+        const distance = to - from;
+        if (Math.abs(distance) < 0.5) {
+          screen.scrollTop = to;
+          scenePosition = SCENE_DISTANCE;
+          return;
+        }
+
+        const startedAt = performance.now();
+        const duration = 520;
+        const animate = (now) => {
+          const raw = Math.min(1, (now - startedAt) / duration);
+          const eased = 1 - Math.pow(1 - raw, 4);
+          screen.scrollTop = from + distance * eased;
+          scenePosition = SCENE_DISTANCE;
+          if (raw < 1) {
+            sceneAnimationFrame = requestAnimationFrame(animate);
+          } else {
+            sceneAnimationFrame = 0;
+            screen.scrollTop = to;
+          }
+        };
+        sceneAnimationFrame = requestAnimationFrame(animate);
+      }
+
+      function settlePageGesture(direction) {
+        const maxScroll = Math.max(SCENE_DISTANCE, screen.scrollHeight - screen.clientHeight);
+        snapPageTo(direction > 0 ? maxScroll : SCENE_DISTANCE);
+      }
+
+      /* Wheel input selects one of three deliberate scroll stages. */
       screen.addEventListener("wheel", (event) => {
         if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
+        const atMiddleStage = Math.abs(screen.scrollTop - SCENE_DISTANCE) <= 0.5;
+        const inFooterStage = screen.scrollTop > SCENE_DISTANCE + 0.5;
+        if (inFooterStage || (atMiddleStage && event.deltaY > 0)) {
+          event.preventDefault();
+          stopSceneSnap();
+          if (Math.abs(event.deltaY) > 0.1) sceneGestureDirection = Math.sign(event.deltaY);
+          if (sceneSnapTimer) clearTimeout(sceneSnapTimer);
+          sceneSnapTimer = setTimeout(() => {
+            sceneSnapTimer = null;
+            settlePageGesture(sceneGestureDirection);
+          }, 140);
+          return;
+        }
         event.preventDefault();
         stopSceneSnap();
         const multiplier = event.deltaMode === 1 ? 24 : event.deltaMode === 2 ? 360 : 1;
@@ -2467,6 +2516,7 @@
         if (!event.touches.length) return;
         stopSceneSnap();
         scenePosition = Math.max(0, Math.min(SCENE_DISTANCE, screen.scrollTop));
+        sceneTouchStartScroll = screen.scrollTop;
         sceneTouchY = event.touches[0].clientY;
         sceneTouchX = event.touches[0].clientX;
         sceneTouchAxis = null;
@@ -2489,18 +2539,41 @@
 
         event.preventDefault();
         if (Math.abs(deltaY) > 0.1) sceneGestureDirection = Math.sign(deltaY);
+        const startedAtMiddle = Math.abs(sceneTouchStartScroll - SCENE_DISTANCE) <= 0.5;
+        const startedInFooter = sceneTouchStartScroll > SCENE_DISTANCE + 0.5;
+        if (startedInFooter || (startedAtMiddle && deltaY > 0)) {
+          sceneTouchY = touch.clientY;
+          sceneTouchX = touch.clientX;
+          return;
+        }
         setSceneScroll(screen.scrollTop + deltaY * SCENE_GESTURE_GAIN);
         sceneTouchY = touch.clientY;
         sceneTouchX = touch.clientX;
       }, { passive: false });
 
       screen.addEventListener("touchend", () => {
-        if (sceneTouchAxis === "vertical") settleSceneGesture(sceneGestureDirection);
+        if (sceneTouchAxis === "vertical") {
+          const startedAtMiddle = Math.abs(sceneTouchStartScroll - SCENE_DISTANCE) <= 0.5;
+          const startedInFooter = sceneTouchStartScroll > SCENE_DISTANCE + 0.5;
+          if (startedInFooter || (startedAtMiddle && sceneGestureDirection > 0)) {
+            settlePageGesture(sceneGestureDirection);
+          } else {
+            settleSceneGesture(sceneGestureDirection);
+          }
+        }
         sceneTouchAxis = null;
       }, { passive: true });
 
       screen.addEventListener("touchcancel", () => {
-        if (sceneTouchAxis === "vertical") settleSceneGesture(sceneGestureDirection);
+        if (sceneTouchAxis === "vertical") {
+          const startedAtMiddle = Math.abs(sceneTouchStartScroll - SCENE_DISTANCE) <= 0.5;
+          const startedInFooter = sceneTouchStartScroll > SCENE_DISTANCE + 0.5;
+          if (startedInFooter || (startedAtMiddle && sceneGestureDirection > 0)) {
+            settlePageGesture(sceneGestureDirection);
+          } else {
+            settleSceneGesture(sceneGestureDirection);
+          }
+        }
         sceneTouchAxis = null;
       }, { passive: true });
 
