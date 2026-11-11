@@ -2002,27 +2002,16 @@
         if (!categoryTrack || !categoryButtons.length) return;
 
         const trackRect = categoryTrack.getBoundingClientRect();
-        const visibleButtons = categoryButtons.filter((button) => {
-          const rect = button.getBoundingClientRect();
-          return rect.right > trackRect.left && rect.left < trackRect.right;
-        });
-        if (!visibleButtons.length) return;
 
-        // Anchor the curve to the categories currently visible, not the full scroll track.
-        const visibleCenters = visibleButtons.map((button) => {
-          const rect = button.getBoundingClientRect();
-          return rect.left + rect.width / 2;
-        });
-        const visibleMin = Math.min(...visibleCenters);
-        const visibleMax = Math.max(...visibleCenters);
-        const centerX = (visibleMin + visibleMax) / 2;
-        const maxDistance = Math.max(1, (visibleMax - visibleMin) / 2 + 39);
+        // The arch is a fixed screen-space template. Its shape never depends on
+        // how many categories exist or happen to be visible while scrolling.
+        const centerX = trackRect.left + trackRect.width / 2;
+        const maxDistance = Math.max(1, trackRect.width / 2);
 
         categoryButtons.forEach((button) => {
           const rect = button.getBoundingClientRect();
           const buttonCenter = rect.left + rect.width / 2;
           const distance = Math.min(1, Math.abs(buttonCenter - centerX) / maxDistance);
-          // Stronger, broader arch; recalculate continuously as the strip scrolls.
           const offset = 34 * Math.pow(distance, 1.65);
           button.style.setProperty("--arch-offset", offset.toFixed(2) + "px");
         });
