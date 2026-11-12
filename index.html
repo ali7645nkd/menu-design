@@ -1832,11 +1832,11 @@
          ITEM DETAILS + CART (isolated feature)
          No nested backdrop-filter: the veil and the card are siblings.
          ========================================== */
-      .iv-modal{position:absolute;inset:0;z-index:19;display:flex;align-items:center;justify-content:center;padding:132px 14px 18px;visibility:hidden;pointer-events:none;touch-action:none;transition:visibility 0s linear .4s}
+      .iv-modal{position:absolute;inset:0;z-index:19;display:flex;align-items:center;justify-content:center;padding:190px 14px 18px;visibility:hidden;pointer-events:none;touch-action:none;transition:visibility 0s linear .4s}
       .iv-modal.open{visibility:visible;pointer-events:auto;transition:none}
       .iv-veil{position:absolute;inset:0;background:rgba(12,30,22,.32);-webkit-backdrop-filter:blur(14px) saturate(120%);backdrop-filter:blur(14px) saturate(120%);opacity:0;transition:opacity .3s ease}
       .iv-modal.open .iv-veil{opacity:1}
-      .iv-card{position:relative;width:100%;max-width:310px;max-height:min(100%,500px);display:flex;flex-direction:column;overflow:visible;border-radius:28px;color:var(--text-color);background:linear-gradient(160deg,rgba(255,252,244,.93),rgba(238,247,240,.86));-webkit-backdrop-filter:blur(26px) saturate(150%);backdrop-filter:blur(26px) saturate(150%);border:1px solid rgba(255,255,255,.85);box-shadow:0 22px 50px rgba(12,48,34,.28),inset 0 1px 0 #fff;opacity:0;transform:translateY(12px) scale(.95);transition:opacity .3s ease,transform .4s cubic-bezier(.22,1,.36,1)}
+      .iv-card{position:relative;width:100%;max-width:310px;max-height:min(100%,500px);display:flex;flex-direction:column;overflow:visible;border-radius:28px;color:var(--text-color);background:linear-gradient(160deg,rgba(255,252,244,.93),rgba(238,247,240,.86));-webkit-backdrop-filter:blur(26px) saturate(150%);backdrop-filter:blur(26px) saturate(150%);border:1px solid rgba(255,255,255,.85);box-shadow:0 22px 50px rgba(12,48,34,.28),inset 0 1px 0 #fff;opacity:0;transform:translateY(12px) scale(.95);transition:opacity .3s ease}
       .iv-modal.open .iv-card{opacity:1;transform:none}
       .phone.dark .iv-card{background:linear-gradient(160deg,rgba(38,68,55,.94),rgba(24,48,38,.92));border-color:rgba(190,235,210,.18);box-shadow:0 22px 50px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.1)}
       .iv-head{position:relative;flex:0 0 auto;padding:82px 16px 14px;border-bottom:1px solid rgba(16,185,129,.14);border-radius:28px 28px 0 0}
@@ -1871,8 +1871,8 @@
       .iv-chk{position:relative;flex:0 0 22px;width:22px;height:22px;border-radius:7px;border:1.8px solid rgba(8,127,91,.5);background:rgba(255,255,255,.6);transition:background .2s,border-color .2s}
       .iv-addon.on .iv-chk{background:linear-gradient(145deg,#12b07e,#087f5b);border-color:#0b9a6b}
       .iv-addon.on .iv-chk::after{content:"";position:absolute;left:6px;top:2.5px;width:6px;height:11px;border:solid #fff;border-width:0 2.2px 2.2px 0;transform:rotate(45deg)}
-      .iv-bar{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px 14px;border-top:1px solid rgba(16,185,129,.16);background:rgba(255,255,255,.3)}
-      .phone.dark .iv-bar{background:rgba(255,255,255,.04)}
+      .iv-bar{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px 14px;border-top:1px solid rgba(16,185,129,.16);border-radius:0 0 28px 28px;background:rgba(255,255,255,.3)}
+      .iv-scroll{border-radius:0 0 28px 28px}\n       .phone.dark .iv-bar{background:rgba(255,255,255,.04)}
       .iv-total{display:flex;flex-direction:column;gap:1px;min-width:0}
       .iv-total>span{font-size:11px;font-weight:700;opacity:.7}
       .iv-price{display:flex;align-items:baseline;flex-wrap:wrap;gap:0 8px}
@@ -3206,7 +3206,7 @@
           imgWrap.getAnimations().forEach((a) => a.cancel());
           const from = card.querySelector(".menu-item-image").getBoundingClientRect(), to = imgWrap.getBoundingClientRect(), k = pscale();
           if (from.width && to.width) {
-            imgWrap.animate([{ transform: `translate(${(from.left + from.width / 2 - to.left - to.width / 2) / k}px,${(from.top + from.height / 2 - to.top - to.height / 2) / k}px) scale(${from.width / to.width})` }, { transform: "none" }], { duration: D(520), easing: "cubic-bezier(.22,.75,.2,1)" });
+            imgWrap.animate([{ transform: `translate(calc(-50% + ${(from.left + from.width / 2 - to.left - to.width / 2) / k}px),calc(-50% + ${(from.top + from.height / 2 - to.top - to.height / 2) / k}px)) scale(${from.width / to.width})` }, { transform: "translate(-50%,-50%) scale(1)" }], { duration: D(520), easing: "cubic-bezier(.22,.75,.2,1)" });
           }
         }
         function closeItem() {
@@ -3218,7 +3218,7 @@
           modal.setAttribute("aria-hidden", "true");
           phoneEl.classList.remove("iv-open");
           if (from.width && to.width) {
-            imgWrap.animate([{ transform: "none" }, { transform: `translate(${(to.left + to.width / 2 - from.left - from.width / 2) / k}px,${(to.top + to.height / 2 - from.top - from.height / 2) / k}px) scale(${to.width / from.width})` }], { duration: D(300), easing: "cubic-bezier(.4,0,.2,1)" });
+            imgWrap.animate([{ transform: "translate(-50%,-50%) scale(1)" }, { transform: `translate(calc(-50% + ${(to.left + to.width / 2 - from.left - from.width / 2) / k}px),calc(-50% + ${(to.top + to.height / 2 - from.top - from.height / 2) / k}px)) scale(${to.width / from.width})` }], { duration: D(300), easing: "cubic-bezier(.4,0,.2,1)" });
           }
           setTimeout(() => { cur = -1; busy = false; }, D(340));
         }
