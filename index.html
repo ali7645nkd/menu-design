@@ -3026,6 +3026,11 @@
         en:{sizes:"Sizes",addons:"Add-ons",total:"Total price",add:"Add to my order",close:"Close details",currency:"$"},
         ku:{sizes:"Mezin",addons:"Zêdekirin",total:"Bihayê giştî",add:"Tevlî daxwaza min bike",close:"Bigire",currency:"$"}
       };
+      // Keep the last size and add-on choices for each item between openings.
+      const itemSelections = itemDetailsData.map(data => ({
+        sizeIndex: Math.max(0, Math.floor(data.sizes.length / 2)),
+        addons: []
+      }));
       let openedItemIndex = null;
       let selectedSizeIndex = 0;
       let selectedAddonIndexes = new Set();
@@ -3072,6 +3077,7 @@
           button.querySelector("small").textContent = formatItemPrice(size[2]);
           button.addEventListener("click",() => {
             selectedSizeIndex = index;
+            itemSelections[openedItemIndex].sizeIndex = index;
             renderItemDetails();
           });
           itemSizeOptions.appendChild(button);
@@ -3086,6 +3092,7 @@
           input.addEventListener("change",() => {
             if (input.checked) selectedAddonIndexes.add(index);
             else selectedAddonIndexes.delete(index);
+            itemSelections[openedItemIndex].addons = [...selectedAddonIndexes];
             updateItemDetailsTotal();
           });
           const check = document.createElement("span");
@@ -3104,8 +3111,8 @@
       function openItemDetails(index) {
         if (detailsClosing) return;
         openedItemIndex = index;
-        selectedSizeIndex = Math.max(0,Math.floor(itemDetailsData[index].sizes.length / 2));
-        selectedAddonIndexes = new Set();
+        selectedSizeIndex = itemSelections[index].sizeIndex;
+        selectedAddonIndexes = new Set(itemSelections[index].addons);
         renderItemDetails();
         itemDetailsScroll.scrollTop = 0;
         itemDetailsBackdrop.classList.remove("is-flight");
