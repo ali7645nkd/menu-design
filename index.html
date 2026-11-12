@@ -1660,6 +1660,8 @@
       .carousel-arrow:hover{transform:translateY(-2px);box-shadow:0 7px 16px rgba(12,48,34,.15),inset 0 1px 0 rgba(255,255,255,.95)}
       .carousel-arrow:active{transform:scale(.94)}
       .carousel-arrow svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round}
+      /* In RTL, flex row placement is mirrored, so mirror the arrow glyphs too. */
+      .phone[dir="rtl"] .carousel-arrow svg{transform:rotate(180deg)}
       .phone.dark .carousel-arrow{background:linear-gradient(145deg,#29483a,#20382e);border-color:rgba(114,221,176,.28);color:#8de0b6;box-shadow:0 4px 12px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.07)}
       .carousel-pagination{display:flex;align-items:center;gap:6px}
       .carousel-dot{width:5px;height:5px;border:0;border-radius:9px;background:rgba(16,185,129,.28);padding:0;cursor:pointer;transition:width .3s ease,background .3s ease}
