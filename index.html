@@ -101,7 +101,17 @@
       .screen::-webkit-scrollbar {
         display: none;
       }
-      /* DARK THEME */
+      /* Keep theme changes immediate to avoid repaint stutter on glass surfaces. */
+      .phone.theme-switching,
+      .phone.theme-switching .screen {
+        transition: none !important;
+      }
+      .phone.theme-switching *,
+      .phone.theme-switching *::before,
+      .phone.theme-switching *::after {
+        transition-property: transform, opacity !important;
+      }
+            /* DARK THEME */
       .phone.dark {
         --page-bg: #14251f;
         --text-color: #e3f4ea;
@@ -447,6 +457,19 @@
       }
       .phone.logo-compact .logo-letter {
         transform: scale(0.92);
+      }
+      .phone.logo-compact .menu-title {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateX(-50%);
+      }
+      .phone.logo-compact .logo-circle {
+        background: #f2fff7;
+        isolation: isolate;
+      }
+      .phone.dark.logo-compact .logo-circle {
+        background: #e6f7ed;
       }
       /* LANGUAGE POPOVER */
       .language-menu {
@@ -833,8 +856,7 @@
       /* SCROLL TEST CONTENT */
       .scroll-demo {
         position: relative;
-        padding: 112px 16px 45px;
-        min-height: 1100px;
+        padding: 10px 16px 45px;
         color: var(--text-color);
       }
       .scroll-demo-heading {
@@ -897,20 +919,160 @@
         line-height: 1.7;
         opacity: 0.7;
       }
+      /* RESTAURANT FOOTER */
       .scroll-demo-footer {
-        margin-top: 65px;
-        padding: 30px 10px;
+        position: relative;
+        isolation: isolate;
+        width: calc(100% + 32px);
+        margin: 12px -16px -45px;
+        padding: 28px 18px 18px;
+        overflow: hidden;
         text-align: center;
-        opacity: 0.65;
+        color: #f8f1e5;
+        background:
+          radial-gradient(ellipse at 50% -25%, rgba(111, 210, 157, 0.2), transparent 65%),
+          #145a43;
+        border-radius: 28px 28px 0 0;
+        box-shadow: 0 -8px 28px rgba(20, 90, 67, 0.12);
       }
-      .scroll-demo-footer span {
-        font-family: Georgia, serif;
-        font-size: 25px;
-        font-weight: 900;
+      .scroll-demo-footer::before {
+        content: "";
+        position: absolute;
+        inset: 0 12% auto;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(248, 241, 229, 0.42), transparent);
+        pointer-events: none;
       }
-      .scroll-demo-footer p {
-        margin-top: 8px;
+      .phone.dark .scroll-demo-footer {
+        color: #edf7ef;
+        background:
+          radial-gradient(ellipse at 50% -25%, rgba(114, 221, 176, 0.13), transparent 65%),
+          #193d32;
+        box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.18);
+      }
+      .footer-restaurant-name {
+        position: relative;
+        margin: 0 auto 18px;
+        color: inherit;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 27px;
+        line-height: 1.35;
+        font-weight: 800;
+        letter-spacing: 0.15px;
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.16);
+      }
+      .footer-socials {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 11px;
+        margin: 0 auto 23px;
+      }
+      .footer-social-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 43px;
+        height: 43px;
+        padding: 10px;
+        color: #202124;
+        background: #fffdf8;
+        border: 1px solid rgba(248, 241, 229, 0.72);
+        border-radius: 50%;
+        box-shadow: 0 4px 13px rgba(0, 0, 0, 0.13), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+        cursor: pointer;
+        transition: transform 0.22s ease, box-shadow 0.22s ease;
+      }
+      .footer-social-button:hover {
+        transform: translateY(-3px) scale(1.04);
+        box-shadow: 0 7px 17px rgba(0, 0, 0, 0.18);
+      }
+      .footer-social-button svg {
+        display: block;
+        width: 23px;
+        height: 23px;
+      }
+      .footer-social-button.facebook svg { fill: #1877f2; }
+      .footer-social-button.instagram svg { fill: none; stroke: url(#instagramBrandGradient); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .footer-social-button.instagram .instagram-dot { fill: #e1306c; stroke: none; }
+      .footer-social-button.whatsapp svg { fill: #25d366; }
+      .footer-social-button.x-brand svg { fill: #000000; }
+      .footer-social-button.tiktok svg { fill: #111111; filter: drop-shadow(-1.2px -0.4px 0 #25f4ee) drop-shadow(1.2px 0.4px 0 #fe2c55); }
+      .phone.dark .footer-social-button {
+        background: #f8f7f2;
+        border-color: rgba(255, 255, 255, 0.72);
+      }
+      .footer-social-heading {
+        margin: -7px auto 13px;
+        color: rgba(248, 241, 229, 0.9);
+        font-size: 11px;
+        line-height: 1.7;
+        font-weight: 600;
+      }
+      .footer-payment-heading {
+        margin-bottom: 11px;
+        color: rgba(248, 241, 229, 0.78);
         font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+      }
+      .footer-payments {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 9px;
+        margin-bottom: 22px;
+      }
+      .footer-payment-mark {
+        min-width: 75px;
+        min-height: 35px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 11px;
+        color: #145a43;
+        background: #f8f1e5;
+        border: 1px solid rgba(255, 255, 255, 0.48);
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        font-size: 12px;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+      .footer-payment-mark.paypal {
+        color: #123b75;
+        font-family: Arial, sans-serif;
+        font-size: 15px;
+        font-style: italic;
+        letter-spacing: -0.8px;
+      }
+      .footer-payment-mark.shamcash {
+        font-size: 11px;
+        letter-spacing: -0.2px;
+      }
+      .footer-payment-mark.masari {
+        font-size: 12px;
+      }
+      .footer-copyright {
+        margin: 0;
+        color: rgba(248, 241, 229, 0.72);
+        font-size: 9px;
+        line-height: 1.8;
+      }
+      .footer-credit {
+        margin-top: 7px;
+        color: rgba(248, 241, 229, 0.96);
+        font-size: 14px;
+        line-height: 1.9;
+        font-weight: 600;
+      }
+      .footer-credit strong {
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: 900;
+        letter-spacing: 0.25px;
       }
       /* CONTROL PANEL DEMO */
       .modal-backdrop {
@@ -1023,16 +1185,15 @@
           opacity 0.3s ease;
       }
 
-      /* Arabic: logo is on the right */
+      /* Move MENU to the right while the navbar opens, then fade it out. */
       .phone[dir="rtl"] .bar-wrap.is-open .menu-title {
-        opacity: 1;
-        transform: translateX(calc(-50% + 145px)) scale(0.88);
+        opacity: 0;
+        transform: translateX(calc(-50% + 145px)) scale(0.92);
       }
-
-      /* English and Kurdish: logo is on the left */
+      /* Keep the mirrored motion for left-to-right languages. */
       .phone[dir="ltr"] .bar-wrap.is-open .menu-title {
-        opacity: 1;
-        transform: translateX(calc(-50% - 145px)) scale(0.88);
+        opacity: 0;
+        transform: translateX(calc(-50% - 145px)) scale(0.92);
       }
 
       /* The logo must stay visually above the title */
@@ -1280,40 +1441,89 @@
           inset -1px 0 0 rgba(190, 255, 215, 0.18);
       }
 
-      /* CATEGORY STRIP */
-      .category-section {
-        margin: 0 -16px 30px;
-        padding: 4px 0 12px;
+      /* CATEGORY HEADING AND SECOND MENU CARD */
+      .category-heading {
+        position: relative;
+        z-index: 17;
+        width: calc(100% - 146px);
+        margin: 0 0 16px 146px;
+        text-align: center;
       }
       .category-section-title {
-        margin: 0 16px 17px;
         color: var(--text-color);
-        font-size: 15px;
+        font-family: inherit;
+        font-size: 24px;
+        line-height: 1.3;
         font-weight: 800;
+        letter-spacing: 0;
+        text-align: center;
+      }
+      .category-section {
+        position: relative;
+        margin: 0 -8px 30px;
+        padding: 24px 0 30px;
+        border: 1px solid rgba(190, 151, 82, 0.34);
+        border-radius: 27px;
+        overflow: hidden;
+        isolation: isolate;
+        background: linear-gradient(145deg, #f3e6c9 0%, #ead8ae 52%, #f6ebd2 100%);
+        box-shadow:
+          0 12px 30px rgba(20, 70, 48, 0.09),
+          0 0 0 1px rgba(255, 255, 255, 0.5),
+          inset 0 1px 0 rgba(255, 255, 255, 0.82);
+      }
+      .category-section::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background:
+          radial-gradient(circle at 12% 0%, rgba(255,255,255,.72), transparent 38%),
+          linear-gradient(115deg, transparent 22%, rgba(255,255,255,.28) 50%, transparent 76%);
+      }
+      .phone.dark .category-section {
+        background: linear-gradient(145deg, #514532 0%, #403725 54%, #5b4c35 100%);
+        border-color: rgba(224, 190, 126, 0.34);
+        box-shadow:
+          0 12px 30px rgba(0, 0, 0, 0.25),
+          0 0 0 1px rgba(255, 255, 255, 0.05),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1);
       }
       .category-track {
+        position: relative;
+        isolation: isolate;
         display: flex;
         align-items: flex-start;
-        gap: 15px;
+        gap: 12px;
         overflow-x: auto;
         overflow-y: hidden;
-        padding: 7px 18px 13px;
+        padding: 12px 18px 30px;
         scroll-snap-type: x proximity;
         scroll-behavior: smooth;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
+      }
+      /* Category positions are calculated from their live on-screen positions. */
+      .category-track > .category-button {
+        z-index: 1;
+        transform: translateY(var(--arch-offset, 0px));
+        transition: transform 0.24s cubic-bezier(0.2, 0.75, 0.25, 1);
+      }
+      .category-track > .category-button.active {
+        z-index: 2;
       }
       .category-track::-webkit-scrollbar {
         display: none;
       }
       .category-button {
         position: relative;
-        flex: 0 0 76px;
-        width: 76px;
+        flex: 0 0 78px;
+        width: 78px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 9px;
+        gap: 8px;
         padding: 0;
         border: 0;
         background: transparent;
@@ -1328,18 +1538,18 @@
         height: 68px;
         display: block;
         padding: 3px;
-        border: 1.5px solid rgba(8, 127, 91, 0.58);
+        border: 1.5px solid rgba(8, 127, 91, 0.56);
         border-radius: 50%;
-        background: rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.38);
         -webkit-backdrop-filter: blur(12px) saturate(145%);
         backdrop-filter: blur(12px) saturate(145%);
         box-shadow:
-          0 4px 13px rgba(20, 90, 67, 0.08),
+          0 4px 13px rgba(20, 90, 67, 0.1),
           inset 0 1px 2px rgba(255, 255, 255, 0.72);
         transition:
-          transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+          transform 0.42s cubic-bezier(0.2, 0.9, 0.25, 1.25),
           border-color 0.3s ease,
-          box-shadow 0.3s ease,
+          box-shadow 0.35s ease,
           background 0.3s ease;
       }
       .category-image-frame img {
@@ -1348,35 +1558,47 @@
         height: 100%;
         border-radius: 50%;
         object-fit: cover;
+        transition: filter 0.35s ease, transform 0.45s ease;
       }
       .category-name {
-        max-width: 88px;
-        min-height: 28px;
-        font-size: 10px;
+        max-width: 94px;
+        min-height: 30px;
+        font-size: 11px;
         line-height: 1.45;
-        font-weight: 700;
+        font-weight: 800;
         text-align: center;
         white-space: normal;
-        opacity: 0.78;
+        opacity: 0.8;
         transition:
           color 0.3s ease,
           opacity 0.3s ease,
-          transform 0.3s ease;
+          transform 0.35s ease;
       }
       .category-button:hover .category-image-frame {
-        transform: translateY(-2px);
+        transform: translateY(-3px) scale(1.025);
       }
       .category-button.active .category-image-frame {
-        transform: translateY(-5px);
-        border-color: #10b981;
-        background: rgba(16, 185, 129, 0.13);
+        transform: translateY(-8px) scale(1.12);
+        border-color: #0b9a6b;
+        background: linear-gradient(145deg, #fffdf7 0%, #e8f6ed 100%);
         box-shadow:
-          0 8px 19px rgba(16, 185, 129, 0.2),
-          0 0 0 2px rgba(16, 185, 129, 0.1),
-          inset 0 1px 3px rgba(255, 255, 255, 0.72);
+          0 12px 26px rgba(8, 127, 91, 0.24),
+          0 0 0 3px rgba(8, 127, 91, 0.12),
+          inset 0 1px 3px rgba(255, 255, 255, 0.96);
+      }
+      .category-button.active .category-image-frame::after {
+        content: "";
+        position: absolute;
+        inset: -3px;
+        border: 1px solid rgba(16, 185, 129, 0.24);
+        border-radius: 50%;
+        pointer-events: none;
+      }
+      .category-button.active .category-image-frame img {
+        filter: saturate(1.12) contrast(1.04);
       }
       .category-button.active .category-name {
-        color: var(--green);
+        color: #087f5b;
         opacity: 1;
         transform: translateY(-2px);
       }
@@ -1388,14 +1610,219 @@
           inset 0 1px 2px rgba(255, 255, 255, 0.1);
       }
       .phone.dark .category-button.active .category-image-frame {
-        border-color: #72ddb0;
-        background: rgba(16, 185, 129, 0.16);
+        border-color: #8be2bd;
+        background: linear-gradient(145deg, #354b3d 0%, #263d32 100%);
         box-shadow:
-          0 8px 20px rgba(0, 0, 0, 0.24),
-          0 0 13px rgba(114, 221, 176, 0.16);
+          0 12px 26px rgba(0, 0, 0, 0.34),
+          0 0 0 3px rgba(139, 226, 189, 0.16),
+          inset 0 1px 3px rgba(255, 255, 255, 0.12);
+      }
+      .phone.dark .category-button.active .category-image-frame::after {
+        border-color: rgba(114, 221, 176, 0.24);
       }
       .phone.dark .category-button.active .category-name {
         color: #72ddb0;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .category-button,
+        .category-image-frame,
+        .category-name {
+          transition: none !important;
+        }
+      }
+    
+      /* 3D menu item carousel */
+      .items-carousel{position:relative;margin-top:8px;padding:0 0 2px;touch-action:pan-y}
+      .items-carousel-stage{position:relative;height:320px;margin:0 auto}
+      .menu-item-card{position:absolute;top:35px;left:50%;width:204px;height:264px;padding:0;border-radius:23px;overflow:visible;background:var(--page-bg);border:1px solid rgba(16,185,129,.17);box-shadow:0 10px 22px rgba(12,48,34,.12);transform:translate3d(-50%,0,0) scale(.72);opacity:0;z-index:1;pointer-events:none;transform-origin:center;transition:transform .48s cubic-bezier(.22,.75,.2,1),opacity .42s ease;will-change:transform,opacity;backface-visibility:hidden;cursor:pointer;outline:none}
+      .menu-item-card.is-active{transform:translate3d(calc(-50% + var(--drag-x,0px)),0,0) scale(1);opacity:1;z-index:5;pointer-events:auto;box-shadow:0 18px 38px rgba(12,48,34,.2)}
+      .menu-item-card.is-prev,.menu-item-card.is-next{opacity:.76;z-index:3;pointer-events:auto;filter:saturate(.78)}
+      .phone[dir="rtl"] .menu-item-card.is-prev{transform:translate3d(calc(-50% + 116px),19px,0) scale(.78)}
+      .phone[dir="rtl"] .menu-item-card.is-next{transform:translate3d(calc(-50% - 116px),19px,0) scale(.78)}
+      .phone[dir="ltr"] .menu-item-card.is-prev{transform:translate3d(calc(-50% - 126px),19px,0) scale(.78)}
+      .phone[dir="ltr"] .menu-item-card.is-next{transform:translate3d(calc(-50% + 126px),19px,0) scale(.78)}
+      .menu-item-image{position:absolute;top:-53px;left:50%;width:140px;height:140px;padding:5px;transform:translateX(-50%);border-radius:50%;background:var(--page-bg);border:1px solid rgba(16,185,129,.3);box-shadow:0 8px 20px rgba(8,55,36,.2);z-index:2}
+      .menu-item-image img{display:block;width:100%;height:100%;object-fit:cover;border-radius:50%}
+      .menu-item-content{height:100%;padding:116px 15px 14px;display:flex;flex-direction:column;text-align:center;align-items:center}
+      .menu-item-category{font-size:9px;font-weight:800;color:var(--green);opacity:.88;margin-bottom:7px}
+      .menu-item-content h3{font-size:17px;font-weight:850;color:var(--text-color);margin-bottom:7px;line-height:1.3}
+      .menu-item-content p{font-size:10px;line-height:1.7;color:var(--text-color);opacity:.68;max-width:175px}
+      .menu-item-bottom{margin-top:auto;width:100%;display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid rgba(16,185,129,.14)}
+      .menu-item-bottom strong{font-size:16px;color:var(--green);font-weight:900;direction:ltr}
+      .menu-item-bottom .item-cart-icon{display:inline-flex;align-items:center;justify-content:center;width:27px;height:27px;color:var(--green);border-radius:50%;background:rgba(16,185,129,.1)}
+      .menu-item-bottom .item-cart-icon svg{display:block;width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+      .phone.dark .menu-item-card{background:#20382e;border-color:rgba(114,221,176,.2);box-shadow:0 14px 30px rgba(0,0,0,.3)}
+      .phone.dark .menu-item-item.is-active,.phone.dark .menu-item-card.is-active{box-shadow:0 18px 38px rgba(0,0,0,.42)}
+      .phone.dark .menu-item-image{background:#20382e;border-color:rgba(114,221,176,.35)}
+      .phone.dark .menu-item-category,.phone.dark .menu-item-bottom strong{color:#72ddb0}
+      .items-carousel-controls{height:35px;display:flex;align-items:center;justify-content:center;gap:15px;margin-top:0;position:relative;z-index:8}
+      .carousel-arrow{width:36px;height:36px;border:1px solid rgba(16,185,129,.24);border-radius:13px;background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(232,246,237,.88));color:#087f5b;cursor:pointer;display:grid;place-items:center;box-shadow:0 4px 12px rgba(12,48,34,.1),inset 0 1px 0 rgba(255,255,255,.95);transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
+      .carousel-arrow:hover{transform:translateY(-2px);box-shadow:0 7px 16px rgba(12,48,34,.15),inset 0 1px 0 rgba(255,255,255,.95)}
+      .carousel-arrow:active{transform:scale(.94)}
+      .carousel-arrow svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round}
+      /* In RTL, flex row placement is mirrored, so mirror the arrow glyphs too. */
+      .phone[dir="rtl"] .carousel-arrow svg{transform:rotate(180deg)}
+      .phone.dark .carousel-arrow{background:linear-gradient(145deg,#29483a,#20382e);border-color:rgba(114,221,176,.28);color:#8de0b6;box-shadow:0 4px 12px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.07)}
+      .carousel-pagination{display:flex;align-items:center;gap:6px}
+      .carousel-dot{width:5px;height:5px;border:0;border-radius:9px;background:rgba(16,185,129,.28);padding:0;cursor:pointer;transition:width .3s ease,background .3s ease}
+      .carousel-dot.active{width:17px;background:var(--green)}
+      .carousel-hint{margin-top:2px;text-align:center;font-size:9px;color:var(--text-color);opacity:.48}
+      @media(max-width:370px){.menu-item-card{width:204px}.phone[dir="rtl"] .menu-item-card.is-prev{transform:translate3d(calc(-50% + 112px),21px,0) scale(.74)}.phone[dir="rtl"] .menu-item-card.is-next{transform:translate3d(calc(-50% - 112px),21px,0) scale(.74)}.phone[dir="ltr"] .menu-item-card.is-prev{transform:translate3d(calc(-50% - 112px),21px,0) scale(.74)}.phone[dir="ltr"] .menu-item-card.is-next{transform:translate3d(calc(-50% + 112px),21px,0) scale(.74)}}
+      @media(prefers-reduced-motion:reduce){.menu-item-card,.carousel-dot,.category-image-frame{transition:none!important}}
+
+      /* ==========================================
+         ONE-WAY SCENE TRANSITION + HORIZONTAL BROWSING
+         ========================================== */
+      .phone {
+        --scene-progress: 0;
+        --collision-progress: 0;
+      }
+
+      /* The cover card collapses completely as the menu scene rises. */
+      .hero {
+        height: 365px;
+        opacity: calc(1 - var(--scene-progress));
+        transform: translate3d(0, calc(-330px * var(--scene-progress)), 0);
+        transition: none;
+        will-change: opacity, transform;
+        pointer-events: auto;
+        touch-action: pan-y;
+      }
+      /* Keep the visual layers from intercepting taps; the indicator buttons stay interactive. */
+      .hero-slides,
+      .hero-content {
+        pointer-events: none;
+      }
+      .hero-indicators,
+      .hero-dot {
+        pointer-events: auto;
+      }
+
+      /* The restaurant status semicircle exits to the right and disappears. */
+      .restaurant-info-pill {
+        /* Exit toward the left in every language direction. */
+        transform: translate3d(calc(-190px * var(--scene-progress)), 0, 0);
+        opacity: calc(1 - var(--scene-progress));
+        transition: none;
+        will-change: transform, opacity;
+        pointer-events: none;
+      }
+
+      /* Search keeps its text at natural width while its available space expands. */
+      .menu-search {
+        position: absolute;
+        top: 443px;
+        left: calc(12px + (146px * (1 - var(--scene-progress))));
+        right: 12px;
+        width: auto;
+        margin: 0;
+        z-index: 19;
+        transform: translate3d(0, calc(-30px * var(--scene-progress)), 0);
+        transition: none;
+        will-change: left, transform;
+        background: rgba(255, 255, 255, 0.94);
+        -webkit-backdrop-filter: blur(8px) saturate(115%);
+        backdrop-filter: blur(8px) saturate(115%);
+        box-shadow:
+          0 7px 22px rgba(18, 48, 34, 0.14),
+          0 12px 25px rgba(248, 241, 229, 0.22),
+          inset 0 1px 0 rgba(255, 255, 255, 0.98);
+      }
+      .phone.dark .menu-search {
+        background: rgba(255, 255, 255, 0.96);
+        -webkit-backdrop-filter: blur(8px) saturate(115%);
+        backdrop-filter: blur(8px) saturate(115%);
+        box-shadow:
+          0 5px 15px rgba(0, 0, 0, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.98);
+      }
+
+      /* Lift the whole menu content slightly to reserve room for the footer. */
+      .category-section {
+        padding-top: 24px;
+        transform: translate3d(0, calc(-34px * var(--scene-progress)), 0);
+        transition: none;
+        will-change: transform;
+      }
+      /* Fade and collapse the section title as the second item card takes focus.
+         The category rail and item cards naturally move up into the freed space. */
+      .category-heading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: calc(100% - (146px * (1 - var(--scene-progress))));
+        height: calc(32px * (1 - var(--scene-progress)));
+        min-height: 0;
+        margin: 0 0 calc(16px * (1 - var(--scene-progress)))
+          calc(146px * (1 - var(--scene-progress)));
+        padding: 0;
+        overflow: hidden;
+        opacity: calc(1 - var(--scene-progress));
+        text-align: center;
+        transform: translate3d(0, calc(-8px * var(--scene-progress)), 0);
+        transition: none;
+        will-change: width, height, margin, opacity, transform;
+        pointer-events: none;
+      }
+      .category-heading .category-section-title {
+        flex: 0 0 auto;
+        margin: 0;
+        line-height: 1.3;
+        white-space: nowrap;
+      }
+
+      /* Keep circle geometry stable; only apply a tiny visual squeeze. */
+      .category-track {
+        gap: 12px;
+        transform: scaleX(calc(1 - (0.025 * var(--collision-progress))));
+        transform-origin: center center;
+        transition: none;
+        will-change: transform;
+      }
+      .category-button {
+        flex-basis: 78px;
+        width: 78px;
+      }
+      .category-image-frame {
+        width: 68px;
+        height: 68px;
+      }
+
+      /* Raise the item cards a little more to open the footer area. */
+      .items-carousel {
+        transform: translate3d(0, calc(-18px * var(--scene-progress)), 0);
+        transition: none;
+        will-change: transform;
+      }
+
+      /* Once the transition is complete, browsing is horizontal only. */
+      .phone.scene-locked .hero,
+      .phone.scene-locked .restaurant-info-pill {
+        pointer-events: none;
+      }
+      .phone.scene-locked .scroll-demo-footer {
+        display: block;
+        margin-top: 12px;
+        transform: translate3d(0, -10px, 0);
+      }
+      .category-track {
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        touch-action: pan-x;
+        -webkit-overflow-scrolling: touch;
+      }
+      .items-carousel-stage {
+        touch-action: pan-y;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .hero,
+        .restaurant-info-pill,
+        .category-heading,
+        .category-track,
+        .items-carousel {
+          transition: none !important;
+        }
       }
     </style>
   </head>
@@ -1615,15 +2042,10 @@
             class="scroll-demo"
             aria-label="محتوى تجريبي لاختبار التمرير"
           >
-            <div class="scroll-demo-heading">
-              <span class="scroll-demo-label">MENUVA PREVIEW</span>
-              <h2 id="scrollHeading">اختبار حركة اللوغو</h2>
-              <p id="scrollIntro">
-                انزل للأسفل ثم اصعد للأعلى لمشاهدة حركة اللوغو.
-              </p>
-            </div>
             <section class="category-section" aria-label="أقسام القائمة">
-              <h3 class="category-section-title" id="categoriesTitle">تصفح الأقسام</h3>
+              <div class="category-heading">
+                <h2 class="category-section-title" id="categoriesTitle">الأقسام</h2>
+              </div>
               <nav class="category-track" id="categoryTrack" aria-label="أقسام القائمة">
                 <button class="category-button active" type="button" data-category-index="0" aria-pressed="true">
                   <span class="category-image-frame"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=240&q=82" alt="" loading="lazy" /></span>
@@ -1650,61 +2072,75 @@
                   <span class="category-name">الوجبات الخاصة</span>
                 </button>
               </nav>
+              <section class="items-carousel" aria-label="أصناف القائمة">
+                <div class="items-carousel-stage" id="itemsCarouselStage">
+                  <article class="menu-item-card is-active" data-item-index="0" tabindex="0" role="button" aria-label="كبسة دجاج">
+                    <div class="menu-item-image"><img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=640&q=85" alt="كبسة دجاج" loading="lazy"></div>
+                    <div class="menu-item-content"><span class="menu-item-category" id="itemCategory1">الأطباق الرئيسية</span><h3 id="itemTitle1">كبسة دجاج</h3><p id="itemDesc1">أرز متبل مع دجاج طري ومزيج من البهارات الشرقية.</p><div class="menu-item-bottom"><strong>$12.50</strong><span class="item-cart-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.2 11.1a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.5L22 8H6"/><path d="M9 20h.01M18 20h.01"/></svg></span></div></div>
+                  </article>
+                  <article class="menu-item-card" data-item-index="1" tabindex="0" role="button" aria-label="سلطة طازجة">
+                    <div class="menu-item-image"><img src="https://images.unsplash.com/photo-1512621778302-9b8f2f7f6f4b?auto=format&fit=crop&w=640&q=85" alt="سلطة طازجة" loading="lazy"></div>
+                    <div class="menu-item-content"><span class="menu-item-category" id="itemCategory2">المقبلات والسلطات</span><h3 id="itemTitle2">سلطة طازجة</h3><p id="itemDesc2">خضروات موسمية طازجة مع صلصة خفيفة ومنعشة.</p><div class="menu-item-bottom"><strong>$6.00</strong><span class="item-cart-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.2 11.1a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.5L22 8H6"/><path d="M9 20h.01M18 20h.01"/></svg></span></div></div>
+                  </article>
+                  <article class="menu-item-card" data-item-index="2" tabindex="0" role="button" aria-label="عصير طبيعي">
+                    <div class="menu-item-image"><img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=640&q=85" alt="عصير طبيعي" loading="lazy"></div>
+                    <div class="menu-item-content"><span class="menu-item-category" id="itemCategory3">المشروبات</span><h3 id="itemTitle3">عصير طبيعي</h3><p id="itemDesc3">مزيج فواكه طازجة يقدم بارداً.</p><div class="menu-item-bottom"><strong>$4.00</strong><span class="item-cart-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.2 11.1a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.5L22 8H6"/><path d="M9 20h.01M18 20h.01"/></svg></span></div></div>
+                  </article>
+                  <article class="menu-item-card" data-item-index="3" tabindex="0" role="button" aria-label="حلوى الكريمة">
+                    <div class="menu-item-image"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=640&q=85" alt="حلوى الكريمة" loading="lazy"></div>
+                    <div class="menu-item-content"><span class="menu-item-category" id="itemCategory4">الحلويات</span><h3 id="itemTitle4">حلوى الكريمة</h3><p id="itemDesc4">حلوى ناعمة بطبقات غنية وكريمة خفيفة.</p><div class="menu-item-bottom"><strong>$5.50</strong><span class="item-cart-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.2 11.1a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.5L22 8H6"/><path d="M9 20h.01M18 20h.01"/></svg></span></div></div>
+                  </article>
+                  <article class="menu-item-card" data-item-index="4" tabindex="0" role="button" aria-label="قهوة مختصة">
+                    <div class="menu-item-image"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=640&q=85" alt="قهوة مختصة" loading="lazy"></div>
+                    <div class="menu-item-content"><span class="menu-item-category" id="itemCategory5">القهوة</span><h3 id="itemTitle5">قهوة مختصة</h3><p id="itemDesc5">قهوة محضرة بعناية لعشاق النكهة الغنية.</p><div class="menu-item-bottom"><strong>$3.50</strong><span class="item-cart-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.2 11.1a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.5L22 8H6"/><path d="M9 20h.01M18 20h.01"/></svg></span></div></div>
+                  </article>
+                  <article class="menu-item-card" data-item-index="5" tabindex="0" role="button" aria-label="برغر كلاسيكي">
+                    <div class="menu-item-image"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=640&q=85" alt="برغر كلاسيكي" loading="lazy"></div>
+                    <div class="menu-item-content"><span class="menu-item-category" id="itemCategory6">الوجبات الخاصة</span><h3 id="itemTitle6">برغر كلاسيكي</h3><p id="itemDesc6">لحم مشوي مع إضافات طازجة وخبز طري.</p><div class="menu-item-bottom"><strong>$9.00</strong><span class="item-cart-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.2 11.1a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.5L22 8H6"/><path d="M9 20h.01M18 20h.01"/></svg></span></div></div>
+                  </article>
+                </div>
+                <div class="items-carousel-controls">
+                  <button class="carousel-arrow" id="itemPrev" type="button" aria-label="الصنف السابق"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></button>
+                  <div class="carousel-pagination" aria-label="التنقل بين الأصناف">
+                    <button class="carousel-dot active" type="button" data-item-target="0" aria-label="الصنف 1"></button><button class="carousel-dot" type="button" data-item-target="1" aria-label="الصنف 2"></button><button class="carousel-dot" type="button" data-item-target="2" aria-label="الصنف 3"></button><button class="carousel-dot" type="button" data-item-target="3" aria-label="الصنف 4"></button><button class="carousel-dot" type="button" data-item-target="4" aria-label="الصنف 5"></button><button class="carousel-dot" type="button" data-item-target="5" aria-label="الصنف 6"></button>
+                  </div>
+                  <button class="carousel-arrow" id="itemNext" type="button" aria-label="الصنف التالي"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 5 7 7-7 7"/></svg></button>
+                </div>
+                <p class="carousel-hint">اسحب للتنقل بين الأصناف</p>
+              </section>
             </section>
-            <div class="scroll-demo-card">
-              <div class="scroll-demo-icon">🍽️</div>
-              <div>
-                <h3 id="demoCat1">الأطباق الرئيسية</h3>
-                <p id="demoDesc1">
-                  مجموعة من الأطباق المحضرة بعناية وبمكونات طازجة.
-                </p>
+            <footer class="scroll-demo-footer" aria-label="تذييل المطعم">
+              <h2 class="footer-restaurant-name" id="footerRestaurantName">مطعم دار الياسمين</h2>
+              <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+                <defs><linearGradient id="instagramBrandGradient" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ffdc80"/><stop offset="32%" stop-color="#f77737"/><stop offset="62%" stop-color="#e1306c"/><stop offset="100%" stop-color="#833ab4"/></linearGradient></defs>
+              </svg>
+              <p class="footer-social-heading" id="footerSocialHeading">تابعنا على وسائل التواصل الاجتماعي</p>
+              <div class="footer-socials" aria-label="حسابات التواصل الاجتماعي">
+                <button class="footer-social-button facebook" type="button" data-social="facebook" aria-label="Facebook">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V3.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.3V13h2.8v8h3.4Z"/></svg>
+                </button>
+                <button class="footer-social-button instagram" type="button" data-social="instagram" aria-label="Instagram">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"/><circle cx="12" cy="12" r="4.1"/><circle class="instagram-dot" cx="17.7" cy="6.6" r="1.1"/></svg>
+                </button>
+                <button class="footer-social-button whatsapp" type="button" data-social="whatsapp" aria-label="WhatsApp">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2a9.7 9.7 0 0 0-8.3 14.7L2.4 22l5.2-1.3A9.8 9.8 0 1 0 12 2.2Zm0 17.6a7.8 7.8 0 0 1-4-1.1l-.3-.2-3.1.8.8-3-.2-.3A7.8 7.8 0 1 1 12 19.8Zm4.3-5.8c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8.9-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.5c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5l-.7-1.7c-.2-.4-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 3.9 3.4.5.2.9.3 1.2.4.5.2 1 .1 1.4.1.4-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.4-.3Z"/></svg>
+                </button>
+                <button class="footer-social-button x-brand" type="button" data-social="x" aria-label="X (Twitter)">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3L12 14.7 5.6 22H2.4l7.3-8.4L1.9 2h6.5l4.5 6.7L18.9 2Zm-1.1 18h1.7L7.4 3.9H5.6L17.8 20Z"/></svg>
+                </button>
+                <button class="footer-social-button tiktok" type="button" data-social="tiktok" aria-label="TikTok">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.6 7.1a6.7 6.7 0 0 1-4.1-1.4v8.1a6.2 6.2 0 1 1-5.4-6.1v3.3a2.9 2.9 0 1 0 2.1 2.8V2.2h3.3c.2 2 1.7 3.7 4.1 4.1v.8Z"/></svg>
+                </button>
               </div>
-            </div>
-            <div class="scroll-demo-card">
-              <div class="scroll-demo-icon">🥗</div>
-              <div>
-                <h3 id="demoCat2">المقبلات والسلطات</h3>
-                <p id="demoDesc2">
-                  تشكيلة متنوعة من المقبلات والسلطات الطازجة.
-                </p>
+              <p class="footer-payment-heading" id="footerPaymentHeading">طرق الدفع المتاحة</p>
+              <div class="footer-payments" aria-label="طرق الدفع">
+                <span class="footer-payment-mark shamcash">شام كاش</span>
+                <span class="footer-payment-mark paypal">PayPal</span>
+                <span class="footer-payment-mark masari">مصاري</span>
               </div>
-            </div>
-            <div class="scroll-demo-card">
-              <div class="scroll-demo-icon">🍹</div>
-              <div>
-                <h3 id="demoCat3">المشروبات</h3>
-                <p id="demoDesc3">
-                  تشكيلة متنوعة من المشروبات الباردة والساخنة.
-                </p>
-              </div>
-            </div>
-            <div class="scroll-demo-card">
-              <div class="scroll-demo-icon">🍰</div>
-              <div>
-                <h3 id="demoCat4">الحلويات</h3>
-                <p id="demoDesc4">حلويات لذيذة لتكتمل تجربتك معنا.</p>
-              </div>
-            </div>
-            <div class="scroll-demo-card">
-              <div class="scroll-demo-icon">☕</div>
-              <div>
-                <h3 id="demoCat5">القهوة</h3>
-                <p id="demoDesc5">قهوة مختارة بعناية لمحبي القهوة.</p>
-              </div>
-            </div>
-            <div class="scroll-demo-card">
-              <div class="scroll-demo-icon">🍕</div>
-              <div>
-                <h3 id="demoCat6">الوجبات الخاصة</h3>
-                <p id="demoDesc6">اختيارات مميزة من مطبخنا.</p>
-              </div>
-            </div>
-            <div class="scroll-demo-footer">
-              <span>Menuva</span>
-              <p id="scrollFooter">
-                حرّك الصفحة للأعلى والأسفل لاختبار التجربة
-              </p>
-            </div>
+              <p class="footer-copyright" id="footerCopyright">© 2026 Menu Dos. جميع الحقوق محفوظة.</p>
+              <p class="footer-credit" id="footerCredit">تم إنشاؤه بواسطة <strong>Menu Dos</strong></p>
+            </footer>
           </section>
         </div>
         <!-- CONTROL PANEL MODAL -->
@@ -1740,12 +2176,42 @@
       const heroSlides = [...document.querySelectorAll(".hero-slide")];
       const heroDots = [...document.querySelectorAll(".hero-dot")];
       const categoryButtons = [...document.querySelectorAll(".category-button")];
+      const categoryTrack = document.querySelector(".category-track");
+      let categoryArchFrame = 0;
+      function updateCategoryArch() {
+        categoryArchFrame = 0;
+        if (!categoryTrack || !categoryButtons.length) return;
+
+        const trackRect = categoryTrack.getBoundingClientRect();
+
+        // The arch is a fixed screen-space template. Its shape never depends on
+        // how many categories exist or happen to be visible while scrolling.
+        const centerX = trackRect.left + trackRect.width / 2;
+        const maxDistance = Math.max(1, trackRect.width / 2);
+
+        categoryButtons.forEach((button) => {
+          const rect = button.getBoundingClientRect();
+          const buttonCenter = rect.left + rect.width / 2;
+          const distance = Math.min(1, Math.abs(buttonCenter - centerX) / maxDistance);
+          const offset = 34 * Math.pow(distance, 1.65);
+          button.style.setProperty("--arch-offset", offset.toFixed(2) + "px");
+        });
+      }
+      function scheduleCategoryArchUpdate() {
+        if (!categoryArchFrame) {
+          categoryArchFrame = requestAnimationFrame(updateCategoryArch);
+        }
+      }
+      if (categoryTrack) {
+        categoryTrack.addEventListener("scroll", scheduleCategoryArchUpdate, { passive: true });
+        window.addEventListener("resize", scheduleCategoryArchUpdate, { passive: true });
+        scheduleCategoryArchUpdate();
+      }
       let menuOpen = false;
       let currentLanguage = "ar";
       let currentSlide = 0;
       let autoplayTimer = null;
       let touchStartX = 0;
-      let lastScrollTop = 0;
       const reduceMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
       ).matches;
@@ -1779,10 +2245,14 @@
           locationLabel: "موقع المطعم",
           locationValue: "القامشلي، سوريا",
           searchPlaceholder: "ابحث عن صنف في القائمة...",
-          scrollHeading: "اختبار حركة اللوغو",
-          categoriesTitle: "تصفح الأقسام",
-          scrollIntro: "انزل للأسفل ثم اصعد للأعلى لمشاهدة حركة اللوغو.",
-          scrollFooter: "حرّك الصفحة للأعلى والأسفل لاختبار التجربة",
+          itemNames: ["كبسة دجاج","سلطة طازجة","عصير طبيعي","حلوى الكريمة","قهوة مختصة","برغر كلاسيكي"],
+          itemDescs: ["أرز متبل مع دجاج طري ومزيج من البهارات الشرقية.","خضروات موسمية طازجة مع صلصة خفيفة ومنعشة.","مزيج فواكه طازجة يقدم بارداً.","حلوى ناعمة بطبقات غنية وكريمة خفيفة.","قهوة محضرة بعناية لعشاق النكهة الغنية.","لحم مشوي مع إضافات طازجة وخبز طري."],
+          itemCategories: ["الأطباق الرئيسية","المقبلات والسلطات","المشروبات","الحلويات","القهوة","الوجبات الخاصة"],
+          categoriesTitle: "الأقسام",
+          footerSocialHeading: "تابعنا على وسائل التواصل الاجتماعي",
+          footerPaymentHeading: "طرق الدفع المتاحة",
+          footerCopyright: "© 2026 Menu Dos. جميع الحقوق محفوظة.",
+          footerCredit: "تم إنشاؤه بواسطة",
           demoCats: [
             "الأطباق الرئيسية",
             "المقبلات والسلطات",
@@ -1824,10 +2294,14 @@
           locationLabel: "Location",
           locationValue: "Qamishli, Syria",
           searchPlaceholder: "Search for a menu item...",
-          scrollHeading: "Logo scroll test",
-          categoriesTitle: "Browse categories",
-          scrollIntro: "Scroll down and then up to see the logo animation.",
-          scrollFooter: "Scroll up and down to test the experience",
+          itemNames: ["Chicken Kabsa","Fresh Garden Salad","Fresh Juice","Cream Dessert","Specialty Coffee","Classic Burger"],
+          itemDescs: ["Seasoned rice with tender chicken and eastern spices.","Fresh seasonal vegetables with a light, refreshing dressing.","A blend of fresh fruits served chilled.","A soft dessert with rich layers and light cream.","Carefully prepared coffee for lovers of rich flavor.","Grilled beef with fresh toppings and a soft bun."],
+          itemCategories: ["Main courses","Starters & salads","Drinks","Desserts","Coffee","Special meals"],
+          categoriesTitle: "Categories",
+          footerSocialHeading: "Follow us on social media",
+          footerPaymentHeading: "Available payment methods",
+          footerCopyright: "© 2026 Menu Dos. All rights reserved.",
+          footerCredit: "Created by",
           demoCats: [
             "Main courses",
             "Starters & salads",
@@ -1868,11 +2342,14 @@
           locationLabel: "Cih",
           locationValue: "Qamişlo, Sûriye",
           searchPlaceholder: "Di lîsteyê de li xwarinekê bigere...",
-          scrollHeading: "Ceribandina tevgera logoyê",
-          categoriesTitle: "Li kategoriyan bigere",
-          scrollIntro:
-            "Ber bi jêr ve here, paşê vegere jorê da ku tevgera logo bibînî.",
-          scrollFooter: "Ji bo ceribandinê jor û jêr here",
+          itemNames: ["Kabsa bi mirîşk","Salata nû","Vexwarina fêkiyan","Şîrîniya kremê","Qehweya taybet","Burgera klasîk"],
+          itemDescs: ["Birincê bi biharat û mirîşkeke nerm.","Sebzeyên demsalê bi sosê sivik û xweş.","Tevliheviya fêkiyên nû û sar.","Şîrîniyeke nerm bi qatên kremê.","Qehwe bi baldarî hatiye amadekirin.","Goştê birêjkirî bi nanê nerm û zêdeyên nû."],
+          itemCategories: ["Xwarinên sereke","Pêşxwarin û salat","Vexwarin","Şîrînî","Qehwe","Xwarinên taybet"],
+          categoriesTitle: "Kategorî",
+          footerSocialHeading: "Li ser torên civakî me bişopînin",
+          footerPaymentHeading: "Rêbazên dayînê yên berdest",
+          footerCopyright: "© 2026 Menu Dos. Hemû maf parastî ne.",
+          footerCredit: "Hatiye çêkirin ji aliyê",
           demoCats: [
             "Xwarinên sereke",
             "Pêşxwarin û salat",
@@ -1938,6 +2415,11 @@
         // Hero
         heroTitle.textContent = t.restaurant;
         heroDescription.textContent = t.description;
+        document.getElementById("footerRestaurantName").textContent = t.restaurant;
+        document.getElementById("footerSocialHeading").textContent = t.footerSocialHeading;
+        document.getElementById("footerPaymentHeading").textContent = t.footerPaymentHeading;
+        document.getElementById("footerCopyright").textContent = t.footerCopyright;
+        document.getElementById("footerCredit").innerHTML = t.footerCredit + ' <strong>Menu Dos</strong>';
         // Restaurant status and location (sample preview data)
         document.getElementById("statusLabel").textContent = t.statusLabel;
         const statusElement = document.getElementById("restaurantStatus");
@@ -1958,15 +2440,14 @@
         categoryButtons.forEach((button, index) => {
           button.querySelector(".category-name").textContent = t.demoCats[index];
         });
-        // Scroll test content
-        document.getElementById("scrollHeading").textContent = t.scrollHeading;
-        document.getElementById("scrollIntro").textContent = t.scrollIntro;
-        document.getElementById("scrollFooter").textContent = t.scrollFooter;
+        // 3D menu item cards
         for (let i = 0; i < 6; i++) {
-          document.getElementById(`demoCat${i + 1}`).textContent =
-            t.demoCats[i];
-          document.getElementById(`demoDesc${i + 1}`).textContent =
-            t.demoDescs[i];
+          const number = i + 1;
+          document.getElementById("itemTitle" + number).textContent = t.itemNames[i];
+          document.getElementById("itemDesc" + number).textContent = t.itemDescs[i];
+          document.getElementById("itemCategory" + number).textContent = t.itemCategories[i];
+          itemCards[i].setAttribute("aria-label", t.itemNames[i]);
+          itemCards[i].querySelector(".menu-item-image img").alt = t.itemNames[i];
         }
         // Modal
         document.getElementById("modalTitle").textContent = t.modalTitle;
@@ -1993,10 +2474,14 @@
       });
       /* DARK / LIGHT MODE */
       themeButton.addEventListener("click", () => {
+        phone.classList.add("theme-switching");
         const isDark = phone.classList.toggle("dark");
         const t = translations[currentLanguage];
         themeButton.title = isDark ? t.lightMode : t.darkMode;
         themeButton.setAttribute("aria-label", themeButton.title);
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => phone.classList.remove("theme-switching"));
+        });
       });
       /* FULLSCREEN */
       async function toggleFullscreen() {
@@ -2045,25 +2530,263 @@
           languageMenu.classList.remove("visible");
         }
       });
-      /* LOGO SCROLL BEHAVIOR */
-      screen.addEventListener(
-        "scroll",
-        () => {
-          const currentScroll = screen.scrollTop;
-          if (currentScroll <= 5) {
-            phone.classList.remove("logo-compact");
-          } else if (currentScroll > lastScrollTop + 1) {
-            phone.classList.add("logo-compact");
-          } else if (currentScroll < lastScrollTop - 1) {
-            phone.classList.remove("logo-compact");
+      /* FINGER-TRACKED SCENE GESTURE */
+      const SCENE_DISTANCE = 330;
+      const SCENE_GESTURE_GAIN = 1;
+      const SCENE_SNAP_THRESHOLD = 0.08;
+      let scenePosition = Math.max(0, Math.min(SCENE_DISTANCE, screen.scrollTop));
+      let sceneFrame = 0;
+      let sceneAnimationFrame = 0;
+      let sceneSnapTimer = null;
+      let sceneCardState = scenePosition >= SCENE_DISTANCE * 0.78 ? 1 : 0;
+      let sceneTouchY = 0;
+      let sceneTouchX = 0;
+      let sceneTouchStartScroll = 0;
+      let sceneTouchAxis = null;
+      let sceneGestureDirection = 0;
+      let sceneWritingScroll = false;
+      let lastRenderedScenePosition = -1;
+
+      function syncSceneCard(progress) {
+        if (progress >= 0.78 && sceneCardState !== 1) {
+          sceneCardState = 1;
+          showMenuItem(1);
+        } else if (progress <= 0.22 && sceneCardState !== 0) {
+          sceneCardState = 0;
+          showMenuItem(0);
+        }
+      }
+
+      function renderScrollScene() {
+        sceneFrame = 0;
+        const position = Math.max(0, Math.min(SCENE_DISTANCE, scenePosition));
+        const progress = position / SCENE_DISTANCE;
+
+        /* Keep the native scroll position in sync, but never use it as the
+           animation source. The finger-controlled value drives every frame. */
+        if (screen.scrollTop <= SCENE_DISTANCE + 0.5 && Math.abs(screen.scrollTop - position) > 0.5) {
+          sceneWritingScroll = true;
+          screen.scrollTop = position;
+          sceneWritingScroll = false;
+        }
+
+        if (Math.abs(position - lastRenderedScenePosition) < 0.08) return;
+        lastRenderedScenePosition = position;
+
+        phone.classList.toggle("logo-compact", progress > 0.015);
+        phone.classList.toggle("scene-locked", progress >= 0.999);
+        phone.style.setProperty("--scene-progress", progress.toFixed(4));
+        phone.style.setProperty(
+          "--collision-progress",
+          (4 * progress * (1 - progress)).toFixed(4)
+        );
+
+        syncSceneCard(progress);
+        if (menuOpen) setMenu(false);
+      }
+
+      function scheduleSceneRender() {
+        if (!sceneFrame) sceneFrame = requestAnimationFrame(renderScrollScene);
+      }
+
+      function setSceneScroll(nextValue) {
+        const pagePosition = Math.max(0, nextValue);
+        screen.scrollTop = pagePosition;
+        scenePosition = Math.max(0, Math.min(SCENE_DISTANCE, pagePosition));
+        scheduleSceneRender();
+      }
+
+      function stopSceneSnap() {
+        if (sceneSnapTimer) {
+          clearTimeout(sceneSnapTimer);
+          sceneSnapTimer = null;
+        }
+        if (sceneAnimationFrame) {
+          cancelAnimationFrame(sceneAnimationFrame);
+          sceneAnimationFrame = 0;
+        }
+      }
+
+      function snapSceneTo(target) {
+        if (screen.scrollTop > SCENE_DISTANCE + 0.5) return;
+        stopSceneSnap();
+        const from = scenePosition;
+        const to = target ? SCENE_DISTANCE : 0;
+        const distance = to - from;
+        if (Math.abs(distance) < 0.5) {
+          setSceneScroll(to);
+          return;
+        }
+
+        const startedAt = performance.now();
+        const duration = 420;
+        const animate = (now) => {
+          const raw = Math.min(1, (now - startedAt) / duration);
+          const eased = 1 - Math.pow(1 - raw, 4);
+          setSceneScroll(from + distance * eased);
+          if (raw < 1) {
+            sceneAnimationFrame = requestAnimationFrame(animate);
+          } else {
+            sceneAnimationFrame = 0;
+            setSceneScroll(to);
           }
-          lastScrollTop = currentScroll;
-          if (menuOpen) {
-            setMenu(false);
+        };
+        sceneAnimationFrame = requestAnimationFrame(animate);
+      }
+
+      function settleSceneGesture(direction) {
+        if (screen.scrollTop > SCENE_DISTANCE + 0.5) return;
+        const progress = scenePosition / SCENE_DISTANCE;
+        if (direction > 0 && progress >= SCENE_SNAP_THRESHOLD) {
+          snapSceneTo(1);
+        } else if (direction < 0 && progress <= 1 - SCENE_SNAP_THRESHOLD) {
+          snapSceneTo(0);
+        } else {
+          snapSceneTo(progress >= 0.5 ? 1 : 0);
+        }
+      }
+
+      /* The third stage snaps directly to the bottom of the menu. */
+      function snapPageTo(target) {
+        stopSceneSnap();
+        const from = screen.scrollTop;
+        const maxScroll = Math.max(SCENE_DISTANCE, screen.scrollHeight - screen.clientHeight);
+        const to = Math.max(SCENE_DISTANCE, Math.min(maxScroll, target));
+        const distance = to - from;
+        if (Math.abs(distance) < 0.5) {
+          screen.scrollTop = to;
+          scenePosition = SCENE_DISTANCE;
+          return;
+        }
+
+        const startedAt = performance.now();
+        const duration = 520;
+        const animate = (now) => {
+          const raw = Math.min(1, (now - startedAt) / duration);
+          const eased = 1 - Math.pow(1 - raw, 4);
+          screen.scrollTop = from + distance * eased;
+          scenePosition = SCENE_DISTANCE;
+          if (raw < 1) {
+            sceneAnimationFrame = requestAnimationFrame(animate);
+          } else {
+            sceneAnimationFrame = 0;
+            screen.scrollTop = to;
           }
-        },
-        { passive: true },
-      );
+        };
+        sceneAnimationFrame = requestAnimationFrame(animate);
+      }
+
+      function settlePageGesture(direction) {
+        const maxScroll = Math.max(SCENE_DISTANCE, screen.scrollHeight - screen.clientHeight);
+        snapPageTo(direction > 0 ? maxScroll : SCENE_DISTANCE);
+      }
+
+      /* Wheel input selects one of three deliberate scroll stages. */
+      screen.addEventListener("wheel", (event) => {
+        if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
+        const atMiddleStage = Math.abs(screen.scrollTop - SCENE_DISTANCE) <= 0.5;
+        const inFooterStage = screen.scrollTop > SCENE_DISTANCE + 0.5;
+        if (inFooterStage || (atMiddleStage && event.deltaY > 0)) {
+          event.preventDefault();
+          stopSceneSnap();
+          if (Math.abs(event.deltaY) > 0.1) sceneGestureDirection = Math.sign(event.deltaY);
+          if (sceneSnapTimer) clearTimeout(sceneSnapTimer);
+          sceneSnapTimer = setTimeout(() => {
+            sceneSnapTimer = null;
+            settlePageGesture(sceneGestureDirection);
+          }, 140);
+          return;
+        }
+        event.preventDefault();
+        stopSceneSnap();
+        const multiplier = event.deltaMode === 1 ? 24 : event.deltaMode === 2 ? 360 : 1;
+        const delta = event.deltaY * multiplier * SCENE_GESTURE_GAIN;
+        if (Math.abs(delta) > 0.1) sceneGestureDirection = Math.sign(delta);
+        setSceneScroll(screen.scrollTop + delta);
+
+        if (sceneSnapTimer) clearTimeout(sceneSnapTimer);
+        sceneSnapTimer = setTimeout(() => {
+          sceneSnapTimer = null;
+          settleSceneGesture(sceneGestureDirection);
+        }, 140);
+      }, { passive: false });
+
+      /* Touch position is mapped 1:1 to scene position for direct manipulation. */
+      screen.addEventListener("touchstart", (event) => {
+        if (!event.touches.length) return;
+        stopSceneSnap();
+        scenePosition = Math.max(0, Math.min(SCENE_DISTANCE, screen.scrollTop));
+        sceneTouchStartScroll = screen.scrollTop;
+        sceneTouchY = event.touches[0].clientY;
+        sceneTouchX = event.touches[0].clientX;
+        sceneTouchAxis = null;
+        sceneGestureDirection = 0;
+      }, { passive: true });
+
+      screen.addEventListener("touchmove", (event) => {
+        if (!event.touches.length) return;
+        const touch = event.touches[0];
+        const deltaY = sceneTouchY - touch.clientY;
+        const deltaX = touch.clientX - sceneTouchX;
+
+        if (!sceneTouchAxis) {
+          if (Math.abs(deltaX) < 5 && Math.abs(deltaY) < 5) return;
+          sceneTouchAxis = Math.abs(deltaY) > Math.abs(deltaX) * 1.12
+            ? "vertical"
+            : "horizontal";
+        }
+        if (sceneTouchAxis !== "vertical") return;
+
+        event.preventDefault();
+        if (Math.abs(deltaY) > 0.1) sceneGestureDirection = Math.sign(deltaY);
+        const startedAtMiddle = Math.abs(sceneTouchStartScroll - SCENE_DISTANCE) <= 0.5;
+        const startedInFooter = sceneTouchStartScroll > SCENE_DISTANCE + 0.5;
+        if (startedInFooter || (startedAtMiddle && deltaY > 0)) {
+          sceneTouchY = touch.clientY;
+          sceneTouchX = touch.clientX;
+          return;
+        }
+        setSceneScroll(screen.scrollTop + deltaY * SCENE_GESTURE_GAIN);
+        sceneTouchY = touch.clientY;
+        sceneTouchX = touch.clientX;
+      }, { passive: false });
+
+      screen.addEventListener("touchend", () => {
+        if (sceneTouchAxis === "vertical") {
+          const startedAtMiddle = Math.abs(sceneTouchStartScroll - SCENE_DISTANCE) <= 0.5;
+          const startedInFooter = sceneTouchStartScroll > SCENE_DISTANCE + 0.5;
+          if (startedInFooter || (startedAtMiddle && sceneGestureDirection > 0)) {
+            settlePageGesture(sceneGestureDirection);
+          } else {
+            settleSceneGesture(sceneGestureDirection);
+          }
+        }
+        sceneTouchAxis = null;
+      }, { passive: true });
+
+      screen.addEventListener("touchcancel", () => {
+        if (sceneTouchAxis === "vertical") {
+          const startedAtMiddle = Math.abs(sceneTouchStartScroll - SCENE_DISTANCE) <= 0.5;
+          const startedInFooter = sceneTouchStartScroll > SCENE_DISTANCE + 0.5;
+          if (startedInFooter || (startedAtMiddle && sceneGestureDirection > 0)) {
+            settlePageGesture(sceneGestureDirection);
+          } else {
+            settleSceneGesture(sceneGestureDirection);
+          }
+        }
+        sceneTouchAxis = null;
+      }, { passive: true });
+
+      screen.addEventListener("scroll", () => {
+        if (sceneWritingScroll) return;
+        const nativePosition = Math.max(0, Math.min(SCENE_DISTANCE, screen.scrollTop));
+        if (Math.abs(nativePosition - scenePosition) > 1) {
+          scenePosition = nativePosition;
+          scheduleSceneRender();
+        }
+      }, { passive: true });
+
+      scheduleSceneRender();
       /* CATEGORY SELECTION */
       categoryButtons.forEach((button) => {
         button.addEventListener("click", () => {
@@ -2074,6 +2797,93 @@
           });
         });
       });
+      
+      /* 3D MENU ITEM CAROUSEL */
+      const itemCards = [...document.querySelectorAll(".menu-item-card")];
+      const itemDots = [...document.querySelectorAll(".carousel-dot")];
+      const itemStage = document.getElementById("itemsCarouselStage");
+      let activeItemIndex = 0;
+      let itemPointerStartX = 0;
+      let itemPointerStartY = 0;
+      let itemDragX = 0;
+      let itemDragging = false;
+      let itemPointerId = null;
+      let itemSuppressClick = false;
+      function clearItemDrag() {
+        itemCards.forEach(card => card.style.removeProperty("--drag-x"));
+        itemDragX = 0;
+        itemDragging = false;
+        itemPointerId = null;
+        itemStage.classList.remove("is-dragging");
+      }
+      function showMenuItem(index) {
+        if (!itemCards.length) return;
+        clearItemDrag();
+        activeItemIndex = (index + itemCards.length) % itemCards.length;
+        itemCards.forEach((card, i) => {
+          card.classList.remove("is-active", "is-prev", "is-next");
+          if (i === activeItemIndex) card.classList.add("is-active");
+          else if (i === (activeItemIndex - 1 + itemCards.length) % itemCards.length) card.classList.add("is-prev");
+          else if (i === (activeItemIndex + 1) % itemCards.length) card.classList.add("is-next");
+          card.setAttribute("aria-current", String(i === activeItemIndex));
+        });
+        itemDots.forEach((dot, i) => dot.classList.toggle("active", i === activeItemIndex));
+      }
+      document.getElementById("itemPrev").addEventListener("click", () => showMenuItem(activeItemIndex - 1));
+      document.getElementById("itemNext").addEventListener("click", () => showMenuItem(activeItemIndex + 1));
+      itemDots.forEach(dot => dot.addEventListener("click", () => showMenuItem(Number(dot.dataset.itemTarget))));
+      itemCards.forEach(card => {
+        card.addEventListener("click", () => {
+          if (itemSuppressClick) return;
+          showMenuItem(Number(card.dataset.itemIndex));
+        });
+        card.addEventListener("keydown", event => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            showMenuItem(Number(card.dataset.itemIndex));
+          }
+        });
+      });
+      itemStage.addEventListener("pointerdown", event => {
+        if (!event.isPrimary || (event.pointerType === "mouse" && event.button !== 0)) return;
+        itemPointerStartX = event.clientX;
+        itemPointerStartY = event.clientY;
+        itemDragX = 0;
+        itemDragging = false;
+        itemPointerId = event.pointerId;
+        itemStage.setPointerCapture(event.pointerId);
+      });
+      itemStage.addEventListener("pointermove", event => {
+        if (itemPointerId !== event.pointerId) return;
+        const deltaX = event.clientX - itemPointerStartX;
+        const deltaY = event.clientY - itemPointerStartY;
+        if (!itemDragging && Math.abs(deltaX) > 7 && Math.abs(deltaX) > Math.abs(deltaY) * 1.15) {
+          itemDragging = true;
+          itemStage.classList.add("is-dragging");
+        }
+        if (!itemDragging) return;
+        itemDragX = Math.max(-145, Math.min(145, deltaX));
+        itemCards[activeItemIndex].style.setProperty("--drag-x", itemDragX + "px");
+      });
+      function finishItemPointer(event, cancelled = false) {
+        if (itemPointerId !== event.pointerId) return;
+        const delta = itemDragX;
+        const wasDragging = itemDragging;
+        clearItemDrag();
+        if (wasDragging) {
+          itemSuppressClick = true;
+          if (!cancelled && Math.abs(delta) >= 42) {
+            const rtl = phone.dir === "rtl";
+            showMenuItem(activeItemIndex + ((delta < 0) === rtl ? -1 : 1));
+          }
+          requestAnimationFrame(() => { itemSuppressClick = false; });
+        }
+      }
+      itemStage.addEventListener("pointerup", event => finishItemPointer(event));
+      itemStage.addEventListener("pointercancel", event => finishItemPointer(event, true));
+      itemStage.addEventListener("lostpointercapture", event => finishItemPointer(event, true));
+      showMenuItem(0);
+
 
       /* HERO SLIDER */
       function showSlide(index) {
@@ -2105,30 +2915,29 @@
           startAutoplay();
         });
       });
-      /* TOUCH SWIPE */
-      hero.addEventListener(
-        "touchstart",
-        (event) => {
-          touchStartX = event.touches[0].clientX;
-        },
-        { passive: true },
-      );
-      hero.addEventListener(
-        "touchend",
-        (event) => {
-          const endX = event.changedTouches[0].clientX;
-          const difference = endX - touchStartX;
-          if (Math.abs(difference) < 45) return;
-          const isRTL = phone.dir === "rtl";
-          if (difference < 0) {
-            showSlide(currentSlide + (isRTL ? 1 : -1));
-          } else {
-            showSlide(currentSlide + (isRTL ? -1 : 1));
-          }
-          startAutoplay();
-        },
-        { passive: true },
-      );
+      /* SWIPE / DRAG BETWEEN COVER PHOTOS */
+      let heroPointerStartX = null;
+      hero.addEventListener("pointerdown", (event) => {
+        if (event.pointerType === "mouse" && event.button !== 0) return;
+        if (event.target.closest(".hero-dot")) return;
+        heroPointerStartX = event.clientX;
+      });
+      hero.addEventListener("pointerup", (event) => {
+        if (heroPointerStartX === null) return;
+        const difference = event.clientX - heroPointerStartX;
+        heroPointerStartX = null;
+        if (Math.abs(difference) < 45) return;
+        const isRTL = phone.dir === "rtl";
+        if (difference < 0) {
+          showSlide(currentSlide + (isRTL ? -1 : 1));
+        } else {
+          showSlide(currentSlide + (isRTL ? 1 : -1));
+        }
+        startAutoplay();
+      });
+      hero.addEventListener("pointercancel", () => {
+        heroPointerStartX = null;
+      });
       /* PAUSE SLIDER WHEN TAB IS HIDDEN */
       document.addEventListener("visibilitychange", () => {
         if (document.hidden) {
