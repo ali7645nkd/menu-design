@@ -2827,13 +2827,8 @@
         });
         itemDots.forEach((dot, i) => dot.classList.toggle("active", i === activeItemIndex));
       }
-      const itemLeftArrow = document.getElementById("itemPrev");
-      const itemRightArrow = document.getElementById("itemNext");
-      const isItemCarouselRTL = phone.dir === "rtl";
-      itemLeftArrow.addEventListener("click", () => showMenuItem(activeItemIndex + (isItemCarouselRTL ? 1 : -1)));
-      itemRightArrow.addEventListener("click", () => showMenuItem(activeItemIndex + (isItemCarouselRTL ? -1 : 1)));
-      itemLeftArrow.setAttribute("aria-label", isItemCarouselRTL ? "الصنف التالي" : "الصنف السابق");
-      itemRightArrow.setAttribute("aria-label", isItemCarouselRTL ? "الصنف السابق" : "الصنف التالي");
+      document.getElementById("itemPrev").addEventListener("click", () => showMenuItem(activeItemIndex - 1));
+      document.getElementById("itemNext").addEventListener("click", () => showMenuItem(activeItemIndex + 1));
       itemDots.forEach(dot => dot.addEventListener("click", () => showMenuItem(Number(dot.dataset.itemTarget))));
       itemCards.forEach(card => {
         card.addEventListener("click", () => {
