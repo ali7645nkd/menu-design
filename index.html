@@ -1824,6 +1824,91 @@
           transition: none !important;
         }
       }
+
+      /* ==========================================
+         ITEM DETAILS + CART (isolated feature)
+         No nested backdrop-filter: the veil and the card are siblings.
+         ========================================== */
+      .iv-modal{position:absolute;inset:0;z-index:19;display:flex;align-items:center;justify-content:center;padding:98px 14px 22px;visibility:hidden;pointer-events:none;touch-action:none;transition:visibility 0s linear .4s}
+      .iv-modal.open{visibility:visible;pointer-events:auto;transition:none}
+      .iv-veil{position:absolute;inset:0;background:rgba(12,30,22,.32);-webkit-backdrop-filter:blur(14px) saturate(120%);backdrop-filter:blur(14px) saturate(120%);opacity:0;transition:opacity .3s ease}
+      .iv-modal.open .iv-veil{opacity:1}
+      .iv-card{position:relative;width:100%;max-width:330px;max-height:min(100%,540px);display:flex;flex-direction:column;overflow:hidden;border-radius:28px;color:var(--text-color);background:linear-gradient(160deg,rgba(255,252,244,.93),rgba(238,247,240,.86));-webkit-backdrop-filter:blur(26px) saturate(150%);backdrop-filter:blur(26px) saturate(150%);border:1px solid rgba(255,255,255,.85);box-shadow:0 22px 50px rgba(12,48,34,.28),inset 0 1px 0 #fff;opacity:0;transform:translateY(12px) scale(.95);transition:opacity .3s ease,transform .4s cubic-bezier(.22,1,.36,1)}
+      .iv-modal.open .iv-card{opacity:1;transform:none}
+      .phone.dark .iv-card{background:linear-gradient(160deg,rgba(38,68,55,.94),rgba(24,48,38,.92));border-color:rgba(190,235,210,.18);box-shadow:0 22px 50px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.1)}
+      .iv-head{position:relative;flex:0 0 auto;padding:14px 16px 13px;border-bottom:1px solid rgba(16,185,129,.14)}
+      .iv-cat{margin:0 38px 10px;text-align:center;font-size:10.5px;font-weight:800;letter-spacing:.2px;color:var(--green)}
+      .iv-main{display:flex;align-items:center;gap:13px}
+      .iv-img{flex:0 0 92px;width:92px;height:92px;padding:4px;border-radius:50%;background:var(--page-bg);border:1px solid rgba(16,185,129,.3);box-shadow:0 8px 18px rgba(8,55,36,.22)}
+      .iv-img img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover}
+      .phone.dark .iv-img{border-color:rgba(114,221,176,.35);box-shadow:0 8px 18px rgba(0,0,0,.4)}
+      .iv-info{flex:1;min-width:0;text-align:start}
+      .iv-name{margin:0 0 4px;font-size:19px;font-weight:850;line-height:1.3}
+      .iv-desc{font-size:11px;line-height:1.65;opacity:.72;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+      .iv-close{position:absolute;top:10px;inset-inline-end:10px;z-index:3;width:30px;height:30px;display:grid;place-items:center;border-radius:11px;border:1px solid rgba(8,127,91,.2);background:rgba(255,255,255,.6);color:var(--text-color);cursor:pointer}
+      .iv-close svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.3;stroke-linecap:round}
+      .phone.dark .iv-close{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14)}
+      .iv-scroll{flex:1 1 auto;min-height:0;padding:0 16px 14px;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;scrollbar-width:none}
+      .iv-scroll::-webkit-scrollbar{display:none}
+      .iv-h{margin:15px 0 9px;font-size:12px;font-weight:800;color:var(--green)}
+      .phone.dark .iv-cat,.phone.dark .iv-h{color:#72ddb0}
+      .iv-num{direction:ltr;unicode-bidi:isolate;white-space:nowrap}
+      .iv-sizes{display:grid;grid-template-columns:repeat(auto-fit,minmax(72px,1fr));gap:8px}
+      .iv-size{display:flex;flex-direction:column;align-items:center;gap:4px;padding:11px 6px;border-radius:16px;border:1.5px solid rgba(8,127,91,.22);background:rgba(255,255,255,.5);color:var(--text-color);font-size:12px;font-weight:700;cursor:pointer;transition:background .25s,border-color .25s,transform .2s,box-shadow .25s}
+      .iv-size b{font-size:11px;font-weight:800;opacity:.85}
+      .iv-size.on{color:#fff;border-color:#0b9a6b;background:linear-gradient(145deg,#12b07e,#087f5b);box-shadow:0 8px 18px rgba(8,127,91,.32),inset 0 1px 0 rgba(255,255,255,.3);transform:translateY(-2px)}
+      .phone.dark .iv-size{background:rgba(255,255,255,.06);border-color:rgba(114,221,176,.25)}
+      .phone.dark .iv-size.on{background:linear-gradient(145deg,#12b07e,#087f5b);border-color:#0b9a6b}
+      .iv-addons{display:flex;flex-direction:column;gap:8px}
+      .iv-addon{display:flex;align-items:center;gap:11px;width:100%;padding:11px 12px;border-radius:15px;border:1px solid rgba(8,127,91,.14);background:rgba(255,255,255,.45);color:var(--text-color);font-size:13px;font-weight:700;text-align:start;cursor:pointer;transition:background .2s,border-color .2s}
+      .iv-addon b{margin-inline-start:auto;font-size:12px;color:var(--green)}
+      .iv-addon.on{background:rgba(16,185,129,.13);border-color:rgba(8,127,91,.45)}
+      .phone.dark .iv-addon{background:rgba(255,255,255,.05);border-color:rgba(114,221,176,.18)}
+      .phone.dark .iv-addon b{color:#72ddb0}
+      .iv-chk{position:relative;flex:0 0 22px;width:22px;height:22px;border-radius:7px;border:1.8px solid rgba(8,127,91,.5);background:rgba(255,255,255,.6);transition:background .2s,border-color .2s}
+      .iv-addon.on .iv-chk{background:linear-gradient(145deg,#12b07e,#087f5b);border-color:#0b9a6b}
+      .iv-addon.on .iv-chk::after{content:"";position:absolute;left:6px;top:2.5px;width:6px;height:11px;border:solid #fff;border-width:0 2.2px 2.2px 0;transform:rotate(45deg)}
+      .iv-bar{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px 14px;border-top:1px solid rgba(16,185,129,.16);background:rgba(255,255,255,.3)}
+      .phone.dark .iv-bar{background:rgba(255,255,255,.04)}
+      .iv-total{display:flex;flex-direction:column;gap:1px;min-width:0}
+      .iv-total>span{font-size:11px;font-weight:700;opacity:.7}
+      .iv-price{display:flex;align-items:baseline;flex-wrap:wrap;gap:0 8px}
+      .iv-price strong{font-size:30px;font-weight:900;line-height:1.15;color:var(--green)}
+      .phone.dark .iv-price strong{color:#72ddb0}
+      .iv-old{font-size:12px;font-weight:700;opacity:.6;text-decoration:line-through}
+      .iv-add{flex:0 0 auto;min-width:118px;padding:14px 16px;border:0;border-radius:18px;background:linear-gradient(145deg,#12b07e,#087f5b);color:#fff;font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 8px 20px rgba(8,127,91,.35),inset 0 1px 0 rgba(255,255,255,.3);transition:transform .2s,opacity .2s}
+      .iv-add:active{transform:scale(.96)}
+      .iv-add:disabled{opacity:.6;pointer-events:none}
+      /* cart pill: lives in the carousel arrows row, so it never covers other elements */
+      .cart-pill{position:relative;flex:0 0 auto;height:36px;max-width:0;margin-inline-start:-15px;padding:0;border:0;border-radius:13px;background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(232,246,237,.88));color:#087f5b;cursor:pointer;opacity:0;pointer-events:none;box-shadow:0 4px 12px rgba(12,48,34,.1),inset 0 0 0 1px rgba(16,185,129,.24),inset 0 1px 0 rgba(255,255,255,.95);transition:max-width .45s cubic-bezier(.22,1,.36,1),margin .45s cubic-bezier(.22,1,.36,1),padding .45s cubic-bezier(.22,1,.36,1),opacity .3s ease}
+      .cart-pill.show{max-width:140px;margin-inline-start:0;padding:0 13px;opacity:1;pointer-events:auto}
+      .cart-pill.nt{transition:none}
+      .phone.iv-open .cart-pill,.phone.iv-cart-open .cart-pill{opacity:0;pointer-events:none}
+      .phone.dark .cart-pill{background:linear-gradient(145deg,#29483a,#20382e);color:#8de0b6;box-shadow:0 4px 12px rgba(0,0,0,.22),inset 0 0 0 1px rgba(114,221,176,.28),inset 0 1px 0 rgba(255,255,255,.07)}
+      .cart-pill-in{display:flex;align-items:center;gap:7px;min-width:0;overflow:hidden;white-space:nowrap;font-size:12px;font-weight:800}
+      .cart-pill-in svg{flex:0 0 18px;width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+      .cart-pill.shake{animation:cartShake .6s ease}
+      @keyframes cartShake{0%,100%{transform:rotate(0)}15%{transform:rotate(-12deg) scale(1.1)}35%{transform:rotate(10deg) scale(1.1)}55%{transform:rotate(-7deg)}75%{transform:rotate(4deg)}}
+      .cart-badge{position:absolute;top:-7px;inset-inline-end:-6px;min-width:20px;height:20px;padding:0 5px;display:grid;place-items:center;border-radius:10px;background:linear-gradient(145deg,#f0c27f,#dfaf6b);color:#3b2a0e;font-size:11px;font-weight:900;box-shadow:0 3px 8px rgba(0,0,0,.25)}
+      .cart-badge[hidden]{display:none}
+      /* miniature dish image that flies to the cart */
+      .iv-fly{position:absolute;left:0;top:0;z-index:19;display:block;border-radius:50%;pointer-events:none;transform-origin:center;background:#f2e8d0 center/cover no-repeat;border:2px solid rgba(255,255,255,.92);box-shadow:0 8px 18px rgba(0,0,0,.3)}
+      .iv-fly[hidden]{display:none}
+      /* cart panel */
+      .cart-panel .iv-name{margin:0;padding-inline-end:40px}
+      .cart-empty{padding:26px 0 10px;text-align:center;font-size:13px;opacity:.65}
+      .cart-line{display:flex;align-items:center;gap:10px;padding:10px;margin-top:9px;border-radius:16px;background:rgba(255,255,255,.5);border:1px solid rgba(8,127,91,.12)}
+      .cart-line:first-child{margin-top:14px}
+      .phone.dark .cart-line{background:rgba(255,255,255,.05);border-color:rgba(114,221,176,.16)}
+      .cart-line img{flex:0 0 50px;width:50px;height:50px;border-radius:50%;object-fit:cover;background:#f2e8d0}
+      .cart-info{flex:1;min-width:0}
+      .cart-info b{display:block;font-size:13px}
+      .cart-info small{display:block;font-size:10px;line-height:1.5;opacity:.72}
+      .cart-info em{font-style:normal;font-size:12px;font-weight:800;color:var(--green)}
+      .phone.dark .cart-info em{color:#72ddb0}
+      .cart-qty{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:800}
+      .cart-qty button{width:26px;height:26px;border-radius:9px;border:1px solid rgba(8,127,91,.25);background:rgba(255,255,255,.6);color:var(--green);font-size:15px;font-weight:800;cursor:pointer}
+      .phone.dark .cart-qty button{background:rgba(255,255,255,.08);color:#72ddb0}
     </style>
   </head>
   <body>
@@ -2154,6 +2239,41 @@
             <button class="modal-close" id="modalClose" type="button">
               إغلاق
             </button>
+          </div>
+        </div>
+        <!-- ITEM DETAILS MODAL (sits below the top bar, z-index 19 < 20) -->
+        <div class="iv-modal" id="ivModal" role="dialog" aria-modal="true" aria-hidden="true">
+          <div class="iv-veil"></div>
+          <div class="iv-card" id="ivSheet">
+            <div class="iv-head">
+              <button class="iv-close" type="button" id="ivClose"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+              <div class="iv-cat" id="ivCat"></div>
+              <div class="iv-main">
+                <div class="iv-img" id="ivImgWrap"><img id="ivImg" alt="" /></div>
+                <div class="iv-info"><h2 class="iv-name" id="ivName"></h2><p class="iv-desc" id="ivDesc"></p></div>
+              </div>
+            </div>
+            <div class="iv-scroll" id="ivScroll">
+              <h3 class="iv-h" id="ivSizesH"></h3><div class="iv-sizes" id="ivSizes"></div>
+              <h3 class="iv-h" id="ivAddonsH"></h3><div class="iv-addons" id="ivAddons"></div>
+            </div>
+            <div class="iv-bar">
+              <div class="iv-total"><span id="ivTotalL"></span><div class="iv-price"><strong id="ivTotal"></strong><s class="iv-old" id="ivOld" hidden></s></div></div>
+              <button class="iv-add" id="ivAdd" type="button"></button>
+            </div>
+          </div>
+        </div>
+        <div class="iv-fly" id="ivFly" hidden></div>
+        <!-- CART PANEL (local only, no checkout) -->
+        <div class="iv-modal cart-panel" id="cartPanel" role="dialog" aria-modal="true" aria-hidden="true">
+          <div class="iv-veil"></div>
+          <div class="iv-card">
+            <div class="iv-head">
+              <button class="iv-close" type="button" id="cartClose"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+              <h2 class="iv-name" id="cartTitle"></h2>
+            </div>
+            <div class="iv-scroll" id="cartList"></div>
+            <div class="iv-bar"><div class="iv-total"><span id="cartTotalL"></span><div class="iv-price"><strong id="cartTotal"></strong></div></div></div>
           </div>
         </div>
       </main>
@@ -2950,6 +3070,252 @@
       changeLanguage("ar");
       showSlide(0);
       startAutoplay();
+    </script>
+    <script>
+      /* ITEM DETAILS + CART: standalone layer. Reads existing globals; changes none of them. */
+      (() => {
+        "use strict";
+        const $ = (id) => document.getElementById(id);
+        const phoneEl = $("phone"), scr = $("screen"), stageEl = $("itemsCarouselStage");
+        const modal = $("ivModal"), scroller = $("ivScroll"), imgWrap = $("ivImgWrap"), img = $("ivImg");
+        const panel = $("cartPanel"), ghost = $("ivFly");
+
+        /* Cart pill is created inside the existing arrows row (no edits to the existing markup). */
+        const row = document.querySelector(".items-carousel-controls");
+        const fab = document.createElement("button");
+        fab.type = "button"; fab.className = "cart-pill"; fab.id = "cartFab";
+        fab.innerHTML = '<span class="cart-pill-in"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 11.1a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.5L22 8H6"/><path d="M9 20h.01M18 20h.01"/></svg><span id="cartPillText"></span></span><span class="cart-badge" id="cartBadge" hidden>0</span>';
+        row.appendChild(fab);
+        const badge = $("cartBadge");
+
+        /* DEMO DATA: replace with sizes / add-ons / prices / discounts / currency from the API.
+           `old` = price before discount (optional, entered by the owner later). */
+        const CURRENCY = "$";
+        const SIZES = { s: { ar: "صغير", en: "Small", ku: "Biçûk" }, m: { ar: "وسط", en: "Medium", ku: "Navîn" }, l: { ar: "كبير", en: "Large", ku: "Mezin" } };
+        const ADDONS = [
+          { id: "cheese", name: { ar: "جبنة إضافية", en: "Extra cheese", ku: "Penîrê zêde" }, price: 1 },
+          { id: "sauce", name: { ar: "صلصة حارة", en: "Hot sauce", ku: "Sosa tûj" }, price: 0.5 },
+          { id: "fries", name: { ar: "بطاطا", en: "Fries", ku: "Kartol" }, price: 2 },
+        ];
+        const half = (n) => Math.round(n * 2) / 2;
+        const ITEMS = [12.5, 6, 4, 5.5, 3.5, 9].map((b, idx) => ({
+          sizes: [["s", 0.8], ["m", 1], ["l", 1.25]].map(([id, f]) => {
+            const price = half(b * f);
+            return { id, name: SIZES[id], price, old: idx === 0 || idx === 3 ? half(price * 1.25) : null };
+          }),
+          addons: ADDONS,
+        }));
+        const STR = {
+          ar: { total: "السعر الإجمالي", add: "أضف إلى طلبي", sizes: "الأحجام", addons: "الإضافات", close: "إغلاق", cart: "سلة الطلبات", cartShort: "السلة", empty: "السلة فارغة" },
+          en: { total: "Total price", add: "Add to my order", sizes: "Sizes", addons: "Add-ons", close: "Close", cart: "Your order", cartShort: "Cart", empty: "Your cart is empty" },
+          ku: { total: "Bihayê giştî", add: "Li fermana min zêde bike", sizes: "Mezinahî", addons: "Pêvek", close: "Bigire", cart: "Sepeta fermanan", cartShort: "Sepet", empty: "Sepet vala ye" },
+        };
+
+        const L = () => (typeof currentLanguage === "string" && STR[currentLanguage] ? currentLanguage : "ar");
+        const TT = () => translations[L()];
+        const cards = () => Array.from(document.querySelectorAll(".menu-item-card"));
+        const pscale = () => phoneEl.getBoundingClientRect().width / phoneEl.offsetWidth || 1;
+        const D = (ms) => (matchMedia("(prefers-reduced-motion: reduce)").matches ? 1 : ms);
+        const num = (n) => { n = Math.round(n * 100) / 100; return n % 1 ? n.toFixed(2) : String(n); };
+        const P = (n, pre = "") => `<span class="iv-num">${pre}${num(n)} ${CURRENCY}</span>`;
+        const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+        let cur = -1, busy = false, cart = [];
+        const sel = {};
+        const selOf = (i) => sel[i] || (sel[i] = { size: ITEMS[i].sizes[1].id, add: new Set() });
+        function calc(i) {
+          const s = selOf(i), it = ITEMS[i], z = it.sizes.find((x) => x.id === s.size);
+          const add = it.addons.filter((a) => s.add.has(a.id)).reduce((t, a) => t + a.price, 0);
+          return { base: z.price, add, final: z.price + add, old: z.old ? z.old + add : null };
+        }
+
+        function renderText() {
+          $("cartPillText").textContent = STR[L()].cartShort;
+        }
+        function renderDetails() {
+          if (cur < 0) return;
+          const t = TT(), s = STR[L()], it = ITEMS[cur], sl = selOf(cur), c = calc(cur);
+          const src = cards()[cur].querySelector(".menu-item-image img").src;
+          if (img.getAttribute("src") !== src) img.src = src;
+          img.alt = t.itemNames[cur];
+          $("ivCat").textContent = t.itemCategories[cur];
+          $("ivName").textContent = t.itemNames[cur];
+          $("ivDesc").textContent = t.itemDescs[cur];
+          $("ivSizesH").textContent = s.sizes;
+          $("ivAddonsH").textContent = s.addons;
+          $("ivSizes").innerHTML = it.sizes.map((z) => `<button type="button" class="iv-size${z.id === sl.size ? " on" : ""}" data-size="${z.id}" aria-pressed="${z.id === sl.size}"><span>${z.name[L()]}</span><b>${P(z.price)}</b></button>`).join("");
+          $("ivAddons").innerHTML = it.addons.map((a) => { const on = sl.add.has(a.id); return `<button type="button" class="iv-addon${on ? " on" : ""}" data-addon="${a.id}" role="checkbox" aria-checked="${on}"><i class="iv-chk"></i><span>${a.name[L()]}</span><b>${P(a.price, "+")}</b></button>`; }).join("");
+          $("ivTotalL").textContent = s.total;
+          $("ivTotal").innerHTML = P(c.final);
+          const old = $("ivOld");
+          old.hidden = !(c.old && c.old > c.final);
+          old.innerHTML = old.hidden ? "" : P(c.old);
+          $("ivAdd").textContent = s.add;
+          $("ivClose").setAttribute("aria-label", s.close);
+        }
+
+        /* OPEN / CLOSE DETAILS */
+        function openItem(i, card) {
+          if (busy || cur >= 0 || panel.classList.contains("open")) return;
+          cur = i;
+          renderDetails();
+          scroller.scrollTop = 0;
+          phoneEl.classList.add("iv-open");
+          modal.classList.add("open");
+          modal.setAttribute("aria-hidden", "false");
+          imgWrap.getAnimations().forEach((a) => a.cancel());
+          const from = card.querySelector(".menu-item-image").getBoundingClientRect(), to = imgWrap.getBoundingClientRect(), k = pscale();
+          if (from.width && to.width) {
+            imgWrap.animate([{ transform: `translate(${(from.left + from.width / 2 - to.left - to.width / 2) / k}px,${(from.top + from.height / 2 - to.top - to.height / 2) / k}px) scale(${from.width / to.width})` }, { transform: "none" }], { duration: D(520), easing: "cubic-bezier(.22,.75,.2,1)" });
+          }
+        }
+        function closeItem() {
+          if (cur < 0 || busy) return;
+          busy = true;
+          const card = cards()[cur];
+          const from = imgWrap.getBoundingClientRect(), to = card.querySelector(".menu-item-image").getBoundingClientRect(), k = pscale();
+          modal.classList.remove("open");
+          modal.setAttribute("aria-hidden", "true");
+          phoneEl.classList.remove("iv-open");
+          if (from.width && to.width) {
+            imgWrap.animate([{ transform: "none" }, { transform: `translate(${(to.left + to.width / 2 - from.left - from.width / 2) / k}px,${(to.top + to.height / 2 - from.top - from.height / 2) / k}px) scale(${to.width / from.width})` }], { duration: D(300), easing: "cubic-bezier(.4,0,.2,1)" });
+          }
+          setTimeout(() => { cur = -1; busy = false; }, D(340));
+        }
+
+        /* CART DATA */
+        const count = () => cart.reduce((n, l) => n + l.quantity, 0);
+        function renderBadge() {
+          const n = count();
+          badge.hidden = !n;
+          badge.textContent = n > 99 ? "99+" : n;
+        }
+        function syncFab() { fab.classList.toggle("show", scr.scrollTop > 6); }
+
+        /* Flight: a small copy of the dish image follows a curved path to the real position of the cart icon. */
+        function fly(onDone) {
+          const k = pscale(), pr = phoneEl.getBoundingClientRect();
+          const loc = (r) => ({ x: (r.left + r.width / 2 - pr.left) / k - phoneEl.clientLeft, y: (r.top + r.height / 2 - pr.top) / k - phoneEl.clientTop, w: r.width / k });
+          fab.classList.add("nt", "show");
+          void fab.offsetWidth;
+          const a = loc(imgWrap.getBoundingClientRect());
+          const b = loc(fab.querySelector("svg").getBoundingClientRect());
+          const W = a.w, C = { x: a.x + (b.x - a.x) * 0.55, y: Math.min(a.y, b.y) - 90 };
+          ghost.style.width = ghost.style.height = W + "px";
+          ghost.style.backgroundImage = `url("${img.src}")`;
+          ghost.hidden = false;
+          const N = 18, frames = [];
+          for (let i = 0; i <= N; i++) {
+            const t = i / N, e = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2, m = 1 - e;
+            const x = m * m * a.x + 2 * m * e * C.x + e * e * b.x, y = m * m * a.y + 2 * m * e * C.y + e * e * b.y;
+            frames.push({ transform: `translate(${x - W / 2}px,${y - W / 2}px) scale(${1 - 0.68 * e})`, opacity: i === N ? 0.9 : 1 });
+          }
+          let finished = false;
+          const finish = () => {
+            if (finished) return;
+            finished = true;
+            ghost.getAnimations().forEach((x) => x.cancel());
+            ghost.hidden = true;
+            fab.classList.remove("nt");
+            renderBadge();
+            fab.classList.remove("shake"); void fab.offsetWidth; fab.classList.add("shake");
+            setTimeout(() => fab.classList.remove("shake"), 700);
+            syncFab();
+            busy = false;
+            if (onDone) onDone();
+          };
+          const anim = ghost.animate(frames, { duration: D(780), easing: "linear", fill: "forwards" });
+          anim.onfinish = finish;
+          setTimeout(finish, D(780) + 500);
+        }
+        function addToCart() {
+          if (busy || cur < 0) return;
+          busy = true;
+          const i = cur, s = selOf(i), c = calc(i), it = ITEMS[i];
+          const addons = it.addons.filter((a) => s.add.has(a.id)).map((a) => a.id).sort();
+          const key = [i, s.size, ...addons].join("|");
+          const line = cart.find((l) => l.key === key);
+          if (line) line.quantity++;
+          else cart.push({ key, itemId: i, itemName: TT().itemNames[i], itemImage: img.src, selectedSize: s.size, selectedAddons: addons, basePrice: c.base, addonsTotal: c.add, finalPrice: c.final, quantity: 1 });
+          cur = -1;
+          modal.classList.remove("open");
+          modal.setAttribute("aria-hidden", "true");
+          phoneEl.classList.remove("iv-open");
+          fly();
+        }
+
+        /* CART PANEL */
+        function renderCart() {
+          const s = STR[L()], t = TT();
+          $("cartTitle").textContent = s.cart;
+          $("cartTotalL").textContent = s.total;
+          $("cartClose").setAttribute("aria-label", s.close);
+          $("cartTotal").innerHTML = P(cart.reduce((n, l) => n + l.finalPrice * l.quantity, 0));
+          $("cartList").innerHTML = cart.length ? cart.map((l) => {
+            const it = ITEMS[l.itemId];
+            const size = it.sizes.find((z) => z.id === l.selectedSize).name[L()];
+            const adds = it.addons.filter((a) => l.selectedAddons.includes(a.id)).map((a) => a.name[L()]).join("، ");
+            return `<div class="cart-line"><img src="${esc(l.itemImage)}" alt=""><div class="cart-info"><b>${esc(t.itemNames[l.itemId])}</b><small>${esc(size)}${adds ? " · " + esc(adds) : ""}</small><em>${P(l.finalPrice * l.quantity)}</em></div><div class="cart-qty"><button type="button" data-act="dec" data-key="${esc(l.key)}">−</button><span>${l.quantity}</span><button type="button" data-act="inc" data-key="${esc(l.key)}">+</button></div></div>`;
+          }).join("") : `<p class="cart-empty">${s.empty}</p>`;
+        }
+        function openCart() {
+          if (busy || cur >= 0) return;
+          renderCart();
+          phoneEl.classList.add("iv-cart-open");
+          panel.classList.add("open");
+          panel.setAttribute("aria-hidden", "false");
+        }
+        function closeCart() {
+          panel.classList.remove("open");
+          panel.setAttribute("aria-hidden", "true");
+          phoneEl.classList.remove("iv-cart-open");
+        }
+
+        /* EVENTS (each registered once) */
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal || e.target.classList.contains("iv-veil")) return closeItem();
+          if (cur < 0 || busy) return;
+          if (e.target.closest("#ivClose")) return closeItem();
+          if (e.target.closest("#ivAdd")) return addToCart();
+          const z = e.target.closest("[data-size]"), a = e.target.closest("[data-addon]");
+          if (z) { selOf(cur).size = z.dataset.size; renderDetails(); }
+          else if (a) { const set = selOf(cur).add, id = a.dataset.addon; set.has(id) ? set.delete(id) : set.add(id); renderDetails(); }
+        });
+        panel.addEventListener("click", (e) => {
+          if (e.target === panel || e.target.classList.contains("iv-veil") || e.target.closest("#cartClose")) return closeCart();
+          const b = e.target.closest("[data-act]");
+          if (!b) return;
+          const idx = cart.findIndex((l) => l.key === b.dataset.key);
+          if (idx < 0) return;
+          cart[idx].quantity += b.dataset.act === "inc" ? 1 : -1;
+          if (cart[idx].quantity <= 0) cart.splice(idx, 1);
+          renderCart(); renderBadge();
+        });
+        fab.addEventListener("click", openCart);
+        scr.addEventListener("scroll", syncFab, { passive: true });
+        document.addEventListener("keydown", (e) => {
+          if (e.key !== "Escape") return;
+          if (cur >= 0) closeItem(); else closeCart();
+        });
+        /* A tap (not a swipe) on the centered card opens the details. Capture phase: runs before the carousel's own handlers. */
+        stageEl.addEventListener("click", (e) => {
+          if (typeof itemSuppressClick !== "undefined" && itemSuppressClick) return;
+          const hit = document.elementFromPoint(e.clientX, e.clientY);
+          const card = hit && hit.closest(".menu-item-card");
+          if (card && card.classList.contains("is-active")) openItem(Number(card.dataset.itemIndex), card);
+        }, true);
+        stageEl.addEventListener("keydown", (e) => {
+          const card = e.target.closest && e.target.closest(".menu-item-card");
+          if ((e.key === "Enter" || e.key === " ") && card && card.classList.contains("is-active")) openItem(Number(card.dataset.itemIndex), card);
+        }, true);
+        /* Language change: the existing handler runs first on the same click, then our text refreshes. */
+        document.addEventListener("click", (e) => {
+          if (!e.target.closest("[data-lang]")) return;
+          setTimeout(() => { renderText(); renderDetails(); if (panel.classList.contains("open")) renderCart(); }, 0);
+        });
+        renderText();
+        syncFab();
+      })();
     </script>
   </body>
 </html>
