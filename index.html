@@ -2989,6 +2989,10 @@
         en:{sizes:"Sizes",addons:"Add-ons",total:"Total price",add:"Add to my order",close:"Close details"},
         ku:{sizes:"Mezinahî",addons:"Zêdekirin",total:"Bihayê giştî",add:"Tevlî daxwaza min bike",close:"Bigire"}
       };
+      const itemSelections = itemDetailsData.map(data => ({
+        sizeIndex: Math.floor(data.sizes.length / 2),
+        addonIndexes: []
+      }));
       let openedItemIndex = null;
       let selectedSizeIndex = 0;
       let selectedAddonIndexes = new Set();
@@ -3024,7 +3028,11 @@
           const name=document.createElement("strong");name.textContent=size[lang];
           const price=document.createElement("small");price.textContent=formatItemPrice(size.price);
           button.append(name,price);
-          button.addEventListener("click",()=>{selectedSizeIndex=index;renderItemDetails()});
+          button.addEventListener("click",()=>{
+            selectedSizeIndex=index;
+            itemSelections[openedItemIndex].sizeIndex=index;
+            renderItemDetails();
+          });
           itemSizeOptions.appendChild(button);
         });
         itemAddonList.replaceChildren();
@@ -3033,6 +3041,7 @@
           const input=document.createElement("input");input.type="checkbox";input.checked=selectedAddonIndexes.has(index);
           input.addEventListener("change",()=>{
             if(input.checked)selectedAddonIndexes.add(index);else selectedAddonIndexes.delete(index);
+            itemSelections[openedItemIndex].addonIndexes=[...selectedAddonIndexes];
             updateItemDetailsTotal();
           });
           const check=document.createElement("span");check.className="item-addon-check";
@@ -3045,8 +3054,8 @@
       function openItemDetails(index){
         if(detailsClosing||!itemDetailsData[index])return;
         openedItemIndex=index;
-        selectedSizeIndex=Math.min(selectedSizeIndex,itemDetailsData[index].sizes.length-1);
-        selectedAddonIndexes=new Set([...selectedAddonIndexes].filter(i=>i<itemDetailsData[index].addons.length));
+        selectedSizeIndex=itemSelections[index].sizeIndex;
+        selectedAddonIndexes=new Set(itemSelections[index].addonIndexes);
         renderItemDetails();
         itemDetailsScroll.scrollTop=0;
         itemDetailsPanel.style.removeProperty("transform");
