@@ -1074,7 +1074,156 @@
         font-weight: 900;
         letter-spacing: 0.25px;
       }
-      /* CONTROL PANEL DEMO */
+
+      /* ITEM DETAILS MODAL - always starts below the sticky top bar */
+      .item-details-backdrop {
+        position: absolute;
+        inset: 105px 0 0;
+        z-index: 15;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 18px 13px 16px;
+        background: rgba(12, 27, 20, 0.28);
+        -webkit-backdrop-filter: blur(0);
+        backdrop-filter: blur(0);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity .32s ease, visibility .32s ease, backdrop-filter .38s ease;
+      }
+      .item-details-backdrop.visible {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        -webkit-backdrop-filter: blur(13px) saturate(125%);
+        backdrop-filter: blur(13px) saturate(125%);
+      }
+      .item-details-panel {
+        position: relative;
+        width: min(100%, 350px);
+        height: min(690px, 100%);
+        min-height: 390px;
+        display: flex;
+        flex-direction: column;
+        overflow: visible;
+        border: 1px solid rgba(255,255,255,.7);
+        border-radius: 29px;
+        color: var(--text-color);
+        background: linear-gradient(145deg, rgba(255,255,255,.94), rgba(248,241,229,.91));
+        box-shadow: 0 22px 55px rgba(10,35,23,.27), inset 0 1px 0 rgba(255,255,255,.95);
+        transform: translateY(24px) scale(.88);
+        opacity: 0;
+        transition: transform .48s cubic-bezier(.2,.85,.25,1), opacity .3s ease;
+        transform-origin: center center;
+      }
+      .item-details-backdrop.visible .item-details-panel {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      .phone.dark .item-details-panel {
+        background: linear-gradient(145deg, rgba(40,65,52,.97), rgba(25,45,36,.97));
+        border-color: rgba(190,235,210,.2);
+        box-shadow: 0 22px 55px rgba(0,0,0,.48), inset 0 1px 0 rgba(255,255,255,.09);
+      }
+      .item-details-scroll {
+        position: relative;
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        scrollbar-width: none;
+        padding: 0 19px 18px;
+        border-radius: inherit;
+      }
+      .item-details-scroll::-webkit-scrollbar { display:none; }
+      .item-details-close {
+        position: relative;
+        z-index: 3;
+        display: grid;
+        place-items: center;
+        width: 35px;
+        height: 35px;
+        margin: 13px auto 0 0;
+        border: 1px solid rgba(8,127,91,.16);
+        border-radius: 12px;
+        color: var(--text-color);
+        background: rgba(255,255,255,.66);
+        box-shadow: 0 4px 12px rgba(10,45,29,.08);
+        cursor: pointer;
+      }
+      .phone[dir="ltr"] .item-details-close { margin: 13px 0 0 auto; }
+      .item-details-close svg { width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round; }
+      .item-details-image-wrap {
+        position: relative;
+        z-index: 2;
+        width: 142px;
+        height: 142px;
+        padding: 5px;
+        margin: -3px auto 0;
+        border-radius: 50%;
+        background: var(--page-bg);
+        border: 1px solid rgba(8,127,91,.28);
+        box-shadow: 0 12px 28px rgba(8,55,36,.2), 0 0 0 6px rgba(255,255,255,.22);
+      }
+      .item-details-image-wrap img { width:100%;height:100%;display:block;object-fit:cover;border-radius:50%; }
+      .item-details-heading { text-align:center; margin: 10px 0 17px; }
+      .item-details-category { display:block;color:var(--green);font-size:12px;font-weight:800;margin-bottom:5px; }
+      .item-details-heading h2 { color:var(--text-color);font-size:23px;line-height:1.35;font-weight:900;margin-bottom:6px; }
+      .item-details-heading p { color:var(--text-color);opacity:.7;font-size:12px;line-height:1.8; }
+      .item-details-section { padding:14px 0;border-top:1px solid rgba(8,127,91,.13); }
+      .item-details-section h3 { font-size:14px;font-weight:900;margin-bottom:11px;color:var(--text-color); }
+      .item-size-options { display:flex;flex-wrap:wrap;gap:9px; }
+      .item-size-option {
+        min-width:67px;min-height:57px;padding:8px 10px;border:1px solid rgba(8,127,91,.2);
+        border-radius:14px;background:rgba(255,255,255,.55);color:var(--text-color);
+        display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+        cursor:pointer;transition:transform .2s ease,background .2s ease,border-color .2s ease,box-shadow .2s ease;
+      }
+      .item-size-option strong { font-size:12px; }
+      .item-size-option small { font-size:10px;opacity:.7; }
+      .item-size-option.active { color:#fff;background:linear-gradient(145deg,#0a9b6b,#087653);border-color:#0a9b6b;box-shadow:0 6px 15px rgba(8,127,91,.22);transform:translateY(-2px); }
+      .item-size-option.active small { color:rgba(255,255,255,.82);opacity:1; }
+      .phone.dark .item-size-option { background:rgba(255,255,255,.06);border-color:rgba(114,221,176,.22);color:#e3f4ea; }
+      .phone.dark .item-size-option.active { background:linear-gradient(145deg,#168c65,#087653);color:#fff; }
+      .item-addon-list { display:flex;flex-direction:column;gap:9px; }
+      .item-addon-row { display:flex;align-items:center;gap:10px;min-height:39px;font-size:12px;color:var(--text-color);cursor:pointer; }
+      .item-addon-row input { position:absolute;opacity:0;pointer-events:none; }
+      .item-addon-check { width:20px;height:20px;flex:0 0 20px;border:1.5px solid rgba(8,127,91,.42);border-radius:6px;background:rgba(255,255,255,.65);display:grid;place-items:center;transition:.2s ease; }
+      .item-addon-check::after { content:"";width:9px;height:5px;border-left:2px solid white;border-bottom:2px solid white;transform:rotate(-45deg) scale(0);transition:transform .18s ease;margin-top:-2px; }
+      .item-addon-row input:checked + .item-addon-check { background:#087f5b;border-color:#087f5b;box-shadow:0 3px 9px rgba(8,127,91,.2); }
+      .item-addon-row input:checked + .item-addon-check::after { transform:rotate(-45deg) scale(1); }
+      .item-addon-name { flex:1; }
+      .item-addon-price { direction:ltr;white-space:nowrap;color:var(--green);font-size:11px;font-weight:800; }
+      .phone.dark .item-addon-check { background:rgba(255,255,255,.08);border-color:rgba(114,221,176,.42); }
+      .item-details-footer {
+        flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;
+        padding:13px 17px max(13px, env(safe-area-inset-bottom));border-top:1px solid rgba(8,127,91,.15);
+        border-radius:0 0 29px 29px;background:rgba(255,255,255,.58);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+      }
+      .phone.dark .item-details-footer { background:rgba(18,36,28,.72);border-color:rgba(114,221,176,.16); }
+      .item-total-label { display:block;font-size:10px;opacity:.7;margin-bottom:3px; }
+      .item-total-value { display:block;font-size:20px;font-weight:900;color:var(--green);direction:ltr;white-space:nowrap; }
+      .item-add-button { min-height:47px;padding:0 15px;border:0;border-radius:14px;background:linear-gradient(145deg,#0a9b6b,#087653);color:#fff;font-size:12px;font-weight:900;box-shadow:0 7px 17px rgba(8,127,91,.24);cursor:pointer;white-space:nowrap; }
+      .item-add-button:active { transform:scale(.96); }
+      .menu-item-bottom .item-cart-icon { position:relative; }
+      .item-cart-count { position:absolute;top:-8px;inset-inline-end:-9px;min-width:18px;height:18px;padding:0 4px;border-radius:10px;background:#d99a36;color:#fff;border:2px solid var(--page-bg);font-size:9px;font-weight:900;display:none;align-items:center;justify-content:center;line-height:1; }
+      .item-cart-count.visible { display:flex; }
+      .menu-item-card.cart-target-pulse .item-cart-icon { animation:cartTargetPulse .5s ease; }
+      @keyframes cartTargetPulse { 0%,100%{transform:scale(1)}45%{transform:scale(1.28);box-shadow:0 0 0 7px rgba(217,154,54,.18)} }
+      .item-details-backdrop.is-flight { background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none; }
+      .item-details-backdrop.is-flight .item-details-panel { opacity:1;transition:transform .58s cubic-bezier(.48,0,.8,.35),opacity .48s ease; }
+      @media(max-width:370px) {
+        .item-details-backdrop { padding:12px 9px 12px; }
+        .item-details-panel { border-radius:25px; }
+        .item-details-image-wrap { width:124px;height:124px; }
+        .item-details-heading h2 { font-size:21px; }
+        .item-details-footer { padding-inline:13px; }
+        .item-add-button { padding-inline:11px;font-size:11px; }
+      }
+      .phone.dark .item-details-close { background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14);color:#e3f4ea; }
+
+      /* CONTROL PANEL DEMO */      /* CONTROL PANEL DEMO */
       .modal-backdrop {
         position: absolute;
         inset: 0;
@@ -2143,7 +2292,40 @@
             </footer>
           </section>
         </div>
-        <!-- CONTROL PANEL MODAL -->
+
+        <!-- ITEM DETAILS MODAL -->
+        <div class="item-details-backdrop" id="itemDetailsBackdrop" aria-hidden="true">
+          <section class="item-details-panel" id="itemDetailsPanel" role="dialog" aria-modal="true" aria-labelledby="itemDetailsTitle">
+            <div class="item-details-scroll" id="itemDetailsScroll">
+              <button class="item-details-close" id="itemDetailsClose" type="button" aria-label="إغلاق التفاصيل">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+              </button>
+              <div class="item-details-image-wrap"><img id="itemDetailsImage" src="" alt=""></div>
+              <header class="item-details-heading">
+                <span class="item-details-category" id="itemDetailsCategory"></span>
+                <h2 id="itemDetailsTitle"></h2>
+                <p id="itemDetailsDescription"></p>
+              </header>
+              <section class="item-details-section">
+                <h3 id="itemSizesHeading">الأحجام</h3>
+                <div class="item-size-options" id="itemSizeOptions"></div>
+              </section>
+              <section class="item-details-section">
+                <h3 id="itemAddonsHeading">الإضافات</h3>
+                <div class="item-addon-list" id="itemAddonList"></div>
+              </section>
+            </div>
+            <footer class="item-details-footer">
+              <div class="item-total">
+                <span class="item-total-label" id="itemTotalLabel">السعر الإجمالي</span>
+                <strong class="item-total-value" id="itemTotalValue">$12.50</strong>
+              </div>
+              <button class="item-add-button" id="itemAddButton" type="button">أضف إلى طلبي</button>
+            </footer>
+          </section>
+        </div>
+
+        <!-- CONTROL PANEL MODAL -->        <!-- CONTROL PANEL MODAL -->
         <div class="modal-backdrop" id="adminModal">
           <div class="modal">
             <h2 id="modalTitle">لوحة التحكم</h2>
@@ -2449,6 +2631,8 @@
           itemCards[i].setAttribute("aria-label", t.itemNames[i]);
           itemCards[i].querySelector(".menu-item-image img").alt = t.itemNames[i];
         }
+        // Keep an open item details sheet in the selected language.
+        if (itemDetailsBackdrop.classList.contains("visible") && !detailsClosing) renderItemDetails();
         // Modal
         document.getElementById("modalTitle").textContent = t.modalTitle;
         document.getElementById("modalDescription").textContent =
@@ -2528,6 +2712,7 @@
           setMenu(false);
           adminModal.classList.remove("visible");
           languageMenu.classList.remove("visible");
+          closeItemDetails();
         }
       });
       /* FINGER-TRACKED SCENE GESTURE */
@@ -2809,6 +2994,184 @@
       let itemDragging = false;
       let itemPointerId = null;
       let itemSuppressClick = false;
+
+      /* ITEM DETAILS + DEMO CART */
+      const itemDetailsBackdrop = document.getElementById("itemDetailsBackdrop");
+      const itemDetailsPanel = document.getElementById("itemDetailsPanel");
+      const itemDetailsScroll = document.getElementById("itemDetailsScroll");
+      const itemDetailsClose = document.getElementById("itemDetailsClose");
+      const itemDetailsImage = document.getElementById("itemDetailsImage");
+      const itemDetailsCategory = document.getElementById("itemDetailsCategory");
+      const itemDetailsTitle = document.getElementById("itemDetailsTitle");
+      const itemDetailsDescription = document.getElementById("itemDetailsDescription");
+      const itemSizeOptions = document.getElementById("itemSizeOptions");
+      const itemAddonList = document.getElementById("itemAddonList");
+      const itemTotalValue = document.getElementById("itemTotalValue");
+      const itemAddButton = document.getElementById("itemAddButton");
+      const itemCart = [];
+      const itemQuantities = itemCards.map(() => 0);
+      const itemDetailsData = [
+        { base:12.5, sizes:[["صغير","Small",10],["وسط","Medium",12.5],["كبير","Large",15]], addons:[["جبنة إضافية","Extra cheese",1.5],["صوص خاص","Special sauce",.75],["مكسرات","Nuts",1]] },
+        { base:6, sizes:[["عادي","Regular",6],["كبير","Large",8]], addons:[["أفوكادو","Avocado",1.5],["جبنة فيتا","Feta cheese",1],["دجاج","Chicken",2]] },
+        { base:4, sizes:[["صغير","Small",3],["وسط","Medium",4],["كبير","Large",5.5]], addons:[["عسل","Honey",.5],["ثلج إضافي","Extra ice",0],["نعناع","Mint",.35]] },
+        { base:5.5, sizes:[["قطعة","Piece",5.5],["قطعتان","Two pieces",9]], addons:[["آيس كريم","Ice cream",1.5],["صوص شوكولا","Chocolate sauce",.75]] },
+        { base:3.5, sizes:[["صغير","Small",3.5],["وسط","Medium",4.5],["كبير","Large",5.5]], addons:[["حليب إضافي","Extra milk",.5],["نكهة فانيلا","Vanilla",.6]] },
+        { base:9, sizes:[["عادي","Regular",9],["دبل","Double",12]], addons:[["جبنة شيدر","Cheddar",1],["لحم إضافي","Extra patty",2.5],["بطاطا","Fries",2]] }
+      ];
+      const detailLabels = {
+        ar:{sizes:"الأحجام",addons:"الإضافات",total:"السعر الإجمالي",add:"أضف إلى طلبي",close:"إغلاق التفاصيل",currency:"$"},
+        en:{sizes:"Sizes",addons:"Add-ons",total:"Total price",add:"Add to my order",close:"Close details",currency:"$"},
+        ku:{sizes:"Mezin",addons:"Zêdekirin",total:"Bihayê giştî",add:"Tevlî daxwaza min bike",close:"Bigire",currency:"$"}
+      };
+      let openedItemIndex = null;
+      let selectedSizeIndex = 0;
+      let selectedAddonIndexes = new Set();
+      let detailsClosing = false;
+
+      function formatItemPrice(value) {
+        return detailLabels[currentLanguage].currency + Number(value).toFixed(2);
+      }
+      function getSelectedItemTotal() {
+        if (openedItemIndex === null) return 0;
+        const data = itemDetailsData[openedItemIndex];
+        const size = data.sizes[selectedSizeIndex];
+        return size[2] + [...selectedAddonIndexes].reduce((sum,index) => sum + data.addons[index][2], 0);
+      }
+      function updateItemDetailsTotal() {
+        itemTotalValue.textContent = formatItemPrice(getSelectedItemTotal());
+      }
+      function renderItemDetails() {
+        if (openedItemIndex === null) return;
+        const t = translations[currentLanguage];
+        const labels = detailLabels[currentLanguage];
+        const card = itemCards[openedItemIndex];
+        const data = itemDetailsData[openedItemIndex];
+        const image = card.querySelector(".menu-item-image img");
+        itemDetailsImage.src = image.src;
+        itemDetailsImage.alt = t.itemNames[openedItemIndex];
+        itemDetailsCategory.textContent = t.itemCategories[openedItemIndex];
+        itemDetailsTitle.textContent = t.itemNames[openedItemIndex];
+        itemDetailsDescription.textContent = t.itemDescs[openedItemIndex];
+        document.getElementById("itemSizesHeading").textContent = labels.sizes;
+        document.getElementById("itemAddonsHeading").textContent = labels.addons;
+        document.getElementById("itemTotalLabel").textContent = labels.total;
+        itemAddButton.textContent = labels.add;
+        itemDetailsClose.setAttribute("aria-label", labels.close);
+        itemSizeOptions.innerHTML = "";
+        data.sizes.forEach((size,index) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "item-size-option" + (index === selectedSizeIndex ? " active" : "");
+          button.setAttribute("aria-pressed",String(index === selectedSizeIndex));
+          const name = currentLanguage === "ar" ? size[0] : size[1];
+          button.innerHTML = "<strong></strong><small></small>";
+          button.querySelector("strong").textContent = name;
+          button.querySelector("small").textContent = formatItemPrice(size[2]);
+          button.addEventListener("click",() => {
+            selectedSizeIndex = index;
+            renderItemDetails();
+          });
+          itemSizeOptions.appendChild(button);
+        });
+        itemAddonList.innerHTML = "";
+        data.addons.forEach((addon,index) => {
+          const label = document.createElement("label");
+          label.className = "item-addon-row";
+          const input = document.createElement("input");
+          input.type = "checkbox";
+          input.checked = selectedAddonIndexes.has(index);
+          input.addEventListener("change",() => {
+            if (input.checked) selectedAddonIndexes.add(index);
+            else selectedAddonIndexes.delete(index);
+            updateItemDetailsTotal();
+          });
+          const check = document.createElement("span");
+          check.className = "item-addon-check";
+          const name = document.createElement("span");
+          name.className = "item-addon-name";
+          name.textContent = currentLanguage === "ar" ? addon[0] : addon[1];
+          const price = document.createElement("strong");
+          price.className = "item-addon-price";
+          price.textContent = "+ " + formatItemPrice(addon[2]);
+          label.append(input,check,name,price);
+          itemAddonList.appendChild(label);
+        });
+        updateItemDetailsTotal();
+      }
+      function openItemDetails(index) {
+        if (detailsClosing) return;
+        openedItemIndex = index;
+        selectedSizeIndex = Math.max(0,Math.floor(itemDetailsData[index].sizes.length / 2));
+        selectedAddonIndexes = new Set();
+        renderItemDetails();
+        itemDetailsScroll.scrollTop = 0;
+        itemDetailsBackdrop.classList.remove("is-flight");
+        itemDetailsBackdrop.classList.add("visible");
+        itemDetailsBackdrop.setAttribute("aria-hidden","false");
+        phone.classList.add("item-details-open");
+        stopSceneSnap();
+        itemDetailsClose.focus({preventScroll:true});
+      }
+      function closeItemDetails() {
+        if (detailsClosing || !itemDetailsBackdrop.classList.contains("visible")) return;
+        detailsClosing = true;
+        itemDetailsBackdrop.classList.remove("visible","is-flight");
+        itemDetailsBackdrop.setAttribute("aria-hidden","true");
+        window.setTimeout(() => {
+          phone.classList.remove("item-details-open");
+          detailsClosing = false;
+          openedItemIndex = null;
+        },360);
+      }
+      function addCurrentItemToCart() {
+        if (openedItemIndex === null || detailsClosing) return;
+        const index = openedItemIndex;
+        const card = itemCards[index];
+        const target = card.querySelector(".item-cart-icon");
+        const size = itemDetailsData[index].sizes[selectedSizeIndex];
+        const addons = [...selectedAddonIndexes].sort((a,b)=>a-b);
+        const signature = index + "|" + selectedSizeIndex + "|" + addons.join(",");
+        const existing = itemCart.find(entry => entry.signature === signature);
+        if (existing) existing.quantity += 1;
+        else itemCart.push({signature,index,sizeIndex:selectedSizeIndex,addons,unitPrice:getSelectedItemTotal(),quantity:1});
+        itemQuantities[index] += 1;
+        let count = target.querySelector(".item-cart-count");
+        if (!count) {
+          count = document.createElement("span");
+          count.className = "item-cart-count";
+          target.appendChild(count);
+        }
+        count.textContent = "(" + itemQuantities[index] + ")";
+        count.classList.add("visible");
+
+        const phoneRect = phone.getBoundingClientRect();
+        const panelRect = itemDetailsPanel.getBoundingClientRect();
+        const targetRect = target.getBoundingClientRect();
+        const startX = panelRect.left + panelRect.width / 2 - phoneRect.left;
+        const startY = panelRect.top + panelRect.height / 2 - phoneRect.top;
+        const endX = targetRect.left + targetRect.width / 2 - phoneRect.left;
+        const endY = targetRect.top + targetRect.height / 2 - phoneRect.top;
+        itemDetailsBackdrop.classList.add("is-flight");
+        itemDetailsPanel.style.transform = "translate(" + (endX-startX) + "px," + (endY-startY) + "px) scale(.12)";
+        itemDetailsPanel.style.opacity = ".08";
+        target.closest(".menu-item-card").classList.add("cart-target-pulse");
+        window.setTimeout(() => target.closest(".menu-item-card").classList.remove("cart-target-pulse"),550);
+        window.setTimeout(() => {
+          itemDetailsPanel.style.removeProperty("transform");
+          itemDetailsPanel.style.removeProperty("opacity");
+          itemDetailsBackdrop.classList.remove("visible","is-flight");
+          itemDetailsBackdrop.setAttribute("aria-hidden","true");
+          phone.classList.remove("item-details-open");
+          detailsClosing = false;
+          openedItemIndex = null;
+        },590);
+      }
+      itemDetailsClose.addEventListener("click",closeItemDetails);
+      itemDetailsBackdrop.addEventListener("click",event => {
+        if (event.target === itemDetailsBackdrop) closeItemDetails();
+      });
+      itemAddButton.addEventListener("click",addCurrentItemToCart);
+      let itemSuppressClick = false;
       function clearItemDrag() {
         itemCards.forEach(card => card.style.removeProperty("--drag-x"));
         itemDragX = 0;
@@ -2833,14 +3196,18 @@
       document.getElementById("itemNext").addEventListener("click", () => showMenuItem(activeItemIndex + 1));
       itemDots.forEach(dot => dot.addEventListener("click", () => showMenuItem(Number(dot.dataset.itemTarget))));
       itemCards.forEach(card => {
-        card.addEventListener("click", () => {
-          if (itemSuppressClick) return;
-          showMenuItem(Number(card.dataset.itemIndex));
+        card.addEventListener("click", (event) => {
+          if (itemSuppressClick || event.target.closest(".item-cart-icon")) return;
+          const index = Number(card.dataset.itemIndex);
+          showMenuItem(index);
+          openItemDetails(index);
         });
         card.addEventListener("keydown", event => {
           if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
-            showMenuItem(Number(card.dataset.itemIndex));
+            const index = Number(card.dataset.itemIndex);
+            showMenuItem(index);
+            openItemDetails(index);
           }
         });
       });
