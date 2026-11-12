@@ -397,6 +397,8 @@
       /* LOGO */
       .logo-circle {
         position: absolute;
+        pointer-events: auto;
+        cursor: pointer;
         inset-inline-start: 0;
         top: 50%;
         width: 92px;
@@ -2005,7 +2007,7 @@
                 </button>
               </div>
               <!-- LOGO -->
-              <div class="logo-circle" id="logoCircle">
+              <div class="logo-circle" id="logoCircle" role="button" tabindex="0" aria-label="العودة إلى بداية الصفحة">
                 <span class="logo-letter">M</span>
               </div>
               <!-- LANGUAGE MENU -->
@@ -2715,6 +2717,42 @@
         scenePosition = Math.max(0, Math.min(SCENE_DISTANCE, pagePosition));
         scheduleSceneRender();
       }
+
+      /* Clicking the logo smoothly returns through the menu scene to page top. */
+      function returnToPageTop() {
+        stopSceneSnap();
+        const from = screen.scrollTop;
+        if (from <= 0.5) {
+          setSceneScroll(0);
+          return;
+        }
+        const startedAt = performance.now();
+        const duration = Math.min(760, Math.max(420, from * 0.55));
+        const animateToTop = (now) => {
+          const raw = Math.min(1, (now - startedAt) / duration);
+          const eased = 1 - Math.pow(1 - raw, 3);
+          const position = from * (1 - eased);
+          screen.scrollTop = position;
+          scenePosition = Math.min(SCENE_DISTANCE, position);
+          scheduleSceneRender();
+          if (raw < 1) {
+            sceneAnimationFrame = requestAnimationFrame(animateToTop);
+          } else {
+            sceneAnimationFrame = 0;
+            setSceneScroll(0);
+          }
+        };
+        sceneAnimationFrame = requestAnimationFrame(animateToTop);
+      }
+
+      const logoCircle = document.getElementById("logoCircle");
+      logoCircle.addEventListener("click", returnToPageTop);
+      logoCircle.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          returnToPageTop();
+        }
+      });
 
       function stopSceneSnap() {
         if (sceneSnapTimer) {
