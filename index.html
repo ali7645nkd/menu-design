@@ -1883,7 +1883,7 @@
       .iv-add:active{transform:scale(.96)}
       .iv-add:disabled{opacity:.6;pointer-events:none}
       /* cart pill: lives in the carousel arrows row, so it never covers other elements */
-      .cart-pill{position:absolute;left:0;right:auto;top:50%;z-index:10;transform:translateY(-50%);display:flex;align-items:center;justify-content:center;flex:0 0 auto;height:54px;min-width:54px;max-width:0;margin:0;padding:0;border:0;border-radius:16px;background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(232,246,237,.88));color:#087f5b;cursor:pointer;opacity:0;pointer-events:none;box-shadow:0 6px 16px rgba(12,48,34,.15),inset 0 0 0 1px rgba(16,185,129,.28),inset 0 1px 0 rgba(255,255,255,.95);transition:max-width .45s cubic-bezier(.22,1,.36,1),min-width .45s cubic-bezier(.22,1,.36,1),opacity .3s ease}
+      .cart-pill{position:absolute;left:0;right:auto;top:calc(50% - 5px);z-index:10;transform:translateY(-50%);display:flex;align-items:center;justify-content:center;flex:0 0 auto;height:54px;min-width:54px;max-width:0;margin:0;padding:0;border:0;border-radius:50%;background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(232,246,237,.88));color:#087f5b;cursor:pointer;opacity:0;pointer-events:none;box-shadow:0 6px 16px rgba(12,48,34,.15),inset 0 0 0 1px rgba(16,185,129,.28),inset 0 1px 0 rgba(255,255,255,.95);transition:max-width .45s cubic-bezier(.22,1,.36,1),min-width .45s cubic-bezier(.22,1,.36,1),opacity .3s ease}
       .cart-pill.show{min-width:58px;max-width:58px;padding:0;opacity:1;pointer-events:auto}
       .cart-pill.nt{transition:none}
       .phone.iv-open .cart-pill,.phone.iv-cart-open .cart-pill{opacity:0;pointer-events:none}
