@@ -7,6 +7,10 @@
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
     <title>Menuva Design Lab</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
     <style>
       :root {
         --page-bg: #f8f1e5;
@@ -111,7 +115,7 @@
       .phone.theme-switching *::after {
         transition-property: transform, opacity !important;
       }
-            /* DARK THEME */
+      /* DARK THEME */
       .phone.dark {
         --page-bg: #14251f;
         --text-color: #e3f4ea;
@@ -397,6 +401,8 @@
       /* LOGO */
       .logo-circle {
         position: absolute;
+        pointer-events: auto;
+        cursor: pointer;
         inset-inline-start: 0;
         top: 50%;
         width: 92px;
@@ -416,7 +422,8 @@
           inset 0 0 0 2px rgba(16, 185, 129, 0.2),
           inset 0 2px 5px rgba(255, 255, 255, 0.9);
         z-index: 8;
-        pointer-events: none;
+        pointer-events: auto;
+        cursor: pointer;
         transform: translateY(-50%);
         transform-origin: right center;
         transition:
@@ -735,7 +742,7 @@
       .status-icon {
         color: #83f0b3;
       }
-    
+
       .info-pill-copy {
         display: flex;
         flex-direction: column;
@@ -930,7 +937,11 @@
         text-align: center;
         color: #f8f1e5;
         background:
-          radial-gradient(ellipse at 50% -25%, rgba(111, 210, 157, 0.2), transparent 65%),
+          radial-gradient(
+            ellipse at 50% -25%,
+            rgba(111, 210, 157, 0.2),
+            transparent 65%
+          ),
           #145a43;
         border-radius: 28px 28px 0 0;
         box-shadow: 0 -8px 28px rgba(20, 90, 67, 0.12);
@@ -940,13 +951,22 @@
         position: absolute;
         inset: 0 12% auto;
         height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(248, 241, 229, 0.42), transparent);
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(248, 241, 229, 0.42),
+          transparent
+        );
         pointer-events: none;
       }
       .phone.dark .scroll-demo-footer {
         color: #edf7ef;
         background:
-          radial-gradient(ellipse at 50% -25%, rgba(114, 221, 176, 0.13), transparent 65%),
+          radial-gradient(
+            ellipse at 50% -25%,
+            rgba(114, 221, 176, 0.13),
+            transparent 65%
+          ),
           #193d32;
         box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.18);
       }
@@ -980,9 +1000,13 @@
         background: #fffdf8;
         border: 1px solid rgba(248, 241, 229, 0.72);
         border-radius: 50%;
-        box-shadow: 0 4px 13px rgba(0, 0, 0, 0.13), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+        box-shadow:
+          0 4px 13px rgba(0, 0, 0, 0.13),
+          inset 0 1px 0 rgba(255, 255, 255, 0.95);
         cursor: pointer;
-        transition: transform 0.22s ease, box-shadow 0.22s ease;
+        transition:
+          transform 0.22s ease,
+          box-shadow 0.22s ease;
       }
       .footer-social-button:hover {
         transform: translateY(-3px) scale(1.04);
@@ -993,12 +1017,31 @@
         width: 23px;
         height: 23px;
       }
-      .footer-social-button.facebook svg { fill: #1877f2; }
-      .footer-social-button.instagram svg { fill: none; stroke: url(#instagramBrandGradient); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-      .footer-social-button.instagram .instagram-dot { fill: #e1306c; stroke: none; }
-      .footer-social-button.whatsapp svg { fill: #25d366; }
-      .footer-social-button.x-brand svg { fill: #000000; }
-      .footer-social-button.tiktok svg { fill: #111111; filter: drop-shadow(-1.2px -0.4px 0 #25f4ee) drop-shadow(1.2px 0.4px 0 #fe2c55); }
+      .footer-social-button.facebook svg {
+        fill: #1877f2;
+      }
+      .footer-social-button.instagram svg {
+        fill: none;
+        stroke: url(#instagramBrandGradient);
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .footer-social-button.instagram .instagram-dot {
+        fill: #e1306c;
+        stroke: none;
+      }
+      .footer-social-button.whatsapp svg {
+        fill: #25d366;
+      }
+      .footer-social-button.x-brand svg {
+        fill: #000000;
+      }
+      .footer-social-button.tiktok svg {
+        fill: #111111;
+        filter: drop-shadow(-1.2px -0.4px 0 #25f4ee)
+          drop-shadow(1.2px 0.4px 0 #fe2c55);
+      }
       .phone.dark .footer-social-button {
         background: #f8f7f2;
         border-color: rgba(255, 255, 255, 0.72);
@@ -1463,10 +1506,15 @@
         margin: 0 -8px 30px;
         padding: 24px 0 30px;
         border: 1px solid rgba(190, 151, 82, 0.34);
-        border-radius: 27px;
+        border-radius: 36px;
         overflow: hidden;
         isolation: isolate;
-        background: linear-gradient(145deg, #f3e6c9 0%, #ead8ae 52%, #f6ebd2 100%);
+        background: linear-gradient(
+          145deg,
+          #f3e6c9 0%,
+          #ead8ae 52%,
+          #f6ebd2 100%
+        );
         box-shadow:
           0 12px 30px rgba(20, 70, 48, 0.09),
           0 0 0 1px rgba(255, 255, 255, 0.5),
@@ -1479,11 +1527,25 @@
         z-index: -1;
         pointer-events: none;
         background:
-          radial-gradient(circle at 12% 0%, rgba(255,255,255,.72), transparent 38%),
-          linear-gradient(115deg, transparent 22%, rgba(255,255,255,.28) 50%, transparent 76%);
+          radial-gradient(
+            circle at 12% 0%,
+            rgba(255, 255, 255, 0.72),
+            transparent 38%
+          ),
+          linear-gradient(
+            115deg,
+            transparent 22%,
+            rgba(255, 255, 255, 0.28) 50%,
+            transparent 76%
+          );
       }
       .phone.dark .category-section {
-        background: linear-gradient(145deg, #514532 0%, #403725 54%, #5b4c35 100%);
+        background: linear-gradient(
+          145deg,
+          #514532 0%,
+          #403725 54%,
+          #5b4c35 100%
+        );
         border-color: rgba(224, 190, 126, 0.34);
         box-shadow:
           0 12px 30px rgba(0, 0, 0, 0.25),
@@ -1558,7 +1620,9 @@
         height: 100%;
         border-radius: 50%;
         object-fit: cover;
-        transition: filter 0.35s ease, transform 0.45s ease;
+        transition:
+          filter 0.35s ease,
+          transform 0.45s ease;
       }
       .category-name {
         max-width: 94px;
@@ -1630,45 +1694,288 @@
           transition: none !important;
         }
       }
-    
+
       /* 3D menu item carousel */
-      .items-carousel{position:relative;margin-top:8px;padding:0 0 2px;touch-action:pan-y}
-      .items-carousel-stage{position:relative;height:320px;margin:0 auto}
-      .menu-item-card{position:absolute;top:35px;left:50%;width:204px;height:264px;padding:0;border-radius:23px;overflow:visible;background:var(--page-bg);border:1px solid rgba(16,185,129,.17);box-shadow:0 10px 22px rgba(12,48,34,.12);transform:translate3d(-50%,0,0) scale(.72);opacity:0;z-index:1;pointer-events:none;transform-origin:center;transition:transform .48s cubic-bezier(.22,.75,.2,1),opacity .42s ease;will-change:transform,opacity;backface-visibility:hidden;cursor:pointer;outline:none}
-      .menu-item-card.is-active{transform:translate3d(calc(-50% + var(--drag-x,0px)),0,0) scale(1);opacity:1;z-index:5;pointer-events:auto;box-shadow:0 18px 38px rgba(12,48,34,.2)}
-      .menu-item-card.is-prev,.menu-item-card.is-next{opacity:.76;z-index:3;pointer-events:auto;filter:saturate(.78)}
-      .phone[dir="rtl"] .menu-item-card.is-prev{transform:translate3d(calc(-50% + 116px),19px,0) scale(.78)}
-      .phone[dir="rtl"] .menu-item-card.is-next{transform:translate3d(calc(-50% - 116px),19px,0) scale(.78)}
-      .phone[dir="ltr"] .menu-item-card.is-prev{transform:translate3d(calc(-50% - 126px),19px,0) scale(.78)}
-      .phone[dir="ltr"] .menu-item-card.is-next{transform:translate3d(calc(-50% + 126px),19px,0) scale(.78)}
-      .menu-item-image{position:absolute;top:-53px;left:50%;width:140px;height:140px;padding:5px;transform:translateX(-50%);border-radius:50%;background:var(--page-bg);border:1px solid rgba(16,185,129,.3);box-shadow:0 8px 20px rgba(8,55,36,.2);z-index:2}
-      .menu-item-image img{display:block;width:100%;height:100%;object-fit:cover;border-radius:50%}
-      .menu-item-content{height:100%;padding:116px 15px 14px;display:flex;flex-direction:column;text-align:center;align-items:center}
-      .menu-item-category{font-size:9px;font-weight:800;color:var(--green);opacity:.88;margin-bottom:7px}
-      .menu-item-content h3{font-size:17px;font-weight:850;color:var(--text-color);margin-bottom:7px;line-height:1.3}
-      .menu-item-content p{font-size:10px;line-height:1.7;color:var(--text-color);opacity:.68;max-width:175px}
-      .menu-item-bottom{margin-top:auto;width:100%;display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid rgba(16,185,129,.14)}
-      .menu-item-bottom strong{font-size:16px;color:var(--green);font-weight:900;direction:ltr}
-      .menu-item-bottom .item-cart-icon{display:inline-flex;align-items:center;justify-content:center;width:27px;height:27px;color:var(--green);border-radius:50%;background:rgba(16,185,129,.1)}
-      .menu-item-bottom .item-cart-icon svg{display:block;width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-      .phone.dark .menu-item-card{background:#20382e;border-color:rgba(114,221,176,.2);box-shadow:0 14px 30px rgba(0,0,0,.3)}
-      .phone.dark .menu-item-item.is-active,.phone.dark .menu-item-card.is-active{box-shadow:0 18px 38px rgba(0,0,0,.42)}
-      .phone.dark .menu-item-image{background:#20382e;border-color:rgba(114,221,176,.35)}
-      .phone.dark .menu-item-category,.phone.dark .menu-item-bottom strong{color:#72ddb0}
-      .items-carousel-controls{height:35px;display:flex;align-items:center;justify-content:center;gap:15px;margin-top:0;position:relative;z-index:8}
-      .carousel-arrow{width:36px;height:36px;border:1px solid rgba(16,185,129,.24);border-radius:13px;background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(232,246,237,.88));color:#087f5b;cursor:pointer;display:grid;place-items:center;box-shadow:0 4px 12px rgba(12,48,34,.1),inset 0 1px 0 rgba(255,255,255,.95);transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
-      .carousel-arrow:hover{transform:translateY(-2px);box-shadow:0 7px 16px rgba(12,48,34,.15),inset 0 1px 0 rgba(255,255,255,.95)}
-      .carousel-arrow:active{transform:scale(.94)}
-      .carousel-arrow svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round}
+      .items-carousel {
+        position: relative;
+        margin-top: 8px;
+        padding: 0 0 2px;
+        touch-action: pan-y;
+      }
+      .items-carousel-stage {
+        position: relative;
+        height: 320px;
+        margin: 0 auto;
+      }
+      .menu-item-card {
+        position: absolute;
+        top: 35px;
+        left: 50%;
+        width: 204px;
+        height: 264px;
+        padding: 0;
+        border-radius: 23px;
+        overflow: visible;
+        background: var(--page-bg);
+        border: 1px solid rgba(16, 185, 129, 0.17);
+        box-shadow: 0 10px 22px rgba(12, 48, 34, 0.12);
+        transform: translate3d(-50%, 0, 0) scale(0.72);
+        opacity: 0;
+        z-index: 1;
+        pointer-events: none;
+        transform-origin: center;
+        transition:
+          transform 0.48s cubic-bezier(0.22, 0.75, 0.2, 1),
+          opacity 0.42s ease;
+        will-change: transform, opacity;
+        backface-visibility: hidden;
+        cursor: pointer;
+        outline: none;
+      }
+      .menu-item-card.is-active {
+        transform: translate3d(calc(-50% + var(--drag-x, 0px)), 0, 0) scale(1);
+        opacity: 1;
+        z-index: 5;
+        pointer-events: auto;
+        box-shadow: 0 18px 38px rgba(12, 48, 34, 0.2);
+      }
+      .menu-item-card.is-prev,
+      .menu-item-card.is-next {
+        opacity: 0.76;
+        z-index: 3;
+        pointer-events: auto;
+        filter: saturate(0.78);
+      }
+      .phone[dir="rtl"] .menu-item-card.is-prev {
+        transform: translate3d(calc(-50% + 116px), 19px, 0) scale(0.78);
+      }
+      .phone[dir="rtl"] .menu-item-card.is-next {
+        transform: translate3d(calc(-50% - 116px), 19px, 0) scale(0.78);
+      }
+      .phone[dir="ltr"] .menu-item-card.is-prev {
+        transform: translate3d(calc(-50% - 126px), 19px, 0) scale(0.78);
+      }
+      .phone[dir="ltr"] .menu-item-card.is-next {
+        transform: translate3d(calc(-50% + 126px), 19px, 0) scale(0.78);
+      }
+      .menu-item-image {
+        position: absolute;
+        top: -53px;
+        left: 50%;
+        width: 140px;
+        height: 140px;
+        padding: 5px;
+        transform: translateX(-50%);
+        border-radius: 50%;
+        background: var(--page-bg);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        box-shadow: 0 8px 20px rgba(8, 55, 36, 0.2);
+        z-index: 2;
+      }
+      .menu-item-image img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+      .menu-item-content {
+        height: 100%;
+        padding: 116px 15px 14px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+      }
+      .menu-item-category {
+        font-size: 9px;
+        font-weight: 800;
+        color: var(--green);
+        opacity: 0.88;
+        margin-bottom: 7px;
+      }
+      .menu-item-content h3 {
+        font-size: 17px;
+        font-weight: 850;
+        color: var(--text-color);
+        margin-bottom: 7px;
+        line-height: 1.3;
+      }
+      .menu-item-content p {
+        font-size: 10px;
+        line-height: 1.7;
+        color: var(--text-color);
+        opacity: 0.68;
+        max-width: 175px;
+      }
+      .menu-item-bottom {
+        margin-top: auto;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 10px;
+        border-top: 1px solid rgba(16, 185, 129, 0.14);
+      }
+      .menu-item-bottom strong {
+        font-size: 16px;
+        color: var(--green);
+        font-weight: 900;
+        direction: ltr;
+      }
+      .menu-item-bottom .item-cart-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 27px;
+        height: 27px;
+        color: #fff;
+        border-radius: 50%;
+        background: #185f47;
+        box-shadow: 0 3px 8px rgba(12, 48, 34, 0.16);
+      }
+      .menu-item-bottom .item-cart-icon .fa-cart-shopping {
+        display: block;
+        font-size: 11px;
+        line-height: 1;
+        color: currentColor;
+      }
+      .phone.dark .menu-item-bottom .item-cart-icon {
+        background: linear-gradient(145deg, #29483a, #20382e);
+        color: #8de0b6;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+      }
+      .phone.dark .menu-item-card {
+        background: #20382e;
+        border-color: rgba(114, 221, 176, 0.2);
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.3);
+      }
+      .phone.dark .menu-item-item.is-active,
+      .phone.dark .menu-item-card.is-active {
+        box-shadow: 0 18px 38px rgba(0, 0, 0, 0.42);
+      }
+      .phone.dark .menu-item-image {
+        background: #20382e;
+        border-color: rgba(114, 221, 176, 0.35);
+      }
+      .phone.dark .menu-item-category,
+      .phone.dark .menu-item-bottom strong {
+        color: #72ddb0;
+      }
+      .items-carousel-controls {
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 0;
+        position: relative;
+        z-index: 8;
+      }
+      .carousel-arrow {
+        width: 36px;
+        height: 36px;
+        border: 1px solid rgba(16, 185, 129, 0.24);
+        border-radius: 13px;
+        background: linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.96),
+          rgba(232, 246, 237, 0.88)
+        );
+        color: #087f5b;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        box-shadow:
+          0 4px 12px rgba(12, 48, 34, 0.1),
+          inset 0 1px 0 rgba(255, 255, 255, 0.95);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          background 0.2s ease;
+      }
+      .carousel-arrow:hover {
+        transform: translateY(-2px);
+        box-shadow:
+          0 7px 16px rgba(12, 48, 34, 0.15),
+          inset 0 1px 0 rgba(255, 255, 255, 0.95);
+      }
+      .carousel-arrow:active {
+        transform: scale(0.94);
+      }
+      .carousel-arrow svg {
+        width: 17px;
+        height: 17px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2.3;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
       /* In RTL, flex row placement is mirrored, so mirror the arrow glyphs too. */
-      .phone[dir="rtl"] .carousel-arrow svg{transform:rotate(180deg)}
-      .phone.dark .carousel-arrow{background:linear-gradient(145deg,#29483a,#20382e);border-color:rgba(114,221,176,.28);color:#8de0b6;box-shadow:0 4px 12px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.07)}
-      .carousel-pagination{display:flex;align-items:center;gap:6px}
-      .carousel-dot{width:5px;height:5px;border:0;border-radius:9px;background:rgba(16,185,129,.28);padding:0;cursor:pointer;transition:width .3s ease,background .3s ease}
-      .carousel-dot.active{width:17px;background:var(--green)}
-      .carousel-hint{margin-top:2px;text-align:center;font-size:9px;color:var(--text-color);opacity:.48}
-      @media(max-width:370px){.menu-item-card{width:204px}.phone[dir="rtl"] .menu-item-card.is-prev{transform:translate3d(calc(-50% + 112px),21px,0) scale(.74)}.phone[dir="rtl"] .menu-item-card.is-next{transform:translate3d(calc(-50% - 112px),21px,0) scale(.74)}.phone[dir="ltr"] .menu-item-card.is-prev{transform:translate3d(calc(-50% - 112px),21px,0) scale(.74)}.phone[dir="ltr"] .menu-item-card.is-next{transform:translate3d(calc(-50% + 112px),21px,0) scale(.74)}}
-      @media(prefers-reduced-motion:reduce){.menu-item-card,.carousel-dot,.category-image-frame{transition:none!important}}
+      .phone[dir="rtl"] .carousel-arrow svg {
+        transform: rotate(180deg);
+      }
+      .phone.dark .carousel-arrow {
+        background: linear-gradient(145deg, #29483a, #20382e);
+        border-color: rgba(114, 221, 176, 0.28);
+        color: #8de0b6;
+        box-shadow:
+          0 4px 12px rgba(0, 0, 0, 0.22),
+          inset 0 1px 0 rgba(255, 255, 255, 0.07);
+      }
+      .carousel-pagination {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .carousel-dot {
+        width: 5px;
+        height: 5px;
+        border: 0;
+        border-radius: 9px;
+        background: rgba(16, 185, 129, 0.28);
+        padding: 0;
+        cursor: pointer;
+        transition:
+          width 0.3s ease,
+          background 0.3s ease;
+      }
+      .carousel-dot.active {
+        width: 17px;
+        background: var(--green);
+      }
+      .carousel-hint {
+        margin-top: 2px;
+        text-align: center;
+        font-size: 9px;
+        color: var(--text-color);
+        opacity: 0.48;
+      }
+      @media (max-width: 370px) {
+        .menu-item-card {
+          width: 204px;
+        }
+        .phone[dir="rtl"] .menu-item-card.is-prev {
+          transform: translate3d(calc(-50% + 112px), 21px, 0) scale(0.74);
+        }
+        .phone[dir="rtl"] .menu-item-card.is-next {
+          transform: translate3d(calc(-50% - 112px), 21px, 0) scale(0.74);
+        }
+        .phone[dir="ltr"] .menu-item-card.is-prev {
+          transform: translate3d(calc(-50% - 112px), 21px, 0) scale(0.74);
+        }
+        .phone[dir="ltr"] .menu-item-card.is-next {
+          transform: translate3d(calc(-50% + 112px), 21px, 0) scale(0.74);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .menu-item-card,
+        .carousel-dot,
+        .category-image-frame {
+          transition: none !important;
+        }
+      }
 
       /* ==========================================
          ONE-WAY SCENE TRANSITION + HORIZONTAL BROWSING
@@ -1824,6 +2131,606 @@
           transition: none !important;
         }
       }
+
+      /* ==========================================
+         ITEM DETAILS + CART (isolated feature)
+         No nested backdrop-filter: the veil and the card are siblings.
+         ========================================== */
+      .iv-modal {
+        position: absolute;
+        inset: 0;
+        z-index: 19;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 160px 14px 18px;
+        visibility: hidden;
+        pointer-events: none;
+        touch-action: none;
+        transition: visibility 0s linear 0.4s;
+      }
+      .iv-modal.open {
+        visibility: visible;
+        pointer-events: auto;
+        transition: none;
+      }
+      .iv-veil {
+        position: absolute;
+        inset: 0;
+        background: rgba(12, 30, 22, 0.32);
+        -webkit-backdrop-filter: blur(14px) saturate(120%);
+        backdrop-filter: blur(14px) saturate(120%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .iv-modal.open .iv-veil {
+        opacity: 1;
+      }
+      .iv-card {
+        position: relative;
+        width: 100%;
+        max-width: 310px;
+        max-height: min(100%, 500px);
+        display: flex;
+        flex-direction: column;
+        overflow: visible;
+        border-radius: 28px;
+        color: var(--text-color);
+        background: linear-gradient(
+          160deg,
+          rgba(255, 252, 244, 0.93),
+          rgba(238, 247, 240, 0.86)
+        );
+        -webkit-backdrop-filter: blur(26px) saturate(150%);
+        backdrop-filter: blur(26px) saturate(150%);
+        border: 1px solid rgba(255, 255, 255, 0.85);
+        box-shadow:
+          0 22px 50px rgba(12, 48, 34, 0.28),
+          inset 0 1px 0 #fff;
+        opacity: 0;
+        transform: translateY(12px) scale(0.95);
+        transition: opacity 0.3s ease;
+      }
+      .iv-modal.open .iv-card {
+        opacity: 1;
+        transform: none;
+      }
+      .phone.dark .iv-card {
+        background: linear-gradient(
+          160deg,
+          rgba(38, 68, 55, 0.94),
+          rgba(24, 48, 38, 0.92)
+        );
+        border-color: rgba(190, 235, 210, 0.18);
+        box-shadow:
+          0 22px 50px rgba(0, 0, 0, 0.45),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      }
+      .iv-head {
+        position: relative;
+        flex: 0 0 auto;
+        padding: 92px 16px 14px;
+        border-bottom: 1px solid rgba(16, 185, 129, 0.14);
+        border-radius: 28px 28px 0 0;
+      }
+      .iv-cat {
+        display: none;
+        margin: 0 38px 10px;
+        text-align: center;
+        font-size: 10.5px;
+        font-weight: 800;
+        letter-spacing: 0.2px;
+        color: var(--green);
+      }
+      .iv-main {
+        position: static;
+        display: block;
+        text-align: center;
+      }
+      .iv-img {
+        position: absolute;
+        top: 5px;
+        left: 50%;
+        z-index: 2;
+        flex: 0 0 158px;
+        width: 158px;
+        height: 158px;
+        padding: 5px;
+        border-radius: 50%;
+        background: var(--page-bg);
+        border: 1px solid rgba(16, 185, 129, 0.34);
+        box-shadow: 0 12px 28px rgba(8, 55, 36, 0.28);
+        transform: translate(-50%, -50%);
+      }
+      .iv-img img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+      .phone.dark .iv-img {
+        border-color: rgba(114, 221, 176, 0.35);
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+      }
+      .iv-info {
+        width: 100%;
+        min-width: 0;
+        text-align: center;
+      }
+      .iv-name {
+        margin: 0 0 5px;
+        font-size: 20px;
+        font-weight: 850;
+        line-height: 1.3;
+        text-align: center;
+      }
+      .iv-desc {
+        max-width: 260px;
+        margin: 0 auto;
+        font-size: 12.5px;
+        line-height: 1.6;
+        opacity: 0.76;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .iv-close {
+        position: absolute;
+        top: 10px;
+        inset-inline-end: 10px;
+        z-index: 3;
+        width: 30px;
+        height: 30px;
+        display: grid;
+        place-items: center;
+        border-radius: 11px;
+        border: 1px solid rgba(8, 127, 91, 0.2);
+        background: rgba(255, 255, 255, 0.6);
+        color: var(--text-color);
+        cursor: pointer;
+      }
+      .iv-close svg {
+        width: 14px;
+        height: 14px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2.3;
+        stroke-linecap: round;
+      }
+      .phone.dark .iv-close {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.14);
+      }
+      .iv-scroll {
+        flex: 1 1 auto;
+        min-height: 0;
+        padding: 0 16px 14px;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        touch-action: pan-y;
+        scrollbar-width: none;
+      }
+      .iv-scroll::-webkit-scrollbar {
+        display: none;
+      }
+      .iv-h {
+        margin: 15px 0 9px;
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--green);
+      }
+      .phone.dark .iv-cat,
+      .phone.dark .iv-h {
+        color: #72ddb0;
+      }
+      .iv-num {
+        direction: ltr;
+        unicode-bidi: isolate;
+        white-space: nowrap;
+      }
+      .iv-sizes {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+        gap: 8px;
+      }
+      .iv-size {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        padding: 11px 6px;
+        border-radius: 16px;
+        border: 1.5px solid rgba(8, 127, 91, 0.22);
+        background: rgba(255, 255, 255, 0.5);
+        color: var(--text-color);
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        transition:
+          background 0.25s,
+          border-color 0.25s,
+          transform 0.2s,
+          box-shadow 0.25s;
+      }
+      .iv-size b {
+        font-size: 11px;
+        font-weight: 800;
+        opacity: 0.85;
+      }
+      .iv-size.on {
+        color: #fff;
+        border-color: #0b9a6b;
+        background: linear-gradient(145deg, #12b07e, #087f5b);
+        box-shadow:
+          0 8px 18px rgba(8, 127, 91, 0.32),
+          inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+      }
+      .phone.dark .iv-size {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(114, 221, 176, 0.25);
+      }
+      .phone.dark .iv-size.on {
+        background: linear-gradient(145deg, #12b07e, #087f5b);
+        border-color: #0b9a6b;
+      }
+      .iv-addons {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .iv-addon {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        width: 100%;
+        padding: 11px 12px;
+        border-radius: 15px;
+        border: 1px solid rgba(8, 127, 91, 0.14);
+        background: rgba(255, 255, 255, 0.45);
+        color: var(--text-color);
+        font-size: 13px;
+        font-weight: 700;
+        text-align: start;
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          border-color 0.2s;
+      }
+      .iv-addon b {
+        margin-inline-start: auto;
+        font-size: 12px;
+        color: var(--green);
+      }
+      .iv-addon.on {
+        background: rgba(16, 185, 129, 0.13);
+        border-color: rgba(8, 127, 91, 0.45);
+      }
+      .phone.dark .iv-addon {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(114, 221, 176, 0.18);
+      }
+      .phone.dark .iv-addon b {
+        color: #72ddb0;
+      }
+      .iv-chk {
+        position: relative;
+        flex: 0 0 22px;
+        width: 22px;
+        height: 22px;
+        border-radius: 7px;
+        border: 1.8px solid rgba(8, 127, 91, 0.5);
+        background: rgba(255, 255, 255, 0.6);
+        transition:
+          background 0.2s,
+          border-color 0.2s;
+      }
+      .iv-addon.on .iv-chk {
+        background: linear-gradient(145deg, #12b07e, #087f5b);
+        border-color: #0b9a6b;
+      }
+      .iv-addon.on .iv-chk::after {
+        content: "";
+        position: absolute;
+        left: 6px;
+        top: 2.5px;
+        width: 6px;
+        height: 11px;
+        border: solid #fff;
+        border-width: 0 2.2px 2.2px 0;
+        transform: rotate(45deg);
+      }
+      .iv-bar {
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 16px 14px;
+        border-top: 1px solid rgba(16, 185, 129, 0.16);
+        border-radius: 0 0 28px 28px;
+        background: rgba(255, 255, 255, 0.3);
+      }
+      .iv-scroll {
+        border-radius: 0 0 28px 28px;
+      }
+      \n .phone.dark .iv-bar {
+        background: rgba(255, 255, 255, 0.04);
+      }
+      .iv-total {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        min-width: 0;
+      }
+      .iv-total > span {
+        font-size: 11px;
+        font-weight: 700;
+        opacity: 0.7;
+      }
+      .iv-price {
+        display: flex;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 0 8px;
+      }
+      .iv-price strong {
+        font-size: 30px;
+        font-weight: 900;
+        line-height: 1.15;
+        color: var(--green);
+      }
+      .phone.dark .iv-price strong {
+        color: #72ddb0;
+      }
+      .iv-old {
+        font-size: 12px;
+        font-weight: 700;
+        opacity: 0.6;
+        text-decoration: line-through;
+      }
+      .iv-add {
+        flex: 0 0 auto;
+        min-width: 118px;
+        padding: 14px 16px;
+        border: 0;
+        border-radius: 18px;
+        background: linear-gradient(145deg, #12b07e, #087f5b);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 800;
+        cursor: pointer;
+        box-shadow:
+          0 8px 20px rgba(8, 127, 91, 0.35),
+          inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        transition:
+          transform 0.2s,
+          opacity 0.2s;
+      }
+      .iv-add:active {
+        transform: scale(0.96);
+      }
+      .iv-add:disabled {
+        opacity: 0.6;
+        pointer-events: none;
+      }
+      /* cart pill: lives in the carousel arrows row, so it never covers other elements */
+      .cart-pill {
+        position: absolute;
+        left: 0;
+        right: auto;
+        top: calc(50% - 10px);
+        z-index: 10;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+        height: 54px;
+        min-width: 54px;
+        max-width: 0;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        border-radius: 50%;
+        background: #185f47;
+        color: #087f5b;
+        cursor: pointer;
+        opacity: 0;
+        pointer-events: none;
+        box-shadow:
+          0 6px 16px rgba(12, 48, 34, 0.15),
+          inset 0 0 0 1px rgba(16, 185, 129, 0.28),
+          inset 0 1px 0 rgba(255, 255, 255, 0.95);
+        transition:
+          max-width 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+          min-width 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+          opacity 0.3s ease;
+      }
+      .cart-pill.show {
+        min-width: 58px;
+        max-width: 58px;
+        padding: 0;
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .cart-pill.nt {
+        transition: none;
+      }
+      .phone.iv-open .cart-pill,
+      .phone.iv-cart-open .cart-pill {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .phone.dark .cart-pill {
+        background: linear-gradient(145deg, #29483a, #20382e);
+        color: #8de0b6;
+        box-shadow:
+          0 4px 12px rgba(0, 0, 0, 0.22),
+          inset 0 0 0 1px rgba(114, 221, 176, 0.28),
+          inset 0 1px 0 rgba(255, 255, 255, 0.07);
+      }
+      .cart-pill-in {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        flex: 0 0 38px;
+        border-radius: 50%;
+        background: transparent;
+        min-width: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        font-size: 13px;
+        font-weight: 850;
+      }
+      .cart-pill-in .fa-cart-shopping {
+        display: block;
+        font-size: 21px;
+        line-height: 1;
+        color: rgb(255 255 255);
+      }
+      .cart-pill.shake {
+        animation: cartShake 0.6s ease;
+      }
+      @keyframes cartShake {
+        0%,
+        100% {
+          transform: translateY(-50%) rotate(0);
+        }
+        15% {
+          transform: translateY(-50%) rotate(-12deg) scale(1.1);
+        }
+        35% {
+          transform: translateY(-50%) rotate(10deg) scale(1.1);
+        }
+        55% {
+          transform: translateY(-50%) rotate(-7deg);
+        }
+        75% {
+          transform: translateY(-50%) rotate(4deg);
+        }
+      }
+      .cart-badge {
+        position: absolute;
+        top: -7px;
+        inset-inline-end: -6px;
+        min-width: 20px;
+        height: 20px;
+        padding: 0 5px;
+        display: grid;
+        place-items: center;
+        border-radius: 10px;
+        background: linear-gradient(145deg, #f0c27f, #dfaf6b);
+        color: #3b2a0e;
+        font-size: 11px;
+        font-weight: 900;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+      }
+      .cart-badge[hidden] {
+        display: none;
+      }
+      /* miniature dish image that flies to the cart */
+      .iv-fly {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 19;
+        display: block;
+        border-radius: 50%;
+        pointer-events: none;
+        transform-origin: center;
+        background: #f2e8d0 center/cover no-repeat;
+        border: 2px solid rgba(255, 255, 255, 0.92);
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+      }
+      .iv-fly[hidden] {
+        display: none;
+      }
+      /* cart panel */
+      .cart-panel .iv-name {
+        margin: 0;
+        padding-inline-end: 40px;
+      }
+      .cart-empty {
+        padding: 26px 0 10px;
+        text-align: center;
+        font-size: 13px;
+        opacity: 0.65;
+      }
+      .cart-line {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        margin-top: 9px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.5);
+        border: 1px solid rgba(8, 127, 91, 0.12);
+      }
+      .cart-line:first-child {
+        margin-top: 14px;
+      }
+      .phone.dark .cart-line {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(114, 221, 176, 0.16);
+      }
+      .cart-line img {
+        flex: 0 0 50px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+        background: #f2e8d0;
+      }
+      .cart-info {
+        flex: 1;
+        min-width: 0;
+      }
+      .cart-info b {
+        display: block;
+        font-size: 13px;
+      }
+      .cart-info small {
+        display: block;
+        font-size: 10px;
+        line-height: 1.5;
+        opacity: 0.72;
+      }
+      .cart-info em {
+        font-style: normal;
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--green);
+      }
+      .phone.dark .cart-info em {
+        color: #72ddb0;
+      }
+      .cart-qty {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 13px;
+        font-weight: 800;
+      }
+      .cart-qty button {
+        width: 26px;
+        height: 26px;
+        border-radius: 9px;
+        border: 1px solid rgba(8, 127, 91, 0.25);
+        background: rgba(255, 255, 255, 0.6);
+        color: var(--green);
+        font-size: 15px;
+        font-weight: 800;
+        cursor: pointer;
+      }
+      .phone.dark .cart-qty button {
+        background: rgba(255, 255, 255, 0.08);
+        color: #72ddb0;
+      }
     </style>
   </head>
   <body>
@@ -1920,7 +2827,13 @@
                 </button>
               </div>
               <!-- LOGO -->
-              <div class="logo-circle" id="logoCircle">
+              <div
+                class="logo-circle"
+                id="logoCircle"
+                role="button"
+                tabindex="0"
+                aria-label="العودة إلى بداية الصفحة"
+              >
                 <span class="logo-letter">M</span>
               </div>
               <!-- LANGUAGE MENU -->
@@ -2008,7 +2921,10 @@
             <span class="info-pill-divider"></span>
             <div class="info-pill-row">
               <span class="info-pill-icon location-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" style="fill: #dfaf6b; color:#202923a6">
+                <svg
+                  viewBox="0 0 24 24"
+                  style="fill: #dfaf6b; color: #202923a6"
+                >
                   <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
                   <circle cx="12" cy="10" r="2.5" />
                 </svg>
@@ -2044,102 +2960,436 @@
           >
             <section class="category-section" aria-label="أقسام القائمة">
               <div class="category-heading">
-                <h2 class="category-section-title" id="categoriesTitle">الأقسام</h2>
+                <h2 class="category-section-title" id="categoriesTitle">
+                  الأقسام
+                </h2>
               </div>
-              <nav class="category-track" id="categoryTrack" aria-label="أقسام القائمة">
-                <button class="category-button active" type="button" data-category-index="0" aria-pressed="true">
-                  <span class="category-image-frame"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=240&q=82" alt="" loading="lazy" /></span>
+              <nav
+                class="category-track"
+                id="categoryTrack"
+                aria-label="أقسام القائمة"
+              >
+                <button
+                  class="category-button active"
+                  type="button"
+                  data-category-index="0"
+                  aria-pressed="true"
+                >
+                  <span class="category-image-frame"
+                    ><img
+                      src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=240&q=82"
+                      alt=""
+                      loading="lazy"
+                  /></span>
                   <span class="category-name">الأطباق الرئيسية</span>
                 </button>
-                <button class="category-button" type="button" data-category-index="1" aria-pressed="false">
-                  <span class="category-image-frame"><img src="https://images.unsplash.com/photo-1512621778302-9b8f2f7f6f4b?auto=format&fit=crop&w=240&q=82" alt="" loading="lazy" /></span>
+                <button
+                  class="category-button"
+                  type="button"
+                  data-category-index="1"
+                  aria-pressed="false"
+                >
+                  <span class="category-image-frame"
+                    ><img
+                      src="https://images.unsplash.com/photo-1512621778302-9b8f2f7f6f4b?auto=format&fit=crop&w=240&q=82"
+                      alt=""
+                      loading="lazy"
+                  /></span>
                   <span class="category-name">المقبلات والسلطات</span>
                 </button>
-                <button class="category-button" type="button" data-category-index="2" aria-pressed="false">
-                  <span class="category-image-frame"><img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=240&q=82" alt="" loading="lazy" /></span>
+                <button
+                  class="category-button"
+                  type="button"
+                  data-category-index="2"
+                  aria-pressed="false"
+                >
+                  <span class="category-image-frame"
+                    ><img
+                      src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=240&q=82"
+                      alt=""
+                      loading="lazy"
+                  /></span>
                   <span class="category-name">المشروبات</span>
                 </button>
-                <button class="category-button" type="button" data-category-index="3" aria-pressed="false">
-                  <span class="category-image-frame"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=240&q=82" alt="" loading="lazy" /></span>
+                <button
+                  class="category-button"
+                  type="button"
+                  data-category-index="3"
+                  aria-pressed="false"
+                >
+                  <span class="category-image-frame"
+                    ><img
+                      src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=240&q=82"
+                      alt=""
+                      loading="lazy"
+                  /></span>
                   <span class="category-name">الحلويات</span>
                 </button>
-                <button class="category-button" type="button" data-category-index="4" aria-pressed="false">
-                  <span class="category-image-frame"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=240&q=82" alt="" loading="lazy" /></span>
+                <button
+                  class="category-button"
+                  type="button"
+                  data-category-index="4"
+                  aria-pressed="false"
+                >
+                  <span class="category-image-frame"
+                    ><img
+                      src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=240&q=82"
+                      alt=""
+                      loading="lazy"
+                  /></span>
                   <span class="category-name">القهوة</span>
                 </button>
-                <button class="category-button" type="button" data-category-index="5" aria-pressed="false">
-                  <span class="category-image-frame"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=240&q=82" alt="" loading="lazy" /></span>
+                <button
+                  class="category-button"
+                  type="button"
+                  data-category-index="5"
+                  aria-pressed="false"
+                >
+                  <span class="category-image-frame"
+                    ><img
+                      src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=240&q=82"
+                      alt=""
+                      loading="lazy"
+                  /></span>
                   <span class="category-name">الوجبات الخاصة</span>
                 </button>
               </nav>
               <section class="items-carousel" aria-label="أصناف القائمة">
                 <div class="items-carousel-stage" id="itemsCarouselStage">
-                  <article class="menu-item-card is-active" data-item-index="0" tabindex="0" role="button" aria-label="كبسة دجاج">
-                    <div class="menu-item-image"><img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=640&q=85" alt="كبسة دجاج" loading="lazy"></div>
-                    <div class="menu-item-content"><span class="menu-item-category" id="itemCategory1">الأطباق الرئيسية</span><h3 id="itemTitle1">كبسة دجاج</h3><p id="itemDesc1">أرز متبل مع دجاج طري ومزيج من البهارات الشرقية.</p><div class="menu-item-bottom"><strong>$12.50</strong><span class="item-cart-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.2 11.1a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.5L22 8H6"/><path d="M9 20h.01M18 20h.01"/></svg></span></div></div>
+                  <article
+                    class="menu-item-card is-active"
+                    data-item-index="0"
+                    tabindex="0"
+                    role="button"
+                    aria-label="كبسة دجاج"
+                  >
+                    <div class="menu-item-image">
+                      <img
+                        src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=640&q=85"
+                        alt="كبسة دجاج"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="menu-item-content">
+                      <span class="menu-item-category" id="itemCategory1"
+                        >الأطباق الرئيسية</span
+                      >
+                      <h3 id="itemTitle1">كبسة دجاج</h3>
+                      <p id="itemDesc1">
+                        أرز متبل مع دجاج طري ومزيج من البهارات الشرقية.
+                      </p>
+                      <div class="menu-item-bottom">
+                        <strong>$12.50</strong
+                        ><span class="item-cart-icon" aria-hidden="true"><i class="fa-solid fa-cart-shopping"></i></span>
+                      </div>
+                    </div>
                   </article>
-                  <article class="menu-item-card" data-item-index="1" tabindex="0" role="button" aria-label="سلطة طازجة">
-                    <div class="menu-item-image"><img src="https://images.unsplash.com/photo-1512621778302-9b8f2f7f6f4b?auto=format&fit=crop&w=640&q=85" alt="سلطة طازجة" loading="lazy"></div>
-                    <div class="menu-item-content"><span class="menu-item-category" id="itemCategory2">المقبلات والسلطات</span><h3 id="itemTitle2">سلطة طازجة</h3><p id="itemDesc2">خضروات موسمية طازجة مع صلصة خفيفة ومنعشة.</p><div class="menu-item-bottom"><strong>$6.00</strong><span class="item-cart-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.2 11.1a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.5L22 8H6"/><path d="M9 20h.01M18 20h.01"/></svg></span></div></div>
+                  <article
+                    class="menu-item-card"
+                    data-item-index="1"
+                    tabindex="0"
+                    role="button"
+                    aria-label="سلطة طازجة"
+                  >
+                    <div class="menu-item-image">
+                      <img
+                        src="https://images.unsplash.com/photo-1512621778302-9b8f2f7f6f4b?auto=format&fit=crop&w=640&q=85"
+                        alt="سلطة طازجة"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="menu-item-content">
+                      <span class="menu-item-category" id="itemCategory2"
+                        >المقبلات والسلطات</span
+                      >
+                      <h3 id="itemTitle2">سلطة طازجة</h3>
+                      <p id="itemDesc2">
+                        خضروات موسمية طازجة مع صلصة خفيفة ومنعشة.
+                      </p>
+                      <div class="menu-item-bottom">
+                        <strong>$6.00</strong
+                        ><span class="item-cart-icon" aria-hidden="true"><i class="fa-solid fa-cart-shopping"></i></span>
+                      </div>
+                    </div>
                   </article>
-                  <article class="menu-item-card" data-item-index="2" tabindex="0" role="button" aria-label="عصير طبيعي">
-                    <div class="menu-item-image"><img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=640&q=85" alt="عصير طبيعي" loading="lazy"></div>
-                    <div class="menu-item-content"><span class="menu-item-category" id="itemCategory3">المشروبات</span><h3 id="itemTitle3">عصير طبيعي</h3><p id="itemDesc3">مزيج فواكه طازجة يقدم بارداً.</p><div class="menu-item-bottom"><strong>$4.00</strong><span class="item-cart-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.2 11.1a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.5L22 8H6"/><path d="M9 20h.01M18 20h.01"/></svg></span></div></div>
+                  <article
+                    class="menu-item-card"
+                    data-item-index="2"
+                    tabindex="0"
+                    role="button"
+                    aria-label="عصير طبيعي"
+                  >
+                    <div class="menu-item-image">
+                      <img
+                        src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=640&q=85"
+                        alt="عصير طبيعي"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="menu-item-content">
+                      <span class="menu-item-category" id="itemCategory3"
+                        >المشروبات</span
+                      >
+                      <h3 id="itemTitle3">عصير طبيعي</h3>
+                      <p id="itemDesc3">مزيج فواكه طازجة يقدم بارداً.</p>
+                      <div class="menu-item-bottom">
+                        <strong>$4.00</strong
+                        ><span class="item-cart-icon" aria-hidden="true"><i class="fa-solid fa-cart-shopping"></i></span>
+                      </div>
+                    </div>
                   </article>
-                  <article class="menu-item-card" data-item-index="3" tabindex="0" role="button" aria-label="حلوى الكريمة">
-                    <div class="menu-item-image"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=640&q=85" alt="حلوى الكريمة" loading="lazy"></div>
-                    <div class="menu-item-content"><span class="menu-item-category" id="itemCategory4">الحلويات</span><h3 id="itemTitle4">حلوى الكريمة</h3><p id="itemDesc4">حلوى ناعمة بطبقات غنية وكريمة خفيفة.</p><div class="menu-item-bottom"><strong>$5.50</strong><span class="item-cart-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.2 11.1a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.5L22 8H6"/><path d="M9 20h.01M18 20h.01"/></svg></span></div></div>
+                  <article
+                    class="menu-item-card"
+                    data-item-index="3"
+                    tabindex="0"
+                    role="button"
+                    aria-label="حلوى الكريمة"
+                  >
+                    <div class="menu-item-image">
+                      <img
+                        src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=640&q=85"
+                        alt="حلوى الكريمة"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="menu-item-content">
+                      <span class="menu-item-category" id="itemCategory4"
+                        >الحلويات</span
+                      >
+                      <h3 id="itemTitle4">حلوى الكريمة</h3>
+                      <p id="itemDesc4">حلوى ناعمة بطبقات غنية وكريمة خفيفة.</p>
+                      <div class="menu-item-bottom">
+                        <strong>$5.50</strong
+                        ><span class="item-cart-icon" aria-hidden="true"><i class="fa-solid fa-cart-shopping"></i></span>
+                      </div>
+                    </div>
                   </article>
-                  <article class="menu-item-card" data-item-index="4" tabindex="0" role="button" aria-label="قهوة مختصة">
-                    <div class="menu-item-image"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=640&q=85" alt="قهوة مختصة" loading="lazy"></div>
-                    <div class="menu-item-content"><span class="menu-item-category" id="itemCategory5">القهوة</span><h3 id="itemTitle5">قهوة مختصة</h3><p id="itemDesc5">قهوة محضرة بعناية لعشاق النكهة الغنية.</p><div class="menu-item-bottom"><strong>$3.50</strong><span class="item-cart-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.2 11.1a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.5L22 8H6"/><path d="M9 20h.01M18 20h.01"/></svg></span></div></div>
+                  <article
+                    class="menu-item-card"
+                    data-item-index="4"
+                    tabindex="0"
+                    role="button"
+                    aria-label="قهوة مختصة"
+                  >
+                    <div class="menu-item-image">
+                      <img
+                        src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=640&q=85"
+                        alt="قهوة مختصة"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="menu-item-content">
+                      <span class="menu-item-category" id="itemCategory5"
+                        >القهوة</span
+                      >
+                      <h3 id="itemTitle5">قهوة مختصة</h3>
+                      <p id="itemDesc5">
+                        قهوة محضرة بعناية لعشاق النكهة الغنية.
+                      </p>
+                      <div class="menu-item-bottom">
+                        <strong>$3.50</strong
+                        ><span class="item-cart-icon" aria-hidden="true"><i class="fa-solid fa-cart-shopping"></i></span>
+                      </div>
+                    </div>
                   </article>
-                  <article class="menu-item-card" data-item-index="5" tabindex="0" role="button" aria-label="برغر كلاسيكي">
-                    <div class="menu-item-image"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=640&q=85" alt="برغر كلاسيكي" loading="lazy"></div>
-                    <div class="menu-item-content"><span class="menu-item-category" id="itemCategory6">الوجبات الخاصة</span><h3 id="itemTitle6">برغر كلاسيكي</h3><p id="itemDesc6">لحم مشوي مع إضافات طازجة وخبز طري.</p><div class="menu-item-bottom"><strong>$9.00</strong><span class="item-cart-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.2 11.1a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.5L22 8H6"/><path d="M9 20h.01M18 20h.01"/></svg></span></div></div>
+                  <article
+                    class="menu-item-card"
+                    data-item-index="5"
+                    tabindex="0"
+                    role="button"
+                    aria-label="برغر كلاسيكي"
+                  >
+                    <div class="menu-item-image">
+                      <img
+                        src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=640&q=85"
+                        alt="برغر كلاسيكي"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="menu-item-content">
+                      <span class="menu-item-category" id="itemCategory6"
+                        >الوجبات الخاصة</span
+                      >
+                      <h3 id="itemTitle6">برغر كلاسيكي</h3>
+                      <p id="itemDesc6">لحم مشوي مع إضافات طازجة وخبز طري.</p>
+                      <div class="menu-item-bottom">
+                        <strong>$9.00</strong
+                        ><span class="item-cart-icon" aria-hidden="true"><i class="fa-solid fa-cart-shopping"></i></span>
+                      </div>
+                    </div>
                   </article>
                 </div>
                 <div class="items-carousel-controls">
-                  <button class="carousel-arrow" id="itemPrev" type="button" aria-label="الصنف السابق"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></button>
-                  <div class="carousel-pagination" aria-label="التنقل بين الأصناف">
-                    <button class="carousel-dot active" type="button" data-item-target="0" aria-label="الصنف 1"></button><button class="carousel-dot" type="button" data-item-target="1" aria-label="الصنف 2"></button><button class="carousel-dot" type="button" data-item-target="2" aria-label="الصنف 3"></button><button class="carousel-dot" type="button" data-item-target="3" aria-label="الصنف 4"></button><button class="carousel-dot" type="button" data-item-target="4" aria-label="الصنف 5"></button><button class="carousel-dot" type="button" data-item-target="5" aria-label="الصنف 6"></button>
+                  <button
+                    class="carousel-arrow"
+                    id="itemPrev"
+                    type="button"
+                    aria-label="الصنف السابق"
+                  >
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="m14.5 5-7 7 7 7" />
+                    </svg>
+                  </button>
+                  <div
+                    class="carousel-pagination"
+                    aria-label="التنقل بين الأصناف"
+                  >
+                    <button
+                      class="carousel-dot active"
+                      type="button"
+                      data-item-target="0"
+                      aria-label="الصنف 1"
+                    ></button
+                    ><button
+                      class="carousel-dot"
+                      type="button"
+                      data-item-target="1"
+                      aria-label="الصنف 2"
+                    ></button
+                    ><button
+                      class="carousel-dot"
+                      type="button"
+                      data-item-target="2"
+                      aria-label="الصنف 3"
+                    ></button
+                    ><button
+                      class="carousel-dot"
+                      type="button"
+                      data-item-target="3"
+                      aria-label="الصنف 4"
+                    ></button
+                    ><button
+                      class="carousel-dot"
+                      type="button"
+                      data-item-target="4"
+                      aria-label="الصنف 5"
+                    ></button
+                    ><button
+                      class="carousel-dot"
+                      type="button"
+                      data-item-target="5"
+                      aria-label="الصنف 6"
+                    ></button>
                   </div>
-                  <button class="carousel-arrow" id="itemNext" type="button" aria-label="الصنف التالي"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 5 7 7-7 7"/></svg></button>
+                  <button
+                    class="carousel-arrow"
+                    id="itemNext"
+                    type="button"
+                    aria-label="الصنف التالي"
+                  >
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="m9.5 5 7 7-7 7" />
+                    </svg>
+                  </button>
                 </div>
                 <p class="carousel-hint">اسحب للتنقل بين الأصناف</p>
               </section>
             </section>
             <footer class="scroll-demo-footer" aria-label="تذييل المطعم">
-              <h2 class="footer-restaurant-name" id="footerRestaurantName">مطعم دار الياسمين</h2>
-              <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
-                <defs><linearGradient id="instagramBrandGradient" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ffdc80"/><stop offset="32%" stop-color="#f77737"/><stop offset="62%" stop-color="#e1306c"/><stop offset="100%" stop-color="#833ab4"/></linearGradient></defs>
+              <h2 class="footer-restaurant-name" id="footerRestaurantName">
+                مطعم دار الياسمين
+              </h2>
+              <svg
+                width="0"
+                height="0"
+                aria-hidden="true"
+                focusable="false"
+                style="position: absolute"
+              >
+                <defs>
+                  <linearGradient
+                    id="instagramBrandGradient"
+                    x1="0%"
+                    y1="100%"
+                    x2="100%"
+                    y2="0%"
+                  >
+                    <stop offset="0%" stop-color="#ffdc80" />
+                    <stop offset="32%" stop-color="#f77737" />
+                    <stop offset="62%" stop-color="#e1306c" />
+                    <stop offset="100%" stop-color="#833ab4" />
+                  </linearGradient>
+                </defs>
               </svg>
-              <p class="footer-social-heading" id="footerSocialHeading">تابعنا على وسائل التواصل الاجتماعي</p>
+              <p class="footer-social-heading" id="footerSocialHeading">
+                تابعنا على وسائل التواصل الاجتماعي
+              </p>
               <div class="footer-socials" aria-label="حسابات التواصل الاجتماعي">
-                <button class="footer-social-button facebook" type="button" data-social="facebook" aria-label="Facebook">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V3.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.3V13h2.8v8h3.4Z"/></svg>
+                <button
+                  class="footer-social-button facebook"
+                  type="button"
+                  data-social="facebook"
+                  aria-label="Facebook"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      d="M13.5 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V3.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.3V13h2.8v8h3.4Z"
+                    />
+                  </svg>
                 </button>
-                <button class="footer-social-button instagram" type="button" data-social="instagram" aria-label="Instagram">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"/><circle cx="12" cy="12" r="4.1"/><circle class="instagram-dot" cx="17.7" cy="6.6" r="1.1"/></svg>
+                <button
+                  class="footer-social-button instagram"
+                  type="button"
+                  data-social="instagram"
+                  aria-label="Instagram"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5" />
+                    <circle cx="12" cy="12" r="4.1" />
+                    <circle class="instagram-dot" cx="17.7" cy="6.6" r="1.1" />
+                  </svg>
                 </button>
-                <button class="footer-social-button whatsapp" type="button" data-social="whatsapp" aria-label="WhatsApp">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2a9.7 9.7 0 0 0-8.3 14.7L2.4 22l5.2-1.3A9.8 9.8 0 1 0 12 2.2Zm0 17.6a7.8 7.8 0 0 1-4-1.1l-.3-.2-3.1.8.8-3-.2-.3A7.8 7.8 0 1 1 12 19.8Zm4.3-5.8c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8.9-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.5c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5l-.7-1.7c-.2-.4-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 3.9 3.4.5.2.9.3 1.2.4.5.2 1 .1 1.4.1.4-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.4-.3Z"/></svg>
+                <button
+                  class="footer-social-button whatsapp"
+                  type="button"
+                  data-social="whatsapp"
+                  aria-label="WhatsApp"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      d="M12 2.2a9.7 9.7 0 0 0-8.3 14.7L2.4 22l5.2-1.3A9.8 9.8 0 1 0 12 2.2Zm0 17.6a7.8 7.8 0 0 1-4-1.1l-.3-.2-3.1.8.8-3-.2-.3A7.8 7.8 0 1 1 12 19.8Zm4.3-5.8c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8.9-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.5c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5l-.7-1.7c-.2-.4-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 3.9 3.4.5.2.9.3 1.2.4.5.2 1 .1 1.4.1.4-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.4-.3Z"
+                    />
+                  </svg>
                 </button>
-                <button class="footer-social-button x-brand" type="button" data-social="x" aria-label="X (Twitter)">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3L12 14.7 5.6 22H2.4l7.3-8.4L1.9 2h6.5l4.5 6.7L18.9 2Zm-1.1 18h1.7L7.4 3.9H5.6L17.8 20Z"/></svg>
+                <button
+                  class="footer-social-button x-brand"
+                  type="button"
+                  data-social="x"
+                  aria-label="X (Twitter)"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3L12 14.7 5.6 22H2.4l7.3-8.4L1.9 2h6.5l4.5 6.7L18.9 2Zm-1.1 18h1.7L7.4 3.9H5.6L17.8 20Z"
+                    />
+                  </svg>
                 </button>
-                <button class="footer-social-button tiktok" type="button" data-social="tiktok" aria-label="TikTok">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.6 7.1a6.7 6.7 0 0 1-4.1-1.4v8.1a6.2 6.2 0 1 1-5.4-6.1v3.3a2.9 2.9 0 1 0 2.1 2.8V2.2h3.3c.2 2 1.7 3.7 4.1 4.1v.8Z"/></svg>
+                <button
+                  class="footer-social-button tiktok"
+                  type="button"
+                  data-social="tiktok"
+                  aria-label="TikTok"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      d="M19.6 7.1a6.7 6.7 0 0 1-4.1-1.4v8.1a6.2 6.2 0 1 1-5.4-6.1v3.3a2.9 2.9 0 1 0 2.1 2.8V2.2h3.3c.2 2 1.7 3.7 4.1 4.1v.8Z"
+                    />
+                  </svg>
                 </button>
               </div>
-              <p class="footer-payment-heading" id="footerPaymentHeading">طرق الدفع المتاحة</p>
+              <p class="footer-payment-heading" id="footerPaymentHeading">
+                طرق الدفع المتاحة
+              </p>
               <div class="footer-payments" aria-label="طرق الدفع">
                 <span class="footer-payment-mark shamcash">شام كاش</span>
                 <span class="footer-payment-mark paypal">PayPal</span>
                 <span class="footer-payment-mark masari">مصاري</span>
               </div>
-              <p class="footer-copyright" id="footerCopyright">© 2026 Menu Dos. جميع الحقوق محفوظة.</p>
-              <p class="footer-credit" id="footerCredit">تم إنشاؤه بواسطة <strong>Menu Dos</strong></p>
+              <p class="footer-copyright" id="footerCopyright">
+                © 2026 Menu Dos. جميع الحقوق محفوظة.
+              </p>
+              <p class="footer-credit" id="footerCredit">
+                تم إنشاؤه بواسطة <strong>Menu Dos</strong>
+              </p>
             </footer>
           </section>
         </div>
@@ -2154,6 +3404,75 @@
             <button class="modal-close" id="modalClose" type="button">
               إغلاق
             </button>
+          </div>
+        </div>
+        <!-- ITEM DETAILS MODAL (sits below the top bar, z-index 19 < 20) -->
+        <div
+          class="iv-modal"
+          id="ivModal"
+          role="dialog"
+          aria-modal="true"
+          aria-hidden="true"
+        >
+          <div class="iv-veil"></div>
+          <div class="iv-card" id="ivSheet">
+            <div class="iv-head">
+              <button class="iv-close" type="button" id="ivClose">
+                <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" /></svg>
+              </button>
+              <div class="iv-cat" id="ivCat"></div>
+              <div class="iv-main">
+                <div class="iv-img" id="ivImgWrap">
+                  <img id="ivImg" alt="" />
+                </div>
+                <div class="iv-info">
+                  <h2 class="iv-name" id="ivName"></h2>
+                  <p class="iv-desc" id="ivDesc"></p>
+                </div>
+              </div>
+            </div>
+            <div class="iv-scroll" id="ivScroll">
+              <h3 class="iv-h" id="ivSizesH"></h3>
+              <div class="iv-sizes" id="ivSizes"></div>
+              <h3 class="iv-h" id="ivAddonsH"></h3>
+              <div class="iv-addons" id="ivAddons"></div>
+            </div>
+            <div class="iv-bar">
+              <div class="iv-total">
+                <span id="ivTotalL"></span>
+                <div class="iv-price">
+                  <strong id="ivTotal"></strong
+                  ><s class="iv-old" id="ivOld" hidden></s>
+                </div>
+              </div>
+              <button class="iv-add" id="ivAdd" type="button"></button>
+            </div>
+          </div>
+        </div>
+        <div class="iv-fly" id="ivFly" hidden></div>
+        <!-- CART PANEL (local only, no checkout) -->
+        <div
+          class="iv-modal cart-panel"
+          id="cartPanel"
+          role="dialog"
+          aria-modal="true"
+          aria-hidden="true"
+        >
+          <div class="iv-veil"></div>
+          <div class="iv-card">
+            <div class="iv-head">
+              <button class="iv-close" type="button" id="cartClose">
+                <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" /></svg>
+              </button>
+              <h2 class="iv-name" id="cartTitle"></h2>
+            </div>
+            <div class="iv-scroll" id="cartList"></div>
+            <div class="iv-bar">
+              <div class="iv-total">
+                <span id="cartTotalL"></span>
+                <div class="iv-price"><strong id="cartTotal"></strong></div>
+              </div>
+            </div>
           </div>
         </div>
       </main>
@@ -2175,7 +3494,9 @@
       const heroDescription = document.getElementById("heroDescription");
       const heroSlides = [...document.querySelectorAll(".hero-slide")];
       const heroDots = [...document.querySelectorAll(".hero-dot")];
-      const categoryButtons = [...document.querySelectorAll(".category-button")];
+      const categoryButtons = [
+        ...document.querySelectorAll(".category-button"),
+      ];
       const categoryTrack = document.querySelector(".category-track");
       let categoryArchFrame = 0;
       function updateCategoryArch() {
@@ -2192,7 +3513,10 @@
         categoryButtons.forEach((button) => {
           const rect = button.getBoundingClientRect();
           const buttonCenter = rect.left + rect.width / 2;
-          const distance = Math.min(1, Math.abs(buttonCenter - centerX) / maxDistance);
+          const distance = Math.min(
+            1,
+            Math.abs(buttonCenter - centerX) / maxDistance,
+          );
           const offset = 34 * Math.pow(distance, 1.65);
           button.style.setProperty("--arch-offset", offset.toFixed(2) + "px");
         });
@@ -2203,8 +3527,12 @@
         }
       }
       if (categoryTrack) {
-        categoryTrack.addEventListener("scroll", scheduleCategoryArchUpdate, { passive: true });
-        window.addEventListener("resize", scheduleCategoryArchUpdate, { passive: true });
+        categoryTrack.addEventListener("scroll", scheduleCategoryArchUpdate, {
+          passive: true,
+        });
+        window.addEventListener("resize", scheduleCategoryArchUpdate, {
+          passive: true,
+        });
         scheduleCategoryArchUpdate();
       }
       let menuOpen = false;
@@ -2245,9 +3573,30 @@
           locationLabel: "موقع المطعم",
           locationValue: "القامشلي، سوريا",
           searchPlaceholder: "ابحث عن صنف في القائمة...",
-          itemNames: ["كبسة دجاج","سلطة طازجة","عصير طبيعي","حلوى الكريمة","قهوة مختصة","برغر كلاسيكي"],
-          itemDescs: ["أرز متبل مع دجاج طري ومزيج من البهارات الشرقية.","خضروات موسمية طازجة مع صلصة خفيفة ومنعشة.","مزيج فواكه طازجة يقدم بارداً.","حلوى ناعمة بطبقات غنية وكريمة خفيفة.","قهوة محضرة بعناية لعشاق النكهة الغنية.","لحم مشوي مع إضافات طازجة وخبز طري."],
-          itemCategories: ["الأطباق الرئيسية","المقبلات والسلطات","المشروبات","الحلويات","القهوة","الوجبات الخاصة"],
+          itemNames: [
+            "كبسة دجاج",
+            "سلطة طازجة",
+            "عصير طبيعي",
+            "حلوى الكريمة",
+            "قهوة مختصة",
+            "برغر كلاسيكي",
+          ],
+          itemDescs: [
+            "أرز متبل مع دجاج طري ومزيج من البهارات الشرقية.",
+            "خضروات موسمية طازجة مع صلصة خفيفة ومنعشة.",
+            "مزيج فواكه طازجة يقدم بارداً.",
+            "حلوى ناعمة بطبقات غنية وكريمة خفيفة.",
+            "قهوة محضرة بعناية لعشاق النكهة الغنية.",
+            "لحم مشوي مع إضافات طازجة وخبز طري.",
+          ],
+          itemCategories: [
+            "الأطباق الرئيسية",
+            "المقبلات والسلطات",
+            "المشروبات",
+            "الحلويات",
+            "القهوة",
+            "الوجبات الخاصة",
+          ],
           categoriesTitle: "الأقسام",
           footerSocialHeading: "تابعنا على وسائل التواصل الاجتماعي",
           footerPaymentHeading: "طرق الدفع المتاحة",
@@ -2294,9 +3643,30 @@
           locationLabel: "Location",
           locationValue: "Qamishli, Syria",
           searchPlaceholder: "Search for a menu item...",
-          itemNames: ["Chicken Kabsa","Fresh Garden Salad","Fresh Juice","Cream Dessert","Specialty Coffee","Classic Burger"],
-          itemDescs: ["Seasoned rice with tender chicken and eastern spices.","Fresh seasonal vegetables with a light, refreshing dressing.","A blend of fresh fruits served chilled.","A soft dessert with rich layers and light cream.","Carefully prepared coffee for lovers of rich flavor.","Grilled beef with fresh toppings and a soft bun."],
-          itemCategories: ["Main courses","Starters & salads","Drinks","Desserts","Coffee","Special meals"],
+          itemNames: [
+            "Chicken Kabsa",
+            "Fresh Garden Salad",
+            "Fresh Juice",
+            "Cream Dessert",
+            "Specialty Coffee",
+            "Classic Burger",
+          ],
+          itemDescs: [
+            "Seasoned rice with tender chicken and eastern spices.",
+            "Fresh seasonal vegetables with a light, refreshing dressing.",
+            "A blend of fresh fruits served chilled.",
+            "A soft dessert with rich layers and light cream.",
+            "Carefully prepared coffee for lovers of rich flavor.",
+            "Grilled beef with fresh toppings and a soft bun.",
+          ],
+          itemCategories: [
+            "Main courses",
+            "Starters & salads",
+            "Drinks",
+            "Desserts",
+            "Coffee",
+            "Special meals",
+          ],
           categoriesTitle: "Categories",
           footerSocialHeading: "Follow us on social media",
           footerPaymentHeading: "Available payment methods",
@@ -2342,9 +3712,30 @@
           locationLabel: "Cih",
           locationValue: "Qamişlo, Sûriye",
           searchPlaceholder: "Di lîsteyê de li xwarinekê bigere...",
-          itemNames: ["Kabsa bi mirîşk","Salata nû","Vexwarina fêkiyan","Şîrîniya kremê","Qehweya taybet","Burgera klasîk"],
-          itemDescs: ["Birincê bi biharat û mirîşkeke nerm.","Sebzeyên demsalê bi sosê sivik û xweş.","Tevliheviya fêkiyên nû û sar.","Şîrîniyeke nerm bi qatên kremê.","Qehwe bi baldarî hatiye amadekirin.","Goştê birêjkirî bi nanê nerm û zêdeyên nû."],
-          itemCategories: ["Xwarinên sereke","Pêşxwarin û salat","Vexwarin","Şîrînî","Qehwe","Xwarinên taybet"],
+          itemNames: [
+            "Kabsa bi mirîşk",
+            "Salata nû",
+            "Vexwarina fêkiyan",
+            "Şîrîniya kremê",
+            "Qehweya taybet",
+            "Burgera klasîk",
+          ],
+          itemDescs: [
+            "Birincê bi biharat û mirîşkeke nerm.",
+            "Sebzeyên demsalê bi sosê sivik û xweş.",
+            "Tevliheviya fêkiyên nû û sar.",
+            "Şîrîniyeke nerm bi qatên kremê.",
+            "Qehwe bi baldarî hatiye amadekirin.",
+            "Goştê birêjkirî bi nanê nerm û zêdeyên nû.",
+          ],
+          itemCategories: [
+            "Xwarinên sereke",
+            "Pêşxwarin û salat",
+            "Vexwarin",
+            "Şîrînî",
+            "Qehwe",
+            "Xwarinên taybet",
+          ],
           categoriesTitle: "Kategorî",
           footerSocialHeading: "Li ser torên civakî me bişopînin",
           footerPaymentHeading: "Rêbazên dayînê yên berdest",
@@ -2415,11 +3806,16 @@
         // Hero
         heroTitle.textContent = t.restaurant;
         heroDescription.textContent = t.description;
-        document.getElementById("footerRestaurantName").textContent = t.restaurant;
-        document.getElementById("footerSocialHeading").textContent = t.footerSocialHeading;
-        document.getElementById("footerPaymentHeading").textContent = t.footerPaymentHeading;
-        document.getElementById("footerCopyright").textContent = t.footerCopyright;
-        document.getElementById("footerCredit").innerHTML = t.footerCredit + ' <strong>Menu Dos</strong>';
+        document.getElementById("footerRestaurantName").textContent =
+          t.restaurant;
+        document.getElementById("footerSocialHeading").textContent =
+          t.footerSocialHeading;
+        document.getElementById("footerPaymentHeading").textContent =
+          t.footerPaymentHeading;
+        document.getElementById("footerCopyright").textContent =
+          t.footerCopyright;
+        document.getElementById("footerCredit").innerHTML =
+          t.footerCredit + " <strong>Menu Dos</strong>";
         // Restaurant status and location (sample preview data)
         document.getElementById("statusLabel").textContent = t.statusLabel;
         const statusElement = document.getElementById("restaurantStatus");
@@ -2436,18 +3832,24 @@
         menuSearchInput.placeholder = t.searchPlaceholder;
         menuSearchInput.setAttribute("aria-label", t.searchPlaceholder);
         // Category strip
-        document.getElementById("categoriesTitle").textContent = t.categoriesTitle;
+        document.getElementById("categoriesTitle").textContent =
+          t.categoriesTitle;
         categoryButtons.forEach((button, index) => {
-          button.querySelector(".category-name").textContent = t.demoCats[index];
+          button.querySelector(".category-name").textContent =
+            t.demoCats[index];
         });
         // 3D menu item cards
         for (let i = 0; i < 6; i++) {
           const number = i + 1;
-          document.getElementById("itemTitle" + number).textContent = t.itemNames[i];
-          document.getElementById("itemDesc" + number).textContent = t.itemDescs[i];
-          document.getElementById("itemCategory" + number).textContent = t.itemCategories[i];
+          document.getElementById("itemTitle" + number).textContent =
+            t.itemNames[i];
+          document.getElementById("itemDesc" + number).textContent =
+            t.itemDescs[i];
+          document.getElementById("itemCategory" + number).textContent =
+            t.itemCategories[i];
           itemCards[i].setAttribute("aria-label", t.itemNames[i]);
-          itemCards[i].querySelector(".menu-item-image img").alt = t.itemNames[i];
+          itemCards[i].querySelector(".menu-item-image img").alt =
+            t.itemNames[i];
         }
         // Modal
         document.getElementById("modalTitle").textContent = t.modalTitle;
@@ -2480,7 +3882,9 @@
         themeButton.title = isDark ? t.lightMode : t.darkMode;
         themeButton.setAttribute("aria-label", themeButton.title);
         requestAnimationFrame(() => {
-          requestAnimationFrame(() => phone.classList.remove("theme-switching"));
+          requestAnimationFrame(() =>
+            phone.classList.remove("theme-switching"),
+          );
         });
       });
       /* FULLSCREEN */
@@ -2496,7 +3900,6 @@
         }
       }
 
-      
       fullscreenButton.addEventListener("click", toggleFullscreen);
       document.addEventListener("fullscreenchange", () => {
         const t = translations[currentLanguage];
@@ -2534,7 +3937,10 @@
       const SCENE_DISTANCE = 330;
       const SCENE_GESTURE_GAIN = 1;
       const SCENE_SNAP_THRESHOLD = 0.08;
-      let scenePosition = Math.max(0, Math.min(SCENE_DISTANCE, screen.scrollTop));
+      let scenePosition = Math.max(
+        0,
+        Math.min(SCENE_DISTANCE, screen.scrollTop),
+      );
       let sceneFrame = 0;
       let sceneAnimationFrame = 0;
       let sceneSnapTimer = null;
@@ -2564,7 +3970,10 @@
 
         /* Keep the native scroll position in sync, but never use it as the
            animation source. The finger-controlled value drives every frame. */
-        if (screen.scrollTop <= SCENE_DISTANCE + 0.5 && Math.abs(screen.scrollTop - position) > 0.5) {
+        if (
+          screen.scrollTop <= SCENE_DISTANCE + 0.5 &&
+          Math.abs(screen.scrollTop - position) > 0.5
+        ) {
           sceneWritingScroll = true;
           screen.scrollTop = position;
           sceneWritingScroll = false;
@@ -2578,7 +3987,7 @@
         phone.style.setProperty("--scene-progress", progress.toFixed(4));
         phone.style.setProperty(
           "--collision-progress",
-          (4 * progress * (1 - progress)).toFixed(4)
+          (4 * progress * (1 - progress)).toFixed(4),
         );
 
         syncSceneCard(progress);
@@ -2595,6 +4004,44 @@
         scenePosition = Math.max(0, Math.min(SCENE_DISTANCE, pagePosition));
         scheduleSceneRender();
       }
+
+      /* Clicking the logo smoothly returns through the menu scene to page top. */
+      function returnToPageTop() {
+        if (document.getElementById("ivModal")?.classList.contains("open"))
+          return;
+        stopSceneSnap();
+        const from = screen.scrollTop;
+        if (from <= 0.5) {
+          setSceneScroll(0);
+          return;
+        }
+        const startedAt = performance.now();
+        const duration = Math.min(760, Math.max(420, from * 0.55));
+        const animateToTop = (now) => {
+          const raw = Math.min(1, (now - startedAt) / duration);
+          const eased = 1 - Math.pow(1 - raw, 3);
+          const position = from * (1 - eased);
+          screen.scrollTop = position;
+          scenePosition = Math.min(SCENE_DISTANCE, position);
+          scheduleSceneRender();
+          if (raw < 1) {
+            sceneAnimationFrame = requestAnimationFrame(animateToTop);
+          } else {
+            sceneAnimationFrame = 0;
+            setSceneScroll(0);
+          }
+        };
+        sceneAnimationFrame = requestAnimationFrame(animateToTop);
+      }
+
+      const logoCircle = document.getElementById("logoCircle");
+      logoCircle.addEventListener("click", returnToPageTop);
+      logoCircle.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          returnToPageTop();
+        }
+      });
 
       function stopSceneSnap() {
         if (sceneSnapTimer) {
@@ -2650,7 +4097,10 @@
       function snapPageTo(target) {
         stopSceneSnap();
         const from = screen.scrollTop;
-        const maxScroll = Math.max(SCENE_DISTANCE, screen.scrollHeight - screen.clientHeight);
+        const maxScroll = Math.max(
+          SCENE_DISTANCE,
+          screen.scrollHeight - screen.clientHeight,
+        );
         const to = Math.max(SCENE_DISTANCE, Math.min(maxScroll, target));
         const distance = to - from;
         if (Math.abs(distance) < 0.5) {
@@ -2677,114 +4127,162 @@
       }
 
       function settlePageGesture(direction) {
-        const maxScroll = Math.max(SCENE_DISTANCE, screen.scrollHeight - screen.clientHeight);
+        const maxScroll = Math.max(
+          SCENE_DISTANCE,
+          screen.scrollHeight - screen.clientHeight,
+        );
         snapPageTo(direction > 0 ? maxScroll : SCENE_DISTANCE);
       }
 
       /* Wheel input selects one of three deliberate scroll stages. */
-      screen.addEventListener("wheel", (event) => {
-        if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
-        const atMiddleStage = Math.abs(screen.scrollTop - SCENE_DISTANCE) <= 0.5;
-        const inFooterStage = screen.scrollTop > SCENE_DISTANCE + 0.5;
-        if (inFooterStage || (atMiddleStage && event.deltaY > 0)) {
+      screen.addEventListener(
+        "wheel",
+        (event) => {
+          if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
+          const atMiddleStage =
+            Math.abs(screen.scrollTop - SCENE_DISTANCE) <= 0.5;
+          const inFooterStage = screen.scrollTop > SCENE_DISTANCE + 0.5;
+          if (inFooterStage || (atMiddleStage && event.deltaY > 0)) {
+            event.preventDefault();
+            stopSceneSnap();
+            if (Math.abs(event.deltaY) > 0.1)
+              sceneGestureDirection = Math.sign(event.deltaY);
+            if (sceneSnapTimer) clearTimeout(sceneSnapTimer);
+            sceneSnapTimer = setTimeout(() => {
+              sceneSnapTimer = null;
+              settlePageGesture(sceneGestureDirection);
+            }, 140);
+            return;
+          }
           event.preventDefault();
           stopSceneSnap();
-          if (Math.abs(event.deltaY) > 0.1) sceneGestureDirection = Math.sign(event.deltaY);
+          const multiplier =
+            event.deltaMode === 1 ? 24 : event.deltaMode === 2 ? 360 : 1;
+          const delta = event.deltaY * multiplier * SCENE_GESTURE_GAIN;
+          if (Math.abs(delta) > 0.1) sceneGestureDirection = Math.sign(delta);
+          setSceneScroll(screen.scrollTop + delta);
+
           if (sceneSnapTimer) clearTimeout(sceneSnapTimer);
           sceneSnapTimer = setTimeout(() => {
             sceneSnapTimer = null;
-            settlePageGesture(sceneGestureDirection);
+            settleSceneGesture(sceneGestureDirection);
           }, 140);
-          return;
-        }
-        event.preventDefault();
-        stopSceneSnap();
-        const multiplier = event.deltaMode === 1 ? 24 : event.deltaMode === 2 ? 360 : 1;
-        const delta = event.deltaY * multiplier * SCENE_GESTURE_GAIN;
-        if (Math.abs(delta) > 0.1) sceneGestureDirection = Math.sign(delta);
-        setSceneScroll(screen.scrollTop + delta);
-
-        if (sceneSnapTimer) clearTimeout(sceneSnapTimer);
-        sceneSnapTimer = setTimeout(() => {
-          sceneSnapTimer = null;
-          settleSceneGesture(sceneGestureDirection);
-        }, 140);
-      }, { passive: false });
+        },
+        { passive: false },
+      );
 
       /* Touch position is mapped 1:1 to scene position for direct manipulation. */
-      screen.addEventListener("touchstart", (event) => {
-        if (!event.touches.length) return;
-        stopSceneSnap();
-        scenePosition = Math.max(0, Math.min(SCENE_DISTANCE, screen.scrollTop));
-        sceneTouchStartScroll = screen.scrollTop;
-        sceneTouchY = event.touches[0].clientY;
-        sceneTouchX = event.touches[0].clientX;
-        sceneTouchAxis = null;
-        sceneGestureDirection = 0;
-      }, { passive: true });
+      screen.addEventListener(
+        "touchstart",
+        (event) => {
+          if (!event.touches.length) return;
+          stopSceneSnap();
+          scenePosition = Math.max(
+            0,
+            Math.min(SCENE_DISTANCE, screen.scrollTop),
+          );
+          sceneTouchStartScroll = screen.scrollTop;
+          sceneTouchY = event.touches[0].clientY;
+          sceneTouchX = event.touches[0].clientX;
+          sceneTouchAxis = null;
+          sceneGestureDirection = 0;
+        },
+        { passive: true },
+      );
 
-      screen.addEventListener("touchmove", (event) => {
-        if (!event.touches.length) return;
-        const touch = event.touches[0];
-        const deltaY = sceneTouchY - touch.clientY;
-        const deltaX = touch.clientX - sceneTouchX;
+      screen.addEventListener(
+        "touchmove",
+        (event) => {
+          if (!event.touches.length) return;
+          const touch = event.touches[0];
+          const deltaY = sceneTouchY - touch.clientY;
+          const deltaX = touch.clientX - sceneTouchX;
 
-        if (!sceneTouchAxis) {
-          if (Math.abs(deltaX) < 5 && Math.abs(deltaY) < 5) return;
-          sceneTouchAxis = Math.abs(deltaY) > Math.abs(deltaX) * 1.12
-            ? "vertical"
-            : "horizontal";
-        }
-        if (sceneTouchAxis !== "vertical") return;
+          if (!sceneTouchAxis) {
+            if (Math.abs(deltaX) < 5 && Math.abs(deltaY) < 5) return;
+            sceneTouchAxis =
+              Math.abs(deltaY) > Math.abs(deltaX) * 1.12
+                ? "vertical"
+                : "horizontal";
+          }
+          if (sceneTouchAxis !== "vertical") return;
 
-        event.preventDefault();
-        if (Math.abs(deltaY) > 0.1) sceneGestureDirection = Math.sign(deltaY);
-        const startedAtMiddle = Math.abs(sceneTouchStartScroll - SCENE_DISTANCE) <= 0.5;
-        const startedInFooter = sceneTouchStartScroll > SCENE_DISTANCE + 0.5;
-        if (startedInFooter || (startedAtMiddle && deltaY > 0)) {
+          event.preventDefault();
+          if (Math.abs(deltaY) > 0.1) sceneGestureDirection = Math.sign(deltaY);
+          const startedAtMiddle =
+            Math.abs(sceneTouchStartScroll - SCENE_DISTANCE) <= 0.5;
+          const startedInFooter = sceneTouchStartScroll > SCENE_DISTANCE + 0.5;
+          if (startedInFooter || (startedAtMiddle && deltaY > 0)) {
+            sceneTouchY = touch.clientY;
+            sceneTouchX = touch.clientX;
+            return;
+          }
+          setSceneScroll(screen.scrollTop + deltaY * SCENE_GESTURE_GAIN);
           sceneTouchY = touch.clientY;
           sceneTouchX = touch.clientX;
-          return;
-        }
-        setSceneScroll(screen.scrollTop + deltaY * SCENE_GESTURE_GAIN);
-        sceneTouchY = touch.clientY;
-        sceneTouchX = touch.clientX;
-      }, { passive: false });
+        },
+        { passive: false },
+      );
 
-      screen.addEventListener("touchend", () => {
-        if (sceneTouchAxis === "vertical") {
-          const startedAtMiddle = Math.abs(sceneTouchStartScroll - SCENE_DISTANCE) <= 0.5;
-          const startedInFooter = sceneTouchStartScroll > SCENE_DISTANCE + 0.5;
-          if (startedInFooter || (startedAtMiddle && sceneGestureDirection > 0)) {
-            settlePageGesture(sceneGestureDirection);
-          } else {
-            settleSceneGesture(sceneGestureDirection);
+      screen.addEventListener(
+        "touchend",
+        () => {
+          if (sceneTouchAxis === "vertical") {
+            const startedAtMiddle =
+              Math.abs(sceneTouchStartScroll - SCENE_DISTANCE) <= 0.5;
+            const startedInFooter =
+              sceneTouchStartScroll > SCENE_DISTANCE + 0.5;
+            if (
+              startedInFooter ||
+              (startedAtMiddle && sceneGestureDirection > 0)
+            ) {
+              settlePageGesture(sceneGestureDirection);
+            } else {
+              settleSceneGesture(sceneGestureDirection);
+            }
           }
-        }
-        sceneTouchAxis = null;
-      }, { passive: true });
+          sceneTouchAxis = null;
+        },
+        { passive: true },
+      );
 
-      screen.addEventListener("touchcancel", () => {
-        if (sceneTouchAxis === "vertical") {
-          const startedAtMiddle = Math.abs(sceneTouchStartScroll - SCENE_DISTANCE) <= 0.5;
-          const startedInFooter = sceneTouchStartScroll > SCENE_DISTANCE + 0.5;
-          if (startedInFooter || (startedAtMiddle && sceneGestureDirection > 0)) {
-            settlePageGesture(sceneGestureDirection);
-          } else {
-            settleSceneGesture(sceneGestureDirection);
+      screen.addEventListener(
+        "touchcancel",
+        () => {
+          if (sceneTouchAxis === "vertical") {
+            const startedAtMiddle =
+              Math.abs(sceneTouchStartScroll - SCENE_DISTANCE) <= 0.5;
+            const startedInFooter =
+              sceneTouchStartScroll > SCENE_DISTANCE + 0.5;
+            if (
+              startedInFooter ||
+              (startedAtMiddle && sceneGestureDirection > 0)
+            ) {
+              settlePageGesture(sceneGestureDirection);
+            } else {
+              settleSceneGesture(sceneGestureDirection);
+            }
           }
-        }
-        sceneTouchAxis = null;
-      }, { passive: true });
+          sceneTouchAxis = null;
+        },
+        { passive: true },
+      );
 
-      screen.addEventListener("scroll", () => {
-        if (sceneWritingScroll) return;
-        const nativePosition = Math.max(0, Math.min(SCENE_DISTANCE, screen.scrollTop));
-        if (Math.abs(nativePosition - scenePosition) > 1) {
-          scenePosition = nativePosition;
-          scheduleSceneRender();
-        }
-      }, { passive: true });
+      screen.addEventListener(
+        "scroll",
+        () => {
+          if (sceneWritingScroll) return;
+          const nativePosition = Math.max(
+            0,
+            Math.min(SCENE_DISTANCE, screen.scrollTop),
+          );
+          if (Math.abs(nativePosition - scenePosition) > 1) {
+            scenePosition = nativePosition;
+            scheduleSceneRender();
+          }
+        },
+        { passive: true },
+      );
 
       scheduleSceneRender();
       /* CATEGORY SELECTION */
@@ -2797,7 +4295,7 @@
           });
         });
       });
-      
+
       /* 3D MENU ITEM CAROUSEL */
       const itemCards = [...document.querySelectorAll(".menu-item-card")];
       const itemDots = [...document.querySelectorAll(".carousel-dot")];
@@ -2810,7 +4308,7 @@
       let itemPointerId = null;
       let itemSuppressClick = false;
       function clearItemDrag() {
-        itemCards.forEach(card => card.style.removeProperty("--drag-x"));
+        itemCards.forEach((card) => card.style.removeProperty("--drag-x"));
         itemDragX = 0;
         itemDragging = false;
         itemPointerId = null;
@@ -2823,29 +4321,48 @@
         itemCards.forEach((card, i) => {
           card.classList.remove("is-active", "is-prev", "is-next");
           if (i === activeItemIndex) card.classList.add("is-active");
-          else if (i === (activeItemIndex - 1 + itemCards.length) % itemCards.length) card.classList.add("is-prev");
-          else if (i === (activeItemIndex + 1) % itemCards.length) card.classList.add("is-next");
+          else if (
+            i ===
+            (activeItemIndex - 1 + itemCards.length) % itemCards.length
+          )
+            card.classList.add("is-prev");
+          else if (i === (activeItemIndex + 1) % itemCards.length)
+            card.classList.add("is-next");
           card.setAttribute("aria-current", String(i === activeItemIndex));
         });
-        itemDots.forEach((dot, i) => dot.classList.toggle("active", i === activeItemIndex));
+        itemDots.forEach((dot, i) =>
+          dot.classList.toggle("active", i === activeItemIndex),
+        );
       }
-      document.getElementById("itemPrev").addEventListener("click", () => showMenuItem(activeItemIndex - 1));
-      document.getElementById("itemNext").addEventListener("click", () => showMenuItem(activeItemIndex + 1));
-      itemDots.forEach(dot => dot.addEventListener("click", () => showMenuItem(Number(dot.dataset.itemTarget))));
-      itemCards.forEach(card => {
+      document
+        .getElementById("itemPrev")
+        .addEventListener("click", () => showMenuItem(activeItemIndex - 1));
+      document
+        .getElementById("itemNext")
+        .addEventListener("click", () => showMenuItem(activeItemIndex + 1));
+      itemDots.forEach((dot) =>
+        dot.addEventListener("click", () =>
+          showMenuItem(Number(dot.dataset.itemTarget)),
+        ),
+      );
+      itemCards.forEach((card) => {
         card.addEventListener("click", () => {
           if (itemSuppressClick) return;
           showMenuItem(Number(card.dataset.itemIndex));
         });
-        card.addEventListener("keydown", event => {
+        card.addEventListener("keydown", (event) => {
           if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
             showMenuItem(Number(card.dataset.itemIndex));
           }
         });
       });
-      itemStage.addEventListener("pointerdown", event => {
-        if (!event.isPrimary || (event.pointerType === "mouse" && event.button !== 0)) return;
+      itemStage.addEventListener("pointerdown", (event) => {
+        if (
+          !event.isPrimary ||
+          (event.pointerType === "mouse" && event.button !== 0)
+        )
+          return;
         itemPointerStartX = event.clientX;
         itemPointerStartY = event.clientY;
         itemDragX = 0;
@@ -2853,17 +4370,24 @@
         itemPointerId = event.pointerId;
         itemStage.setPointerCapture(event.pointerId);
       });
-      itemStage.addEventListener("pointermove", event => {
+      itemStage.addEventListener("pointermove", (event) => {
         if (itemPointerId !== event.pointerId) return;
         const deltaX = event.clientX - itemPointerStartX;
         const deltaY = event.clientY - itemPointerStartY;
-        if (!itemDragging && Math.abs(deltaX) > 7 && Math.abs(deltaX) > Math.abs(deltaY) * 1.15) {
+        if (
+          !itemDragging &&
+          Math.abs(deltaX) > 7 &&
+          Math.abs(deltaX) > Math.abs(deltaY) * 1.15
+        ) {
           itemDragging = true;
           itemStage.classList.add("is-dragging");
         }
         if (!itemDragging) return;
         itemDragX = Math.max(-145, Math.min(145, deltaX));
-        itemCards[activeItemIndex].style.setProperty("--drag-x", itemDragX + "px");
+        itemCards[activeItemIndex].style.setProperty(
+          "--drag-x",
+          itemDragX + "px",
+        );
       });
       function finishItemPointer(event, cancelled = false) {
         if (itemPointerId !== event.pointerId) return;
@@ -2874,16 +4398,23 @@
           itemSuppressClick = true;
           if (!cancelled && Math.abs(delta) >= 42) {
             const rtl = phone.dir === "rtl";
-            showMenuItem(activeItemIndex + ((delta < 0) === rtl ? -1 : 1));
+            showMenuItem(activeItemIndex + (delta < 0 === rtl ? -1 : 1));
           }
-          requestAnimationFrame(() => { itemSuppressClick = false; });
+          requestAnimationFrame(() => {
+            itemSuppressClick = false;
+          });
         }
       }
-      itemStage.addEventListener("pointerup", event => finishItemPointer(event));
-      itemStage.addEventListener("pointercancel", event => finishItemPointer(event, true));
-      itemStage.addEventListener("lostpointercapture", event => finishItemPointer(event, true));
+      itemStage.addEventListener("pointerup", (event) =>
+        finishItemPointer(event),
+      );
+      itemStage.addEventListener("pointercancel", (event) =>
+        finishItemPointer(event, true),
+      );
+      itemStage.addEventListener("lostpointercapture", (event) =>
+        finishItemPointer(event, true),
+      );
       showMenuItem(0);
-
 
       /* HERO SLIDER */
       function showSlide(index) {
@@ -2950,6 +4481,460 @@
       changeLanguage("ar");
       showSlide(0);
       startAutoplay();
+    </script>
+    <script>
+      /* ITEM DETAILS + CART: standalone layer. Reads existing globals; changes none of them. */
+      (() => {
+        "use strict";
+        const $ = (id) => document.getElementById(id);
+        const phoneEl = $("phone"),
+          scr = $("screen"),
+          stageEl = $("itemsCarouselStage");
+        const modal = $("ivModal"),
+          scroller = $("ivScroll"),
+          imgWrap = $("ivImgWrap"),
+          img = $("ivImg");
+        const panel = $("cartPanel"),
+          ghost = $("ivFly");
+
+        /* Cart pill is created inside the existing arrows row (no edits to the existing markup). */
+        const row = document.querySelector(".items-carousel-controls");
+        const fab = document.createElement("button");
+        fab.type = "button";
+        fab.className = "cart-pill";
+        fab.id = "cartFab";
+        fab.innerHTML =
+          '<span class="cart-pill-in"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i></span><span class="cart-badge" id="cartBadge" hidden>0</span>';
+        row.appendChild(fab);
+        const badge = $("cartBadge");
+
+        /* DEMO DATA: replace with sizes / add-ons / prices / discounts / currency from the API.
+           `old` = price before discount (optional, entered by the owner later). */
+        const CURRENCY = "$";
+        const SIZES = {
+          s: { ar: "صغير", en: "Small", ku: "Biçûk" },
+          m: { ar: "وسط", en: "Medium", ku: "Navîn" },
+          l: { ar: "كبير", en: "Large", ku: "Mezin" },
+        };
+        const ADDONS = [
+          {
+            id: "cheese",
+            name: { ar: "جبنة إضافية", en: "Extra cheese", ku: "Penîrê zêde" },
+            price: 1,
+          },
+          {
+            id: "sauce",
+            name: { ar: "صلصة حارة", en: "Hot sauce", ku: "Sosa tûj" },
+            price: 0.5,
+          },
+          {
+            id: "fries",
+            name: { ar: "بطاطا", en: "Fries", ku: "Kartol" },
+            price: 2,
+          },
+        ];
+        const half = (n) => Math.round(n * 2) / 2;
+        const ITEMS = [12.5, 6, 4, 5.5, 3.5, 9].map((b, idx) => ({
+          sizes: [
+            ["s", 0.8],
+            ["m", 1],
+            ["l", 1.25],
+          ].map(([id, f]) => {
+            const price = half(b * f);
+            return {
+              id,
+              name: SIZES[id],
+              price,
+              old: idx === 0 || idx === 3 ? half(price * 1.25) : null,
+            };
+          }),
+          addons: ADDONS,
+        }));
+        const STR = {
+          ar: {
+            total: "السعر الإجمالي",
+            add: "أضف إلى طلبي",
+            sizes: "الأحجام",
+            addons: "الإضافات",
+            close: "إغلاق",
+            cart: "سلة الطلبات",
+            cartShort: "السلة",
+            empty: "السلة فارغة",
+          },
+          en: {
+            total: "Total price",
+            add: "Add to my order",
+            sizes: "Sizes",
+            addons: "Add-ons",
+            close: "Close",
+            cart: "Your order",
+            cartShort: "Cart",
+            empty: "Your cart is empty",
+          },
+          ku: {
+            total: "Bihayê giştî",
+            add: "Li fermana min zêde bike",
+            sizes: "Mezinahî",
+            addons: "Pêvek",
+            close: "Bigire",
+            cart: "Sepeta fermanan",
+            cartShort: "Sepet",
+            empty: "Sepet vala ye",
+          },
+        };
+
+        const L = () =>
+          typeof currentLanguage === "string" && STR[currentLanguage]
+            ? currentLanguage
+            : "ar";
+        const TT = () => translations[L()];
+        const cards = () =>
+          Array.from(document.querySelectorAll(".menu-item-card"));
+        const pscale = () =>
+          phoneEl.getBoundingClientRect().width / phoneEl.offsetWidth || 1;
+        const D = (ms) =>
+          matchMedia("(prefers-reduced-motion: reduce)").matches ? 1 : ms;
+        const num = (n) => {
+          n = Math.round(n * 100) / 100;
+          return n % 1 ? n.toFixed(2) : String(n);
+        };
+        const P = (n, pre = "") =>
+          `<span class="iv-num">${pre}${num(n)} ${CURRENCY}</span>`;
+        const esc = (s) =>
+          String(s).replace(
+            /[&<>"]/g,
+            (c) =>
+              ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c],
+          );
+
+        let cur = -1,
+          busy = false,
+          cart = [];
+        const sel = {};
+        const selOf = (i) =>
+          sel[i] || (sel[i] = { size: ITEMS[i].sizes[1].id, add: new Set() });
+        function calc(i) {
+          const s = selOf(i),
+            it = ITEMS[i],
+            z = it.sizes.find((x) => x.id === s.size);
+          const add = it.addons
+            .filter((a) => s.add.has(a.id))
+            .reduce((t, a) => t + a.price, 0);
+          return {
+            base: z.price,
+            add,
+            final: z.price + add,
+            old: z.old ? z.old + add : null,
+          };
+        }
+
+        function renderDetails() {
+          if (cur < 0) return;
+          const t = TT(),
+            s = STR[L()],
+            it = ITEMS[cur],
+            sl = selOf(cur),
+            c = calc(cur);
+          const src = cards()[cur].querySelector(".menu-item-image img").src;
+          if (img.getAttribute("src") !== src) img.src = src;
+          img.alt = t.itemNames[cur];
+          $("ivCat").textContent = t.itemCategories[cur];
+          $("ivName").textContent = t.itemNames[cur];
+          $("ivDesc").textContent = t.itemDescs[cur];
+          $("ivSizesH").textContent = s.sizes;
+          $("ivAddonsH").textContent = s.addons;
+          $("ivSizes").innerHTML = it.sizes
+            .map(
+              (z) =>
+                `<button type="button" class="iv-size${z.id === sl.size ? " on" : ""}" data-size="${z.id}" aria-pressed="${z.id === sl.size}"><span>${z.name[L()]}</span><b>${P(z.price)}</b></button>`,
+            )
+            .join("");
+          $("ivAddons").innerHTML = it.addons
+            .map((a) => {
+              const on = sl.add.has(a.id);
+              return `<button type="button" class="iv-addon${on ? " on" : ""}" data-addon="${a.id}" role="checkbox" aria-checked="${on}"><i class="iv-chk"></i><span>${a.name[L()]}</span><b>${P(a.price, "+")}</b></button>`;
+            })
+            .join("");
+          $("ivTotalL").textContent = s.total;
+          $("ivTotal").innerHTML = P(c.final);
+          const old = $("ivOld");
+          old.hidden = !(c.old && c.old > c.final);
+          old.innerHTML = old.hidden ? "" : P(c.old);
+          $("ivAdd").textContent = s.add;
+          $("ivClose").setAttribute("aria-label", s.close);
+        }
+
+        /* OPEN / CLOSE DETAILS */
+        function openItem(i, card) {
+          if (busy || cur >= 0 || panel.classList.contains("open")) return;
+          cur = i;
+          renderDetails();
+          scroller.scrollTop = 0;
+          phoneEl.classList.add("iv-open");
+          modal.classList.add("open");
+          modal.setAttribute("aria-hidden", "false");
+          imgWrap.getAnimations().forEach((a) => a.cancel());
+          const from = card
+              .querySelector(".menu-item-image")
+              .getBoundingClientRect(),
+            to = imgWrap.getBoundingClientRect(),
+            k = pscale();
+          if (from.width && to.width) {
+            imgWrap.animate(
+              [
+                {
+                  transform: `translate(calc(-50% + ${(from.left + from.width / 2 - to.left - to.width / 2) / k}px),calc(-50% + ${(from.top + from.height / 2 - to.top - to.height / 2) / k}px)) scale(${from.width / to.width})`,
+                },
+                { transform: "translate(-50%,-50%) scale(1)" },
+              ],
+              { duration: D(520), easing: "cubic-bezier(.22,.75,.2,1)" },
+            );
+          }
+        }
+        function closeItem() {
+          if (cur < 0 || busy) return;
+          busy = true;
+          const card = cards()[cur];
+          const from = imgWrap.getBoundingClientRect(),
+            to = card.querySelector(".menu-item-image").getBoundingClientRect(),
+            k = pscale();
+          modal.classList.remove("open");
+          modal.setAttribute("aria-hidden", "true");
+          phoneEl.classList.remove("iv-open");
+          if (from.width && to.width) {
+            imgWrap.animate(
+              [
+                { transform: "translate(-50%,-50%) scale(1)" },
+                {
+                  transform: `translate(calc(-50% + ${(to.left + to.width / 2 - from.left - from.width / 2) / k}px),calc(-50% + ${(to.top + to.height / 2 - from.top - from.height / 2) / k}px)) scale(${to.width / from.width})`,
+                },
+              ],
+              { duration: D(300), easing: "cubic-bezier(.4,0,.2,1)" },
+            );
+          }
+          setTimeout(() => {
+            cur = -1;
+            busy = false;
+          }, D(340));
+        }
+
+        /* CART DATA */
+        const count = () => cart.reduce((n, l) => n + l.quantity, 0);
+        function renderBadge() {
+          const n = count();
+          badge.hidden = !n;
+          badge.textContent = n > 99 ? "99+" : n;
+        }
+        function syncFab() {
+          fab.classList.toggle("show", scr.scrollTop > 6);
+        }
+
+        /* Flight: a small copy of the dish image follows a curved path to the real position of the cart icon. */
+        function fly(onDone) {
+          const k = pscale(),
+            pr = phoneEl.getBoundingClientRect();
+          const loc = (r) => ({
+            x: (r.left + r.width / 2 - pr.left) / k - phoneEl.clientLeft,
+            y: (r.top + r.height / 2 - pr.top) / k - phoneEl.clientTop,
+            w: r.width / k,
+          });
+          fab.classList.add("nt", "show");
+          void fab.offsetWidth;
+          const a = loc(imgWrap.getBoundingClientRect());
+          const b = loc(fab.querySelector(".fa-cart-shopping").getBoundingClientRect());
+          const W = a.w,
+            C = { x: a.x + (b.x - a.x) * 0.55, y: Math.min(a.y, b.y) - 90 };
+          ghost.style.width = ghost.style.height = W + "px";
+          ghost.style.backgroundImage = `url("${img.src}")`;
+          ghost.hidden = false;
+          const N = 18,
+            frames = [];
+          for (let i = 0; i <= N; i++) {
+            const t = i / N,
+              e = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2,
+              m = 1 - e;
+            const x = m * m * a.x + 2 * m * e * C.x + e * e * b.x,
+              y = m * m * a.y + 2 * m * e * C.y + e * e * b.y;
+            frames.push({
+              transform: `translate(${x - W / 2}px,${y - W / 2}px) scale(${1 - 0.68 * e})`,
+              opacity: i === N ? 0.9 : 1,
+            });
+          }
+          let finished = false;
+          const finish = () => {
+            if (finished) return;
+            finished = true;
+            ghost.getAnimations().forEach((x) => x.cancel());
+            ghost.hidden = true;
+            fab.classList.remove("nt");
+            renderBadge();
+            fab.classList.remove("shake");
+            void fab.offsetWidth;
+            fab.classList.add("shake");
+            setTimeout(() => fab.classList.remove("shake"), 700);
+            syncFab();
+            busy = false;
+            if (onDone) onDone();
+          };
+          const anim = ghost.animate(frames, {
+            duration: D(780),
+            easing: "linear",
+            fill: "forwards",
+          });
+          anim.onfinish = finish;
+          setTimeout(finish, D(780) + 500);
+        }
+        function addToCart() {
+          if (busy || cur < 0) return;
+          busy = true;
+          const i = cur,
+            s = selOf(i),
+            c = calc(i),
+            it = ITEMS[i];
+          const addons = it.addons
+            .filter((a) => s.add.has(a.id))
+            .map((a) => a.id)
+            .sort();
+          const key = [i, s.size, ...addons].join("|");
+          const line = cart.find((l) => l.key === key);
+          if (line) line.quantity++;
+          else
+            cart.push({
+              key,
+              itemId: i,
+              itemName: TT().itemNames[i],
+              itemImage: img.src,
+              selectedSize: s.size,
+              selectedAddons: addons,
+              basePrice: c.base,
+              addonsTotal: c.add,
+              finalPrice: c.final,
+              quantity: 1,
+            });
+          cur = -1;
+          modal.classList.remove("open");
+          modal.setAttribute("aria-hidden", "true");
+          phoneEl.classList.remove("iv-open");
+          fly();
+        }
+
+        /* CART PANEL */
+        function renderCart() {
+          const s = STR[L()],
+            t = TT();
+          $("cartTitle").textContent = s.cart;
+          $("cartTotalL").textContent = s.total;
+          $("cartClose").setAttribute("aria-label", s.close);
+          $("cartTotal").innerHTML = P(
+            cart.reduce((n, l) => n + l.finalPrice * l.quantity, 0),
+          );
+          $("cartList").innerHTML = cart.length
+            ? cart
+                .map((l) => {
+                  const it = ITEMS[l.itemId];
+                  const size = it.sizes.find((z) => z.id === l.selectedSize)
+                    .name[L()];
+                  const adds = it.addons
+                    .filter((a) => l.selectedAddons.includes(a.id))
+                    .map((a) => a.name[L()])
+                    .join("، ");
+                  return `<div class="cart-line"><img src="${esc(l.itemImage)}" alt=""><div class="cart-info"><b>${esc(t.itemNames[l.itemId])}</b><small>${esc(size)}${adds ? " · " + esc(adds) : ""}</small><em>${P(l.finalPrice * l.quantity)}</em></div><div class="cart-qty"><button type="button" data-act="dec" data-key="${esc(l.key)}">−</button><span>${l.quantity}</span><button type="button" data-act="inc" data-key="${esc(l.key)}">+</button></div></div>`;
+                })
+                .join("")
+            : `<p class="cart-empty">${s.empty}</p>`;
+        }
+        function openCart() {
+          if (busy || cur >= 0) return;
+          renderCart();
+          phoneEl.classList.add("iv-cart-open");
+          panel.classList.add("open");
+          panel.setAttribute("aria-hidden", "false");
+        }
+        function closeCart() {
+          panel.classList.remove("open");
+          panel.setAttribute("aria-hidden", "true");
+          phoneEl.classList.remove("iv-cart-open");
+        }
+
+        /* EVENTS (each registered once) */
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal || e.target.classList.contains("iv-veil"))
+            return closeItem();
+          if (cur < 0 || busy) return;
+          if (e.target.closest("#ivClose")) return closeItem();
+          if (e.target.closest("#ivAdd")) return addToCart();
+          const z = e.target.closest("[data-size]"),
+            a = e.target.closest("[data-addon]");
+          if (z) {
+            selOf(cur).size = z.dataset.size;
+            renderDetails();
+          } else if (a) {
+            const set = selOf(cur).add,
+              id = a.dataset.addon;
+            set.has(id) ? set.delete(id) : set.add(id);
+            renderDetails();
+          }
+        });
+        panel.addEventListener("click", (e) => {
+          if (
+            e.target === panel ||
+            e.target.classList.contains("iv-veil") ||
+            e.target.closest("#cartClose")
+          )
+            return closeCart();
+          const b = e.target.closest("[data-act]");
+          if (!b) return;
+          const idx = cart.findIndex((l) => l.key === b.dataset.key);
+          if (idx < 0) return;
+          cart[idx].quantity += b.dataset.act === "inc" ? 1 : -1;
+          if (cart[idx].quantity <= 0) cart.splice(idx, 1);
+          renderCart();
+          renderBadge();
+        });
+        fab.addEventListener("click", openCart);
+        scr.addEventListener("scroll", syncFab, { passive: true });
+        document.addEventListener("keydown", (e) => {
+          if (e.key !== "Escape") return;
+          if (cur >= 0) closeItem();
+          else closeCart();
+        });
+        /* A tap (not a swipe) on the centered card opens the details. Capture phase: runs before the carousel's own handlers. */
+        stageEl.addEventListener(
+          "click",
+          (e) => {
+            if (typeof itemSuppressClick !== "undefined" && itemSuppressClick)
+              return;
+            const hit = document.elementFromPoint(e.clientX, e.clientY);
+            const card = hit && hit.closest(".menu-item-card");
+            if (card && card.classList.contains("is-active"))
+              openItem(Number(card.dataset.itemIndex), card);
+          },
+          true,
+        );
+        stageEl.addEventListener(
+          "keydown",
+          (e) => {
+            const card =
+              e.target.closest && e.target.closest(".menu-item-card");
+            if (
+              (e.key === "Enter" || e.key === " ") &&
+              card &&
+              card.classList.contains("is-active")
+            )
+              openItem(Number(card.dataset.itemIndex), card);
+          },
+          true,
+        );
+        /* Language change: the existing handler runs first on the same click, then our text refreshes. */
+        document.addEventListener("click", (e) => {
+          if (!e.target.closest("[data-lang]")) return;
+          setTimeout(() => {
+            renderDetails();
+            if (panel.classList.contains("open")) renderCart();
+          }, 0);
+        });
+        syncFab();
+      })();
     </script>
   </body>
 </html>
