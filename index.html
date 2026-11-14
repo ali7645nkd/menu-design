@@ -2597,19 +2597,19 @@
       @keyframes cartShake {
         0%,
         100% {
-          transform: rotate(0);
+          transform: translateY(-50%) rotate(0);
         }
         15% {
-          transform: rotate(-12deg) scale(1.1);
+          transform: translateY(-50%) rotate(-12deg) scale(1.1);
         }
         35% {
-          transform: rotate(10deg) scale(1.1);
+          transform: translateY(-50%) rotate(10deg) scale(1.1);
         }
         55% {
-          transform: rotate(-7deg);
+          transform: translateY(-50%) rotate(-7deg);
         }
         75% {
-          transform: rotate(4deg);
+          transform: translateY(-50%) rotate(4deg);
         }
       }
       .cart-badge {
@@ -4775,7 +4775,7 @@
           fab.classList.add("nt", "show");
           void fab.offsetWidth;
           const a = loc(imgWrap.getBoundingClientRect());
-          const b = loc(fab.querySelector("svg").getBoundingClientRect());
+          const b = loc(fab.querySelector(".fa-cart-shopping").getBoundingClientRect());
           const W = a.w,
             C = { x: a.x + (b.x - a.x) * 0.55, y: Math.min(a.y, b.y) - 90 };
           ghost.style.width = ghost.style.height = W + "px";
