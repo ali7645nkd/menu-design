@@ -1883,13 +1883,13 @@
       .iv-add:active{transform:scale(.96)}
       .iv-add:disabled{opacity:.6;pointer-events:none}
       /* cart pill: lives in the carousel arrows row, so it never covers other elements */
-      .cart-pill{position:absolute;right:0;top:50%;z-index:10;transform:translateY(-50%);display:flex;align-items:center;justify-content:center;flex:0 0 auto;height:46px;min-width:46px;max-width:0;margin:0;padding:0;border:0;border-radius:16px;background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(232,246,237,.88));color:#087f5b;cursor:pointer;opacity:0;pointer-events:none;box-shadow:0 6px 16px rgba(12,48,34,.15),inset 0 0 0 1px rgba(16,185,129,.28),inset 0 1px 0 rgba(255,255,255,.95);transition:max-width .45s cubic-bezier(.22,1,.36,1),min-width .45s cubic-bezier(.22,1,.36,1),opacity .3s ease}
-      .cart-pill.show{min-width:54px;max-width:140px;padding:0 14px;opacity:1;pointer-events:auto}
+      .cart-pill{position:absolute;left:0;right:auto;top:50%;z-index:10;transform:translateY(-50%);display:flex;align-items:center;justify-content:center;flex:0 0 auto;height:54px;min-width:54px;max-width:0;margin:0;padding:0;border:0;border-radius:16px;background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(232,246,237,.88));color:#087f5b;cursor:pointer;opacity:0;pointer-events:none;box-shadow:0 6px 16px rgba(12,48,34,.15),inset 0 0 0 1px rgba(16,185,129,.28),inset 0 1px 0 rgba(255,255,255,.95);transition:max-width .45s cubic-bezier(.22,1,.36,1),min-width .45s cubic-bezier(.22,1,.36,1),opacity .3s ease}
+      .cart-pill.show{min-width:58px;max-width:58px;padding:0;opacity:1;pointer-events:auto}
       .cart-pill.nt{transition:none}
       .phone.iv-open .cart-pill,.phone.iv-cart-open .cart-pill{opacity:0;pointer-events:none}
       .phone.dark .cart-pill{background:linear-gradient(145deg,#29483a,#20382e);color:#8de0b6;box-shadow:0 4px 12px rgba(0,0,0,.22),inset 0 0 0 1px rgba(114,221,176,.28),inset 0 1px 0 rgba(255,255,255,.07)}
       .cart-pill-in{display:flex;align-items:center;gap:8px;min-width:0;overflow:hidden;white-space:nowrap;font-size:13px;font-weight:850}
-      .cart-pill-in svg{flex:0 0 22px;width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+      .cart-pill-in svg{flex:0 0 27px;width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
       .cart-pill.shake{animation:cartShake .6s ease}
       @keyframes cartShake{0%,100%{transform:rotate(0)}15%{transform:rotate(-12deg) scale(1.1)}35%{transform:rotate(10deg) scale(1.1)}55%{transform:rotate(-7deg)}75%{transform:rotate(4deg)}}
       .cart-badge{position:absolute;top:-7px;inset-inline-end:-6px;min-width:20px;height:20px;padding:0 5px;display:grid;place-items:center;border-radius:10px;background:linear-gradient(145deg,#f0c27f,#dfaf6b);color:#3b2a0e;font-size:11px;font-weight:900;box-shadow:0 3px 8px rgba(0,0,0,.25)}
@@ -3124,7 +3124,7 @@
         const row = document.querySelector(".items-carousel-controls");
         const fab = document.createElement("button");
         fab.type = "button"; fab.className = "cart-pill"; fab.id = "cartFab";
-        fab.innerHTML = '<span class="cart-pill-in"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 11.1a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.5L22 8H6"/><path d="M9 20h.01M18 20h.01"/></svg><span id="cartPillText"></span></span><span class="cart-badge" id="cartBadge" hidden>0</span>';
+        fab.innerHTML = '<span class="cart-pill-in"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 11.1a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.5L22 8H6"/><path d="M9 20h.01M18 20h.01"/></svg></span><span class="cart-badge" id="cartBadge" hidden>0</span>';
         row.appendChild(fab);
         const badge = $("cartBadge");
 
@@ -3169,9 +3169,6 @@
           return { base: z.price, add, final: z.price + add, old: z.old ? z.old + add : null };
         }
 
-        function renderText() {
-          $("cartPillText").textContent = STR[L()].cartShort;
-        }
         function renderDetails() {
           if (cur < 0) return;
           const t = TT(), s = STR[L()], it = ITEMS[cur], sl = selOf(cur), c = calc(cur);
@@ -3351,9 +3348,8 @@
         /* Language change: the existing handler runs first on the same click, then our text refreshes. */
         document.addEventListener("click", (e) => {
           if (!e.target.closest("[data-lang]")) return;
-          setTimeout(() => { renderText(); renderDetails(); if (panel.classList.contains("open")) renderCart(); }, 0);
+          setTimeout(() => { renderDetails(); if (panel.classList.contains("open")) renderCart(); }, 0);
         });
-        renderText();
         syncFab();
       })();
     </script>
